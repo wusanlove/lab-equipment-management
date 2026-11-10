@@ -1,0 +1,63 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam sequence {
+  ArrowColor #1F4E79
+  LifeLineBorderColor #2B6CB0
+  ParticipantBackgroundColor #EDF2F7
+  ParticipantBorderColor #1F4E79
+}
+
+actor "借用师生\n(User)" as User
+actor "实验室管理员\n(LabManager)" as Mgr
+participant "门面控制器\nLabSystemFacade" as Facade
+participant "借还服务\nBorrowService" as BorrowSvc
+participant "设备状态机服务\nEquipmentService" as EqSvc
+participant "维修报废服务\nMaintenanceScrapService" as MaintSvc
+database "内存仓储层\nInMemoryDatabase" as DB
+
+== 阶段一：设备借用申请与状态校验 ==
+User -> Facade : borrowEquipment(borrower, mgr, "EQ-2026-001", 7天)
+activate Facade
+Facade -> BorrowSvc : borrowEquipment(...)
+activate BorrowSvc
+BorrowSvc -> EqSvc : getByCode("EQ-2026-001")
+EqSvc -> DB : findByCode("EQ-2026-001")
+DB --> EqSvc : Equipment [status = IN_STOCK]
+BorrowSvc -> EqSvc : transitionStatus(IN_STOCK -> BORROWED)
+activate EqSvc
+EqSvc -> EqSvc : canTransitionTo(BORROWED) == true
+EqSvc -> DB : updateEquipment(status = BORROWED)
+deactivate EqSvc
+BorrowSvc -> DB : saveBorrowRecord(record)
+BorrowSvc --> Facade : BorrowRecord (借出成功)
+deactivate BorrowSvc
+Facade --> User : 返回借用凭据与应还日期
+deactivate Facade
+
+== 阶段二：设备归还验收与损坏自动转修联动 ==
+User -> Facade : 归还设备并由管理员验收\nreturnEquipment(mgr, recordId, conditionOk, note)
+activate Facade
+Facade -> BorrowSvc : returnEquipment(...)
+activate BorrowSvc
+alt 验收完好 [conditionOk == true]
+  BorrowSvc -> EqSvc : transitionStatus(BORROWED -> IN_STOCK)
+  EqSvc -> DB : updateEquipment(status = IN_STOCK)
+  BorrowSvc -> DB : updateBorrowRecord(returnConditionOk = true)
+else 验收发现故障损坏 [conditionOk == false]
+  BorrowSvc -> MaintSvc : reportFault(mgr, "EQ-2026-001", note)
+  activate MaintSvc
+  MaintSvc -> EqSvc : transitionStatus(BORROWED -> MAINTENANCE)
+  EqSvc -> DB : updateEquipment(status = MAINTENANCE)
+  MaintSvc -> DB : saveMaintenanceRecord(PENDING)
+  MaintSvc --> BorrowSvc : 自动生成维修工单
+  deactivate MaintSvc
+  BorrowSvc -> DB : updateBorrowRecord(returnConditionOk = false)
+end
+BorrowSvc --> Facade : 归还闭环处理完成
+deactivate BorrowSvc
+Facade --> Mgr : 显示更新后的设备状态与工单
+deactivate Facade
+@enduml

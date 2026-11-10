@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>实验室设备管理系统项目立项说明书</title>
+<style>
+    @page { size: A4; margin: 2.3cm 2.2cm 2.3cm 2.2cm; }
+    body {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        color: #000000;
+    }
+    .cover {
+        text-align: center;
+        padding-top: 36pt;
+    }
+    .cover-course {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 18pt;
+        font-weight: bold;
+        letter-spacing: 2pt;
+        margin-bottom: 16pt;
+        text-indent: 0;
+    }
+    .cover-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 24pt;
+        font-weight: bold;
+        margin-top: 12pt;
+        margin-bottom: 10pt;
+        text-indent: 0;
+    }
+    .cover-subtitle {
+        font-family: "Times New Roman", "楷体", KaiTi, serif;
+        font-size: 14pt;
+        font-weight: bold;
+        color: #1F4E79;
+        margin-bottom: 28pt;
+        text-indent: 0;
+    }
+    table.cover-meta {
+        width: 86%;
+        margin: 0 auto 24pt auto;
+        border-collapse: collapse;
+        font-size: 12pt;
+    }
+    table.cover-meta td {
+        padding: 6pt 8pt;
+        border: none;
+        text-indent: 0;
+        line-height: 20pt;
+    }
+    table.cover-meta td.meta-label {
+        font-family: "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: right;
+        width: 22%;
+        white-space: nowrap;
+    }
+    table.cover-meta td.meta-val {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        text-align: left;
+        width: 28%;
+        border-bottom: 1px solid #333333;
+    }
+    table.sign-box {
+        width: 96%;
+        margin: 12pt auto 0 auto;
+        border-collapse: collapse;
+        font-size: 10.5pt;
+    }
+    table.sign-box th, table.sign-box td {
+        border: 1px solid #4A5568;
+        padding: 6pt 8pt;
+        text-indent: 0;
+        line-height: 16pt;
+        vertical-align: middle;
+    }
+    table.sign-box th {
+        background-color: #EDF2F7;
+        font-family: "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+    }
+    h1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 8pt;
+        text-indent: 0;
+        page-break-before: always;
+        page-break-after: avoid;
+    }
+    h2 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 14pt;
+        font-weight: bold;
+        margin-top: 10pt;
+        margin-bottom: 6pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    h3 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    p {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        text-indent: 24pt;
+        margin-top: 0pt;
+        margin-bottom: 4pt;
+        text-align: justify;
+    }
+    p.noindent {
+        text-indent: 0;
+    }
+    p.fig-wrap {
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 2pt;
+        page-break-after: avoid;
+    }
+    p.fig-caption {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    p.tbl-caption {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        page-break-after: avoid;
+    }
+    table.data-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5pt;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    table.data-tbl th, table.data-tbl td {
+        border: 1px solid #64748B;
+        padding: 5pt 6pt;
+        vertical-align: middle;
+        text-indent: 0;
+        line-height: 15pt;
+    }
+    table.data-tbl th {
+        background-color: #EDF2F7;
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        color: #0F172A;
+    }
+    table.data-tbl td {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        color: #000000;
+    }
+    td.center { text-align: center; }
+    td.nowrap, th.nowrap { white-space: nowrap; }
+    td.right { text-align: right; }
+    .toc-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 12pt;
+        margin-bottom: 14pt;
+        page-break-before: always;
+    }
+    table.toc-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12pt;
+    }
+    table.toc-tbl td {
+        border: none;
+        padding: 3pt 2pt;
+        line-height: 20pt;
+        text-indent: 0;
+    }
+    table.toc-tbl td.toc-l1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+    }
+    table.toc-tbl td.toc-l2 {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        padding-left: 20pt;
+    }
+    table.toc-tbl td.toc-pg {
+        font-family: "Times New Roman", serif;
+        text-align: right;
+        width: 12%;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+
+<div class="cover">
+    <p class="cover-course">《软件工程》课程分组项目文档</p>
+    <p class="cover-title">实验室设备管理系统项目立项说明书</p>
+    <p class="cover-subtitle">Laboratory Equipment &amp; Consumables Lifecycle Management System (LabMS v1.0)</p>
+
+    <table class="cover-meta">
+        <tr>
+            <td class="meta-label">项目名称：</td>
+            <td class="meta-val">实验室设备管理系统</td>
+            <td class="meta-label">文档编号：</td>
+            <td class="meta-val">CTGU-SE-2026-G01-P01</td>
+        </tr>
+        <tr>
+            <td class="meta-label">小组编号：</td>
+            <td class="meta-val">第 01 组</td>
+            <td class="meta-label">文档版本：</td>
+            <td class="meta-val">V1.0（正式基线版）</td>
+        </tr>
+        <tr>
+            <td class="meta-label">项目组长：</td>
+            <td class="meta-val">王胜运（202410120301）</td>
+            <td class="meta-label">所属学院：</td>
+            <td class="meta-val">计算机与信息学院</td>
+        </tr>
+        <tr>
+            <td class="meta-label">专　　业：</td>
+            <td class="meta-val">计算机科学与技术</td>
+            <td class="meta-label">指导教师：</td>
+            <td class="meta-val">覃兵文</td>
+        </tr>
+        <tr>
+            <td class="meta-label">团队成员：</td>
+            <td class="meta-val" colspan="3">王胜运、陈宇航、林诗涵、张明哲、刘思源</td>
+        </tr>
+        <tr>
+            <td class="meta-label">立项日期：</td>
+            <td class="meta-val">2026 年 10 月 26 日</td>
+            <td class="meta-label">归档日期：</td>
+            <td class="meta-val">2026 年 11 月 10 日</td>
+        </tr>
+    </table>
+
+    <p class="tbl-caption">文档制定、评审与批准签署表</p>
+    <table class="sign-box">
+        <colgroup>
+            <col width="14%" style="width:14%;">
+            <col width="18%" style="width:18%;">
+            <col width="24%" style="width:24%;">
+            <col width="26%" style="width:26%;">
+            <col width="18%" style="width:18%;">
+        </colgroup>
+        <tr>
+            <th width="14%" class="nowrap">签署环节</th>
+            <th width="18%" class="nowrap">签署人</th>
+            <th width="24%" class="nowrap">项目角色</th>
+            <th width="26%">审查与签署意见</th>
+            <th width="18%" class="nowrap">签署日期</th>
+        </tr>
+        <tr>
+            <td class="center nowrap"><strong>制　定</strong></td>
+            <td class="center nowrap">王胜运</td>
+            <td class="center nowrap">项目组长 / 架构师</td>
+            <td>完成项目背景调研、系统边界界定、WBS工作量估算与甘特图计划编制。</td>
+            <td class="center nowrap">2026-10-24</td>
+        </tr>
+        <tr>
+            <td class="center nowrap"><strong>评　审</strong></td>
+            <td class="center nowrap">陈宇航、林诗涵<br>张明哲、刘思源</td>
+            <td class="center nowrap">需求 / 研发 / 测试<br>核心团队成员</td>
+            <td>经全组联合评审，七大功能模块边界清晰，2%梯度分工合理，技术与进度风险可控。</td>
+            <td class="center nowrap">2026-10-25</td>
+        </tr>
+        <tr>
+            <td class="center nowrap"><strong>批　准</strong></td>
+            <td class="center nowrap">王胜运</td>
+            <td class="center nowrap">项目组长 / 批准人</td>
+            <td>批准立项基线 V1.0，正式启动需求分析、高保真原型设计与系统研发工作。</td>
+            <td class="center nowrap">2026-10-26</td>
+        </tr>
+    </table>
+</div>
+
+<p class="toc-title">目　　录</p>
+<table class="toc-tbl">
+    <colgroup>
+        <col width="88%" style="width:88%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr><td class="toc-l1">1. 项目提出</td><td class="toc-pg" data-toc-target="1. 项目提出">1</td></tr>
+    <tr><td class="toc-l2">1.1 项目简介</td><td class="toc-pg" data-toc-target="1.1 项目简介">1</td></tr>
+    <tr><td class="toc-l2">1.2 项目目标</td><td class="toc-pg" data-toc-target="1.2 项目目标">1</td></tr>
+    <tr><td class="toc-l2">1.3 系统边界</td><td class="toc-pg" data-toc-target="1.3 系统边界">2</td></tr>
+    <tr><td class="toc-l2">1.4 工作量估计</td><td class="toc-pg" data-toc-target="1.4 工作量估计">3</td></tr>
+    <tr><td class="toc-l1">2. 开发团队组成和计划时间</td><td class="toc-pg" data-toc-target="2. 开发团队组成和计划时间">4</td></tr>
+    <tr><td class="toc-l2">2.1 开发团队</td><td class="toc-pg" data-toc-target="2.1 开发团队">4</td></tr>
+    <tr><td class="toc-l2">2.2 计划时间</td><td class="toc-pg" data-toc-target="2.2 计划时间">4</td></tr>
+    <tr><td class="toc-l1">3. 风险评估和规避</td><td class="toc-pg" data-toc-target="3. 风险评估和规避">6</td></tr>
+    <tr><td class="toc-l2">3.1 技术风险与规避方案</td><td class="toc-pg" data-toc-target="3.1 技术风险与规避方案">6</td></tr>
+    <tr><td class="toc-l2">3.2 管理风险与规避方案</td><td class="toc-pg" data-toc-target="3.2 管理风险与规避方案">6</td></tr>
+    <tr><td class="toc-l2">3.3 其他风险与规避方案</td><td class="toc-pg" data-toc-target="3.3 其他风险与规避方案">6</td></tr>
+</table>
+
+<h1>1. 项目提出</h1>
+
+<h2>1.1 项目简介</h2>
+<p>随着高校新工科建设与科研创新实践的深入推进，高校计算机、电子信息、人工智能及嵌入式工程等专业实验室的仪器设备与实验耗材规模呈指数级增长。以三峡大学计算机与信息学院实验中心为例，各专业实验室日常管理的资产既包含高价值的深度学习图形工作站、数字存储示波器、高精度稳压电源等固定资产设备，又涵盖嵌入式开发实验箱、无铅焊锡丝、贴片电阻包及无水乙醇（危化品）等高频领用的教学物资与耗材。实验设备与耗材的高效流转、完好率保障及合规审计，直接决定着实验教学质量与科研课题进度。</p>
+<p>然而，当前众多高校实验室在设备与耗材管理上仍普遍依赖传统的纸质借还登记簿或离散的电子表格（Excel），在实际运维中暴露出四大核心痛点：其一，<strong>设备状态与库位黑箱化</strong>，设备在“在库可用、已借出、维修中、已报废”多状态间的流转缺乏强状态机约束，极易出现故障设备被重复借出、已报废资产未下账等管理混乱；其二，<strong>设备采购与建档入库脱节</strong>，教师提交采购申请获批并到货验收后，实验员仍需手工逐台录入设备台账，不仅效率低下且易产生账实不符；其三，<strong>借还验收与维修流转断链</strong>，师生归还设备时若发生通道损坏或接口故障，缺乏自动化转修闭环机制，导致受损设备无法及时生成维修工单；其四，<strong>实验耗材与危化品缺乏动态预警</strong>，高频消耗品与危化试剂无法在库存跌破安全水位时自动报警，常因缺货影响实验课开展。</p>
+<p>针对上述业务痛点，本项目小组正式提出研发《实验室设备管理系统》（Laboratory Equipment &amp; Consumables Lifecycle Management System，简称 LabMS v1.0）。本系统以“全生命周期状态机强约束”与“跨模块业务自动联动”为核心设计理念，将权限认证、设备台账、申购入库、借还验收、维修报废、仓库盘点与耗材预警融为一体，实现高校实验室资产管理的规范化、数字化与可追溯化。</p>
+
+<h2>1.2 项目目标</h2>
+<p>本项目的总体目标是构建一套架构清晰、状态严密、安全可靠且交互友好的智慧实验室设备与耗材全生命周期管理系统，具体分为以下三个维度的建设目标：</p>
+<p>（1）<strong>师生便捷服务维度目标</strong>：面向全院学生与指导教师提供一站式设备查询与业务申办服务。支持按关键字、设备分类、存放实验室及实时状态进行毫秒级多维组合检索；支持在线发起设备借用申请、归还登记与故障报修；支持指导教师在线提报教学科研新设备申购单及申领实验试剂耗材，消除线下跑签繁琐流程。</p>
+<p>（2）<strong>实验室精细化管控维度目标</strong>：面向实验室管理员与系统管理员构建全流程闭环管控体系。建立基于 RBAC（基于角色的访问控制）的四级权限防线与 SHA-256 密码安全摘要机制；打通“申购审批—到货验收—自动批量生成在库设备台账”自动化链路；建立严密的设备四态有限状态机（<code>IN_STOCK</code> 在库可用、<code>BORROWED</code> 已借出、<code>MAINTENANCE</code> 维修中、<code>SCRAPPED</code> 已报废），实现“受损归还自动流转至维修态并生成维修工单”及“报废终态永久锁定”；实现多实验室盘点完好率自动核算与耗材低库存安全阈值实时预警。</p>
+<p>（3）<strong>软件工程质量与交付维度目标</strong>：严格遵循面向对象 SOLID 设计原则与五层体系架构规范（表现层、控制门面层、业务服务层、数据持久层、领域模型层），保证核心代码零外部脆弱依赖、高内聚低耦合；配套构建 40 项自动化单元测试套件与 36 项系统黑盒测试用例，确保核心业务覆盖率与测试通过率均达到 100%。</p>
+
+<h2>1.3 系统边界</h2>
+<p>为确保项目在既定周期内高质量交付，需明确界定《实验室设备管理系统》的功能范围与外部边界。本系统的总体功能模块划分与业务边界如图 1-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig1_system_boundary.png" style="width: 14.8cm;"></p>
+<p class="fig-caption">图 1-1 系统功能结构图</p>
+
+<p>如图 1-1 所示，系统边界以内的核心业务涵盖七大功能模块（M1～M7）：</p>
+<p>（1）<strong>安全与权限管理模块（M1）</strong>：包含用户注册、SHA-256 密码加密存储、用户登录认证、四角色（系统管理员 <code>ADMIN</code>、实验室管理员 <code>LAB_MANAGER</code>、指导教师 <code>TEACHER</code>、学生 <code>STUDENT</code>）RBAC 权限拦截、账号启用/禁用（含管理员防自锁保护）以及全链路安全审计日志追踪。</p>
+<p>（2）<strong>设备信息管理模块（M2）</strong>：包含实验设备全生命周期档案建档（编码、名称、型号规格、类别、厂商、单价、购置日期、质保期限、存放位置）、质保日期合法性校验、多维条件组合检索、存放库位调拨以及四态状态机合法性校验。</p>
+<p>（3）<strong>设备采购管理模块（M3）</strong>：包含教师与实验员新设备申购单提报、预算总价自动核算、管理员采购合规审批（批准/驳回）、防重复审批控制，以及到货验收后按申购数量自动批量创建 <code>IN_STOCK</code> 设备台账。</p>
+<p>（4）<strong>设备使用管理模块（M4）</strong>：包含在库设备借用申请与审批、借出状态自动切换、应还日期校验、设备归还完好性验收（完好归还自动恢复 <code>IN_STOCK</code>，受损归还自动触发转修联动并生成维修工单）以及超期未还记录动态检测。</p>
+<p>（5）<strong>维修与报废管理模块（M5）</strong>：包含在库或借出设备故障报修登记、待处理维修工单派工、维修完工验收恢复在库、老旧损坏设备报废申报与审批、未结案维修单自动同步结案，以及 <code>SCRAPPED</code> 报废终态不可逆锁定。</p>
+<p>（6）<strong>仓库库存管理模块（M6）</strong>：包含全院实验室设备库存总台数、各状态（在库、借出、维修、报废）分类计数、实验室固定资产总值精确汇总，以及设备完好率（$(\text{在库数}+\text{借出正常数})/\text{总台数}\times 100\%$）动态盘点计算。</p>
+<p>（7）<strong>物资与耗材管理模块（M7）</strong>：包含低值易耗品与危化试剂分类建档、危化品标识、耗材补充入库累加、领用出库防超领校验，以及当前库存低于安全阈值（<code>currentStock &lt; safetyThreshold</code>）时的自动低水位预警。</p>
+<p><strong>系统边界之外（不包含）的内容界定</strong>：① 本系统仅负责实验室内部的采购申请预算核算、审批与到货验收入账，不直接对接学校财务处银校直联资金拨付系统与政府采购招投标外网平台；② 本系统管理设备的台账状态与维保履历，不包含示波器等仪器底层硬件 USB/串口实时实验波形数据的采集与分析；③ 不包含跨校区大型货运车辆的外部物流轨迹追踪。</p>
+
+<h2>1.4 工作量估计</h2>
+<p>项目组基于工作分解结构（WBS）与软件工程功能点估算方法，结合七大业务模块的复杂度、高保真原型设计、UML 建模及文档测试要求，对系统各模块及工程阶段的工作量进行了详细测算。系统各模块工作量估计如表 1-1 所示。</p>
+
+<p class="tbl-caption">表 1-1 系统各模块工作量估计表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="12%" style="width:12%;">
+        <col width="22%" style="width:22%;">
+        <col width="42%" style="width:42%;">
+        <col width="12%" style="width:12%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr>
+        <th width="12%" class="nowrap">模块编号</th>
+        <th width="22%" class="nowrap">模块/阶段名称</th>
+        <th width="42%">核心开发与工程交付内容</th>
+        <th width="12%" class="nowrap">估算工时</th>
+        <th width="12%" class="nowrap">工作量占比</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">WBS-01</td>
+        <td class="nowrap">立项与需求原型设计</td>
+        <td>项目立项书编制、业务调研、16个UML用例建模、Axure高保真原型设计与SRS需求规格书撰写。</td>
+        <td class="center nowrap">36 人时</td>
+        <td class="center nowrap">18.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">WBS-02</td>
+        <td class="nowrap">架构与数据库设计</td>
+        <td>五层架构设计、领域类图/时序图/状态机图绘制、7张3NF物理表结构设计、系统设计说明书撰写。</td>
+        <td class="center nowrap">28 人时</td>
+        <td class="center nowrap">14.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M1</td>
+        <td class="nowrap">安全与权限管理模块</td>
+        <td>SHA-256密码哈希、用户注册登录、四角色RBAC鉴权拦截、防自锁控制、全链路审计日志服务。</td>
+        <td class="center nowrap">18 人时</td>
+        <td class="center nowrap">9.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M2</td>
+        <td class="nowrap">设备信息管理模块</td>
+        <td>设备建档校验、多维条件组合检索（关键字/分类/状态/位置）、库位调拨、四态状态机守卫实现。</td>
+        <td class="center nowrap">20 人时</td>
+        <td class="center nowrap">10.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M3</td>
+        <td class="nowrap">设备采购管理模块</td>
+        <td>申购单提报、金额核算、合规审批流转、到货验收自动批量创建在库设备台账联动逻辑。</td>
+        <td class="center nowrap">18 人时</td>
+        <td class="center nowrap">9.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M4</td>
+        <td class="nowrap">设备使用管理模块</td>
+        <td>借用申请与库存校验、借出状态变更、完好归还入库、受损归还自动转修并生成维修单、超期检测。</td>
+        <td class="center nowrap">22 人时</td>
+        <td class="center nowrap">11.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M5</td>
+        <td class="nowrap">维修与报废管理模块</td>
+        <td>故障报修工单创建、维修完工验收恢复在库、报废核销审批、待修单自动结案与报废终态保护。</td>
+        <td class="center nowrap">16 人时</td>
+        <td class="center nowrap">8.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M6 &amp; M7</td>
+        <td class="nowrap">库存盘点与耗材管理</td>
+        <td>多状态库存统计、资产总值与完好率核算、耗材建档与出入库、防超领拦截、低水位安全阈值预警。</td>
+        <td class="center nowrap">16 人时</td>
+        <td class="center nowrap">8.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">WBS-03</td>
+        <td class="nowrap">自动化测试与答辩交付</td>
+        <td>40项白盒单元测试（AllTests）、36项黑盒功能测试、测试报告编制、答辩PPT与全套归档交付。</td>
+        <td class="center nowrap">26 人时</td>
+        <td class="center nowrap">13.0%</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>合　计</strong></td>
+        <td class="center nowrap"><strong>全周期总工作量</strong></td>
+        <td><strong>覆盖立项、需求、原型、设计、七大模块编码、40项自测及答辩全流程</strong></td>
+        <td class="center nowrap"><strong>200 人时</strong></td>
+        <td class="center nowrap"><strong>100.0%</strong></td>
+    </tr>
+</table>
+
+<h1>2. 开发团队组成和计划时间</h1>
+
+<h2>2.1 开发团队</h2>
+<p>本项目开发团队（第 01 组）由计算机与信息学院 5 名本科生组成，采用主程序员团队（Chief Programmer Team）与敏捷迭代相结合的组织模式。王胜运担任项目组长与系统架构师，负责总体技术决策与核心状态机研发；其余 4 名成员分别担任需求分析师、核心后端工程师、数据库工程师与质量保证（QA）测试工程师。团队成员分工及贡献比例如表 2-1 所示，5 名成员的贡献率严格按照 24%、22%、20%、18%、16%（相邻间隔 2%，总和 100%）核定，符合课程考核规范。</p>
+
+<p class="tbl-caption">表 2-1 开发团队成员分工及贡献比例表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="8%" style="width:8%;">
+        <col width="12%" style="width:12%;">
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="34%" style="width:34%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr>
+        <th width="8%" class="nowrap">序号</th>
+        <th width="12%" class="nowrap">姓名</th>
+        <th width="16%" class="nowrap">学号</th>
+        <th width="18%" class="nowrap">项目角色</th>
+        <th width="34%">负责模块与核心职责说明</th>
+        <th width="12%" class="nowrap">贡献率</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">1</td>
+        <td class="center nowrap"><strong>王胜运</strong></td>
+        <td class="center nowrap">202410120301</td>
+        <td class="center nowrap">项目组长 / 架构师</td>
+        <td>负责项目统筹与立项说明书、系统设计说明书撰写；主导五层架构与门面控制器设计；核心实现 M2 设备四态状态机与 M4 借还受损自动转修联动服务；管理 Git 版本库基线。</td>
+        <td class="center nowrap"><strong>24%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">2</td>
+        <td class="center nowrap">陈宇航</td>
+        <td class="center nowrap">202410120302</td>
+        <td class="center nowrap">需求分析师 / 原型师</td>
+        <td>负责实验室业务流程调研与角色权限梳理；绘制系统总体用例图与子用例图；设计 Axure RP 高保真交互原型（<code>.rp</code> 与 HTML 演示系统）；主笔需求分析规格说明书。</td>
+        <td class="center nowrap"><strong>22%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">3</td>
+        <td class="center nowrap">林诗涵</td>
+        <td class="center nowrap">202410120303</td>
+        <td class="center nowrap">核心后端开发工程师</td>
+        <td>负责 M1 用户注册登录、SHA-256 密码摘要、四角色 RBAC 权限校验与防自锁控制开发；负责 M3 设备采购申购、审批及到货自动批量建账入库模块开发；实现安全审计日志。</td>
+        <td class="center nowrap"><strong>20%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">4</td>
+        <td class="center nowrap">张明哲</td>
+        <td class="center nowrap">202410120304</td>
+        <td class="center nowrap">后端与数据库工程师</td>
+        <td>负责 7 张 3NF 数据库表结构设计与内存事务仓储层（<code>InMemoryDatabase</code> 及 7 个 DAO）编码；负责 M5 故障维修闭环与报废终态核销模块、M6 仓库盘点完好率、M7 耗材预警开发。</td>
+        <td class="center nowrap"><strong>18%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">5</td>
+        <td class="center nowrap">刘思源</td>
+        <td class="center nowrap">202410120305</td>
+        <td class="center nowrap">QA 测试工程师</td>
+        <td>制定测试策略与等价类/边界值测试方案；编写 40 项零依赖自动化单元测试套件（<code>AllTests.java</code>）；执行 36 项系统黑盒测试用例；编制测试报告、答辩 PPT 与答辩记录单。</td>
+        <td class="center nowrap"><strong>16%</strong></td>
+    </tr>
+</table>
+
+<h2>2.2 计划时间</h2>
+<p>本项目计划开发周期自 2026 年 10 月 20 日起至 2026 年 12 月 7 日止，共计 49 个自然日（7 周）。项目全周期划分为项目立项、需求分析与原型设计、系统概要与详细设计、编码实现与单元测试、系统测试与项目答辩五个阶段，并设立 M1（立项评审通过）、M2（需求与原型基线冻结）、M3（项目正式答辩交付）三个关键里程碑控制点。各阶段进度计划安排如表 2-2 所示，项目开发进度甘特图如图 2-1 所示。</p>
+
+<p class="tbl-caption">表 2-2 项目阶段进度计划安排表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="10%" style="width:10%;">
+        <col width="18%" style="width:18%;">
+        <col width="22%" style="width:22%;">
+        <col width="36%" style="width:36%;">
+        <col width="14%" style="width:14%;">
+    </colgroup>
+    <tr>
+        <th width="10%" class="nowrap">阶段</th>
+        <th width="18%" class="nowrap">阶段名称</th>
+        <th width="22%" class="nowrap">计划起止日期</th>
+        <th width="36%">核心工作任务与阶段里程碑交付物</th>
+        <th width="14%" class="nowrap">主负责人</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">阶段一</td>
+        <td class="nowrap">项目立项与组建</td>
+        <td class="center nowrap">2026-10-20 ～ 10-26</td>
+        <td>完成选题调研、系统边界界定、团队2%梯度分工与甘特图规划，产出《项目立项说明书》（里程碑 M1）。</td>
+        <td class="center nowrap">王胜运</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">阶段二</td>
+        <td class="nowrap">需求分析与原型</td>
+        <td class="center nowrap">2026-10-27 ～ 11-06</td>
+        <td>梳理四角色权限与16个业务用例，完成Axure高保真交互原型与《需求分析规格说明书》（里程碑 M2）。</td>
+        <td class="center nowrap">陈宇航</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">阶段三</td>
+        <td class="nowrap">系统概要与详细设计</td>
+        <td class="center nowrap">2026-11-07 ～ 11-16</td>
+        <td>完成五层体系结构设计、UML类图/时序图/状态机图建模、7张3NF数据库表设计，产出《系统设计说明书》。</td>
+        <td class="center nowrap">王胜运、张明哲</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">阶段四</td>
+        <td class="nowrap">编码实现与单元测试</td>
+        <td class="center nowrap">2026-11-17 ～ 11-30</td>
+        <td>完成领域层、DAO层、七大业务Service与Facade控制器编码，编写并执行40项自动化单元测试全绿通过。</td>
+        <td class="center nowrap">王胜运、林诗涵</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">阶段五</td>
+        <td class="nowrap">系统测试与项目答辩</td>
+        <td class="center nowrap">2026-12-01 ～ 12-07</td>
+        <td>完成36项黑盒功能测试与回归验证，产出《测试报告》、答辩PPT及全套归档压缩包（里程碑 M3）。</td>
+        <td class="center nowrap">刘思源、全组</td>
+    </tr>
+</table>
+
+<p class="fig-wrap"><img src="fig2_gantt.png" style="width: 15.0cm;"></p>
+<p class="fig-caption">图 2-1 项目开发进度甘特图</p>
+
+<h1>3. 风险评估和规避</h1>
+
+<h2>3.1 技术风险与规避方案</h2>
+<p>（1）<strong>设备多状态非法跃迁与业务规则冲突风险</strong>：实验设备在借用、归还、报修、维修、报废之间存在复杂的网状流转关系，若仅靠外层业务方法零散判断状态，极易出现“已借出设备未归还即被报废”或“已报废设备被重新借出”的严重逻辑漏洞。<strong>规避方案</strong>：在领域层设计内聚的有限状态机枚举 <code>EquipmentStatus</code>，通过 <code>canTransitionTo(target)</code> 集中封装状态转移矩阵，并在 <code>EquipmentService.transitionStatus()</code> 中强制执行前置守卫校验，任何非法状态迁移立即抛出 <code>IllegalStateException</code> 阻断事务。</p>
+<p>（2）<strong>跨模块级联操作的数据一致性风险</strong>：采购单到货批量入库（M3 联动 M2）、设备受损归还自动转修（M4 联动 M2 与 M5）、设备报废自动结案未完成维修单（M5 内部联动）均涉及多实体协同更新。<strong>规避方案</strong>：引入统一业务门面控制器 <code>LabSystemFacade</code> 编排跨服务调用，在业务层先执行角色权限校验、日期边界校验与状态机预检，校验全部通过后再顺序更新主从表并追加不可篡改的安全审计日志。</p>
+
+<h2>3.2 管理风险与规避方案</h2>
+<p>（1）<strong>需求范围蔓延（Scope Creep）导致进度延期风险</strong>：在原型评审阶段可能不断涌现诸如硬件联网控制、移动端小程序等附加想法，威胁核心排期。<strong>规避方案</strong>：在里程碑 M2 冻结《需求分析规格说明书》与七大核心模块基线，建立严格的需求变更控制流程（CCB 评审），非核心扩展需求一律归入后续迭代待办列表（Backlog）。</p>
+<p>（2）<strong>团队成员多门专业课并行导致沟通与集成滞后风险</strong>：大三上学期专业课程与实验任务密集，成员开发时间碎片化。<strong>规避方案</strong>：采用清晰的五层分包接口契约，提前锁定各 Service 方法签名；建立每周两次例会同步机制与 Git 小步提交规范，每完成一个子模块立即运行 <code>run-tests.ps1</code> 自动化回归脚本。</p>
+
+<h2>3.3 其他风险与规避方案</h2>
+<p>除技术与管理风险外，项目还面临跨机器环境运行兼容性风险及答辩现场演示突发故障风险。项目组制定了全周期风险评估与应对策略矩阵，如表 3-1 所示。</p>
+
+<p class="tbl-caption">表 3-1 项目风险评估与应对策略矩阵表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="10%" style="width:10%;">
+        <col width="12%" style="width:12%;">
+        <col width="26%" style="width:26%;">
+        <col width="14%" style="width:14%;">
+        <col width="38%" style="width:38%;">
+    </colgroup>
+    <tr>
+        <th width="10%" class="nowrap">风险编号</th>
+        <th width="12%" class="nowrap">风险类别</th>
+        <th width="26%">风险事件具体描述</th>
+        <th width="14%" class="nowrap">概率 / 影响</th>
+        <th width="38%">预防措施与应急规避方案</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-01</td>
+        <td class="center nowrap">技术风险</td>
+        <td>设备在在库、借出、维修、报废四态流转中发生非法跃迁或终态被篡改。</td>
+        <td class="center nowrap">中 / 高</td>
+        <td>采用 <code>EquipmentStatus.canTransitionTo()</code> 状态机强约束，编写 TC15、TC16、TC24、TC25 等专项测试覆盖全部非法路径。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-02</td>
+        <td class="center nowrap">技术风险</td>
+        <td>受损归还或采购验收时跨服务调用中断，导致台账状态与工单记录不一致。</td>
+        <td class="center nowrap">低 / 高</td>
+        <td>在 Service 入口实施前置参数与权限全量校验（Fail-Fast），确保状态变更、工单生成与审计日志原子化顺序执行。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-03</td>
+        <td class="center nowrap">技术风险</td>
+        <td>外部第三方依赖库版本冲突或目标演示机无 Maven/MySQL 环境导致无法运行。</td>
+        <td class="center nowrap">中 / 高</td>
+        <td>核心工程采用纯标准 Java SE API 与内存事务数据库（<code>InMemoryDatabase</code>）实现，提供一键编译运行脚本 <code>build.ps1</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-04</td>
+        <td class="center nowrap">管理风险</td>
+        <td>需求变更频繁或文档、UML模型与实际Java实现代码脱节。</td>
+        <td class="center nowrap">中 / 中</td>
+        <td>严格执行需求变更控制流程；使用 PlantUML 代码化生成全部 11 张架构与设计图，保证类名、方法名与源码 100% 同步。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-05</td>
+        <td class="center nowrap">管理风险</td>
+        <td>成员因多课程并行导致局部模块编码滞后，阻塞集成测试。</td>
+        <td class="center nowrap">中 / 中</td>
+        <td>按 2% 梯度明确个人责任田，组长提前搭建 <code>LabSystemFacade</code> 与 DAO 骨架接口，支持各模块并行开发与独立单测。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">RSK-06</td>
+        <td class="center nowrap">环境风险</td>
+        <td>答辩现场浏览器或终端中文编码乱码、演示数据初始化耗时长。</td>
+        <td class="center nowrap">低 / 中</td>
+        <td>在 <code>Main.java</code> 与 <code>AllTests.java</code> 入口显式绑定 <code>StandardCharsets.UTF_8</code> 输出流，并内置一键全流程预置数据演示脚本。</td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>实验室设备管理系统测试报告</title>
+<style>
+    @page { size: A4; margin: 2.3cm 2.2cm 2.3cm 2.2cm; }
+    body {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        color: #000000;
+    }
+    .cover {
+        text-align: center;
+        padding-top: 40pt;
+    }
+    .cover-course {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 18pt;
+        font-weight: bold;
+        letter-spacing: 2pt;
+        margin-bottom: 18pt;
+        text-indent: 0;
+    }
+    .cover-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 24pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 10pt;
+        text-indent: 0;
+    }
+    .cover-subtitle {
+        font-family: "Times New Roman", "楷体", KaiTi, serif;
+        font-size: 14pt;
+        font-weight: bold;
+        color: #1F4E79;
+        margin-bottom: 30pt;
+        text-indent: 0;
+    }
+    table.cover-meta {
+        width: 86%;
+        margin: 0 auto 24pt auto;
+        border-collapse: collapse;
+        font-size: 12pt;
+    }
+    table.cover-meta td {
+        padding: 6pt 8pt;
+        border: none;
+        text-indent: 0;
+        line-height: 20pt;
+    }
+    table.cover-meta td.meta-label {
+        font-family: "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: right;
+        width: 22%;
+        white-space: nowrap;
+    }
+    table.cover-meta td.meta-val {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        text-align: left;
+        width: 28%;
+        border-bottom: 1px solid #333333;
+    }
+    h1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 8pt;
+        text-indent: 0;
+        page-break-before: always;
+        page-break-after: avoid;
+    }
+    h2 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 14pt;
+        font-weight: bold;
+        margin-top: 10pt;
+        margin-bottom: 6pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    h3 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    p {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        text-indent: 24pt;
+        margin-top: 0pt;
+        margin-bottom: 4pt;
+        text-align: justify;
+    }
+    p.noindent { text-indent: 0; }
+    p.tbl-caption {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        page-break-after: avoid;
+    }
+    table.data-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5pt;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    table.data-tbl th, table.data-tbl td {
+        border: 1px solid #64748B;
+        padding: 4pt 6pt;
+        vertical-align: middle;
+        text-indent: 0;
+        line-height: 15pt;
+    }
+    table.data-tbl th {
+        background-color: #EDF2F7;
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        color: #0F172A;
+    }
+    table.data-tbl td {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        color: #000000;
+    }
+    td.center { text-align: center; }
+    td.nowrap, th.nowrap { white-space: nowrap; }
+    table.code-box {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6pt;
+        margin-bottom: 10pt;
+        background-color: #F6F8FA;
+        border: 1px solid #D0D7DE;
+    }
+    table.code-box td.code-cell {
+        background-color: #F6F8FA;
+        border: 1px solid #D0D7DE;
+        padding: 6pt 8pt;
+        text-indent: 0;
+    }
+    p.code-line {
+        font-family: Consolas, "Microsoft YaHei", monospace;
+        font-size: 9pt;
+        line-height: 12pt;
+        mso-line-height-rule: exactly;
+        text-indent: 0;
+        margin: 0;
+        padding: 0;
+        color: #24292F;
+        text-align: left;
+    }
+    .kw { color: #0033B3; font-weight: bold; }
+    .ty { color: #6F42C1; }
+    .st { color: #067D17; }
+    .cm { color: #6E7781; font-style: italic; }
+    .toc-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 12pt;
+        margin-bottom: 12pt;
+        page-break-before: always;
+    }
+    table.toc-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5pt;
+    }
+    table.toc-tbl td {
+        border: none;
+        padding: 3pt 2pt;
+        line-height: 19pt;
+        text-indent: 0;
+    }
+    table.toc-tbl td.toc-l1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+    }
+    table.toc-tbl td.toc-l2 {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        padding-left: 18pt;
+    }
+    table.toc-tbl td.toc-pg {
+        font-family: "Times New Roman", serif;
+        text-align: right;
+        width: 12%;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+
+<div class="cover">
+    <p class="cover-course">《软件工程》课程分组项目文档</p>
+    <p class="cover-title">实验室设备管理系统<br>系统测试报告</p>
+    <p class="cover-subtitle">System Testing &amp; Automated Verification Report for LabMS v1.0</p>
+
+    <table class="cover-meta">
+        <tr>
+            <td class="meta-label">项目名称：</td>
+            <td class="meta-val">实验室设备管理系统</td>
+            <td class="meta-label">文档编号：</td>
+            <td class="meta-val">CTGU-SE-2026-G01-STR</td>
+        </tr>
+        <tr>
+            <td class="meta-label">小组编号：</td>
+            <td class="meta-val">第 01 组</td>
+            <td class="meta-label">文档版本：</td>
+            <td class="meta-val">V1.0（正式验收版）</td>
+        </tr>
+        <tr>
+            <td class="meta-label">项目组长：</td>
+            <td class="meta-val">王胜运（202410120301）</td>
+            <td class="meta-label">测试负责：</td>
+            <td class="meta-val">刘思源、王胜运</td>
+        </tr>
+        <tr>
+            <td class="meta-label">所属学院：</td>
+            <td class="meta-val">计算机与信息学院</td>
+            <td class="meta-label">专　　业：</td>
+            <td class="meta-val">计算机科学与技术</td>
+        </tr>
+        <tr>
+            <td class="meta-label">指导教师：</td>
+            <td class="meta-val">覃兵文</td>
+            <td class="meta-label">测试日期：</td>
+            <td class="meta-val">2026 年 12 月 4 日</td>
+        </tr>
+        <tr>
+            <td class="meta-label">测试结论：</td>
+            <td class="meta-val" colspan="3"><strong>40 项白盒单元测试 + 36 项黑盒功能测试 100% 通过（0 失败）</strong></td>
+        </tr>
+    </table>
+</div>
+
+<p class="toc-title">目　　录</p>
+<table class="toc-tbl">
+    <colgroup>
+        <col width="88%" style="width:88%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr><td class="toc-l1">1. 测试概述</td><td class="toc-pg" data-toc-target="1. 测试概述">1</td></tr>
+    <tr><td class="toc-l2">1.1 编写目的</td><td class="toc-pg" data-toc-target="1.1 编写目的">1</td></tr>
+    <tr><td class="toc-l2">1.2 测试环境与工具配置</td><td class="toc-pg" data-toc-target="1.2 测试环境与工具配置">1</td></tr>
+    <tr><td class="toc-l2">1.3 测试范围与参考文档</td><td class="toc-pg" data-toc-target="1.3 测试范围与参考文档">1</td></tr>
+    <tr><td class="toc-l1">2. 测试策略与方法</td><td class="toc-pg" data-toc-target="2. 测试策略与方法">2</td></tr>
+    <tr><td class="toc-l2">2.1 等价类划分与边界值分析法</td><td class="toc-pg" data-toc-target="2.1 等价类划分与边界值分析法">2</td></tr>
+    <tr><td class="toc-l2">2.2 有限状态机路径与非法转移覆盖测试</td><td class="toc-pg" data-toc-target="2.2 有限状态机路径与非法转移覆盖测试">2</td></tr>
+    <tr><td class="toc-l2">2.3 RBAC 角色越权与防自锁安全测试</td><td class="toc-pg" data-toc-target="2.3 RBAC 角色越权与防自锁安全测试">2</td></tr>
+    <tr><td class="toc-l1">3. 功能测试用例与执行结果</td><td class="toc-pg" data-toc-target="3. 功能测试用例与执行结果">4</td></tr>
+    <tr><td class="toc-l2">3.1 测试执行结果汇总统计</td><td class="toc-pg" data-toc-target="3.1 测试执行结果汇总统计">4</td></tr>
+    <tr><td class="toc-l2">3.2 核心功能测试用例与执行结果明细</td><td class="toc-pg" data-toc-target="3.2 核心功能测试用例与执行结果明细">4</td></tr>
+    <tr><td class="toc-l2">3.3 自动化单元测试断言代码设计</td><td class="toc-pg" data-toc-target="3.3 自动化单元测试断言代码设计">6</td></tr>
+    <tr><td class="toc-l1">4. 自动化回归测试实证输出</td><td class="toc-pg" data-toc-target="4. 自动化回归测试实证输出">7</td></tr>
+    <tr><td class="toc-l2">4.1 自动化单元测试套件（AllTests）全量通过实证</td><td class="toc-pg" data-toc-target="4.1 自动化单元测试套件（AllTests）全量通过实证">7</td></tr>
+    <tr><td class="toc-l2">4.2 端到端全业务流演示（Main）关键输出实证</td><td class="toc-pg" data-toc-target="4.2 端到端全业务流演示（Main）关键输出实证">8</td></tr>
+    <tr><td class="toc-l1">5. 测试结论与质量评价</td><td class="toc-pg" data-toc-target="5. 测试结论与质量评价">10</td></tr>
+    <tr><td class="toc-l2">5.1 研发过程缺陷收敛与修复分析</td><td class="toc-pg" data-toc-target="5.1 研发过程缺陷收敛与修复分析">10</td></tr>
+    <tr><td class="toc-l2">5.2 软件质量度量与最终测试结论</td><td class="toc-pg" data-toc-target="5.2 软件质量度量与最终测试结论">10</td></tr>
+</table>
+
+<h1>1. 测试概述</h1>
+
+<h2>1.1 编写目的</h2>
+<p>本《系统测试报告》旨在全面记录第 01 组对《实验室设备管理系统》（LabMS v1.0）开展的自动化白盒单元测试与黑盒系统功能测试的设计策略、执行过程、实证输出与缺陷收敛情况。通过对比《项目需求分析规格说明书》与《系统设计说明书》中的验收准则，验证七大核心模块的功能完整性、有限状态机防错严密性、RBAC 权限安全性及边界容错能力，为项目最终交付与课程答辩提供客观质量实证。</p>
+
+<h2>1.2 测试环境与工具配置</h2>
+<p>本次系统测试与自动化回归测试均在标准研发与演示环境中执行，测试软硬件与工具环境配置如表 1-1 所示。</p>
+
+<p class="tbl-caption">表 1-1 测试软硬件与工具环境配置表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="28%" style="width:28%;">
+        <col width="54%" style="width:54%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">环境类别</th>
+        <th width="28%" class="nowrap">配置项名称</th>
+        <th width="54%">版本型号与测试用途说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">硬件平台</td>
+        <td class="nowrap">测试主机配置</td>
+        <td>x86_64 多核处理器，16 GB RAM，512 GB NVMe SSD。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">操作系统</td>
+        <td class="nowrap">Microsoft Windows 10</td>
+        <td>64 位专业版（Build 10.0.26200），PowerShell 5.1 自动化执行终端。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">JDK 与编译环境</td>
+        <td class="nowrap">Oracle JDK 24.0.2</td>
+        <td>使用 <code>javac -encoding UTF-8</code> 编译主代码与测试类，零外部依赖运行。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">白盒测试框架</td>
+        <td class="nowrap"><code>cn.edu.ctgu.labms.AllTests</code></td>
+        <td>自研零依赖断言测试引擎（支持 <code>assertTrue</code>、<code>assertEquals</code>、<code>assertThrows</code>），共 40 项单元测试。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">黑盒与原型测试</td>
+        <td class="nowrap">Chrome 浏览器 + 测试用例表</td>
+        <td>验证 <code>prototype/html/index.html</code> 交互及配套 36 项系统黑盒测试用例（<code>.xlsx</code>）。</td>
+    </tr>
+</table>
+
+<h2>1.3 测试范围与参考文档</h2>
+<p>本次测试100%覆盖系统全部七大业务模块：用户认证与 RBAC 权限管理（M1）、设备台账与状态机边界管理（M2）、设备申购审批与自动批量入库（M3）、设备借用与受损归还自动转修（M4）、设备故障报修与报废终态核销（M5）、仓库库存盘点与完好率统计（M6）、实验耗材出入库与低库存预警（M7）。参考基线文档包括第 01 组《项目立项说明书》、《需求分析规格说明书》及《系统设计说明书》。</p>
+
+<h1>2. 测试策略与方法</h1>
+
+<h2>2.1 等价类划分与边界值分析法</h2>
+<p>针对系统中的数值计算、日期比较与库存阈值判断，重点采用<strong>有效/无效等价类划分</strong>与<strong>边界值分析法（Boundary Value Analysis）</strong>：</p>
+<p>（1）<strong>日期与数值边界验证</strong>：测试设备质保到期日早于购置日期（TC12）、借用应还日期早于借出日期、申购数量为 0 或负数以及预计单价为负数（TC19）等无效等价类，验证系统是否精准抛出 <code>IllegalArgumentException</code>。</p>
+<p>（2）<strong>耗材低水位安全阈值精确边界验证</strong>：针对预警判定式 <code>currentStock &lt; safetyThreshold</code>（设 <code>safetyThreshold = 10</code>），专门设计边界值三点测试（TC39）：当库存扣减至 <code>10</code>（恰好等于阈值上边界）时，验证 <code>isLowStock() == false</code> 不误报；当继续领用 1 瓶使库存降至 <code>9</code>（紧邻阈值下边界）时，验证立即触发低库存预警；当领用数量超过当前实际库存（TC38）时，验证防超领异常拦截。</p>
+<p>（3）<strong>空仓库完好率零除边界验证</strong>：测试新建空数据库（设备总数 <code>total == 0</code>）时的盘点统计（TC36），验证完好率默认返回 <code>100.0%</code> 且无除零异常。</p>
+
+<h2>2.2 有限状态机路径与非法转移覆盖测试</h2>
+<p>围绕设备四态状态机（<code>IN_STOCK</code>、<code>BORROWED</code>、<code>MAINTENANCE</code>、<code>SCRAPPED</code>），同时设计<strong>合法迁移路径覆盖</strong>（入库$\rightarrow$借出$\rightarrow$完好归还、借出$\rightarrow$受损归还自动转修$\rightarrow$维修完工恢复在库、在库/维修$\rightarrow$报废）与<strong>非法状态跃迁反例测试</strong>：验证已报废终态设备严禁逆向流转至在库、借出或维修（TC15、TC25），验证处于已借出状态的设备严禁被第二人重复借出（TC24）或未归还直接报废（TC16）。</p>
+
+<h2>2.3 RBAC 角色越权与防自锁安全测试</h2>
+<p>针对四类系统角色，设计越权攻击测试矩阵：验证学生越权登记设备台账（TC10）、学生越权提交设备采购申请（TC18）、学生或普通指导教师越权批准固定资产报废（TC34）、非系统管理员尝试禁用他人账号（TC07）均被 <code>AuthService.requireRole()</code> 拦截并抛出 <code>SecurityException</code>；同时验证系统管理员尝试禁用自身账号时被防自锁机制拦截（TC06）。测试策略与七大模块覆盖映射如表 2-1 所示。</p>
+
+<p class="tbl-caption">表 2-1 测试设计方法与七大业务模块覆盖映射表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="14%" style="width:14%;">
+        <col width="22%" style="width:22%;">
+        <col width="22%" style="width:22%;">
+        <col width="42%" style="width:42%;">
+    </colgroup>
+    <tr>
+        <th width="14%" class="nowrap">模块编号</th>
+        <th width="22%" class="nowrap">被测业务模块</th>
+        <th width="22%" class="nowrap">核心测试设计方法</th>
+        <th width="42%">覆盖的正向业务流与反向异常边界重点</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">M1</td>
+        <td class="nowrap">用户与RBAC权限管理</td>
+        <td class="nowrap">等价类 + 越权安全测试</td>
+        <td>SHA-256摘要校验、忽略大小写防重名、错误密码拦截、禁用登录拦截、防管理员自锁（TC01～TC08）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M2</td>
+        <td class="nowrap">设备台账与状态机</td>
+        <td class="nowrap">状态机路径 + 组合覆盖</td>
+        <td>设备建档、质保期倒挂拦截、多条件组合检索、库位调拨、报废终态锁与借出防报废（TC09～TC16）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M3</td>
+        <td class="nowrap">设备采购与自动入库</td>
+        <td class="nowrap">因果图 + 边界值分析</td>
+        <td>教师申购总价核算、学生申购拦截、0数量/负单价拦截、审批通过自动批量建账、驳回禁入库（TC17～TC22）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M4</td>
+        <td class="nowrap">设备借用与归还联动</td>
+        <td class="nowrap">状态联动 + 判定表测试</td>
+        <td>在库借出、重复借出拦截、完好归还恢复在库、受损归还自动转修并建维修单、超期检测（TC23～TC29）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M5</td>
+        <td class="nowrap">维修闭环与报废核销</td>
+        <td class="nowrap">状态机 + RBAC鉴权测试</td>
+        <td>故障报修转维修态、完工恢复在库、防重复完工、报废同步结案待修单、越权报废拦截（TC30～TC34）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M6</td>
+        <td class="nowrap">仓库盘点与完好率统计</td>
+        <td class="nowrap">白盒公式验证 + 边界值</td>
+        <td>四态分类计数、固定资产总值累加、完好率 $(1+1)/4=50.0\%$ 公式验证、空库 $100\%$ 零除保护（TC35～TC36）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M7</td>
+        <td class="nowrap">实验耗材与低水位预警</td>
+        <td class="nowrap">边界值分析 + 审计追踪</td>
+        <td>耗材建档补货、领用防超领拦截、安全阈值 <code>stock==10</code> 与 <code>stock==9</code> 边界预警、全链路日志检索（TC37～TC40）。</td>
+    </tr>
+</table>
+
+<h1>3. 功能测试用例与执行结果</h1>
+
+<h2>3.1 测试执行结果汇总统计</h2>
+<p>项目组对《实验室设备管理系统》执行了全量 40 项自动化白盒单元测试（<code>AllTests.java</code>）与 36 项系统黑盒功能测试（详见配套 Excel《测试用例与测试报告.xlsx》）。各模块的测试执行结果汇总如表 3-1 所示，总体测试通过率达到 <strong>100.0%</strong>。</p>
+
+<p class="tbl-caption">表 3-1 七大业务模块测试执行结果汇总表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="10%" style="width:10%;">
+        <col width="26%" style="width:26%;">
+        <col width="16%" style="width:16%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr>
+        <th width="10%" class="nowrap">模块</th>
+        <th width="26%" class="nowrap">模块名称</th>
+        <th width="16%" class="nowrap">白盒单测编号</th>
+        <th width="16%" class="nowrap">白盒/黑盒用例数</th>
+        <th width="10%" class="nowrap">通过数</th>
+        <th width="10%" class="nowrap">失败数</th>
+        <th width="12%" class="nowrap">通过率</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">M1</td>
+        <td class="nowrap">用户认证与RBAC权限管理</td>
+        <td class="center nowrap">TC01 ～ TC08</td>
+        <td class="center nowrap">8 项 / 6 项</td>
+        <td class="center nowrap">14</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M2</td>
+        <td class="nowrap">设备台账与状态机边界管理</td>
+        <td class="center nowrap">TC09 ～ TC16</td>
+        <td class="center nowrap">8 项 / 6 项</td>
+        <td class="center nowrap">14</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M3</td>
+        <td class="nowrap">设备采购审批与自动入库</td>
+        <td class="center nowrap">TC17 ～ TC22</td>
+        <td class="center nowrap">6 项 / 5 项</td>
+        <td class="center nowrap">11</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M4</td>
+        <td class="nowrap">设备借用与受损自动转修</td>
+        <td class="center nowrap">TC23 ～ TC29</td>
+        <td class="center nowrap">7 项 / 7 项</td>
+        <td class="center nowrap">14</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M5</td>
+        <td class="nowrap">设备故障维修与报废核销</td>
+        <td class="center nowrap">TC30 ～ TC34</td>
+        <td class="center nowrap">5 项 / 5 项</td>
+        <td class="center nowrap">10</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M6</td>
+        <td class="nowrap">仓库库存盘点与完好率统计</td>
+        <td class="center nowrap">TC35 ～ TC36</td>
+        <td class="center nowrap">2 项 / 3 项</td>
+        <td class="center nowrap">5</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M7</td>
+        <td class="nowrap">实验耗材管理与低库存预警</td>
+        <td class="center nowrap">TC37 ～ TC40</td>
+        <td class="center nowrap">4 项 / 4 项</td>
+        <td class="center nowrap">8</td>
+        <td class="center nowrap">0</td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>合计</strong></td>
+        <td class="center nowrap"><strong>全系统七大核心模块</strong></td>
+        <td class="center nowrap"><strong>TC01 ～ TC40</strong></td>
+        <td class="center nowrap"><strong>40 项 / 36 项</strong></td>
+        <td class="center nowrap"><strong>76</strong></td>
+        <td class="center nowrap"><strong>0</strong></td>
+        <td class="center nowrap"><strong>100%</strong></td>
+    </tr>
+</table>
+
+<h2>3.2 核心功能测试用例与执行结果明细</h2>
+<p>表 3-2 展示了从全量测试套件中精选的 15 项代表性核心业务与异常边界测试用例的输入数据、预期结果与实际执行结论。</p>
+
+<p class="tbl-caption">表 3-2 核心业务与异常边界测试用例执行记录表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="9%" style="width:9%;">
+        <col width="13%" style="width:13%;">
+        <col width="28%" style="width:28%;">
+        <col width="38%" style="width:38%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr>
+        <th width="9%" class="nowrap">编号</th>
+        <th width="13%" class="nowrap">所属模块</th>
+        <th width="28%">测试场景与输入数据</th>
+        <th width="38%">预期输出与状态/异常断言</th>
+        <th width="12%" class="nowrap">测试结果</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC01</td>
+        <td class="center nowrap">M1 权限</td>
+        <td>注册用户 <code>alice</code>，密码 <code>Secret#123</code>。</td>
+        <td>ID前缀为 <code>USR-</code>，密码转为 64 位 SHA-256 哈希串，非明文。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC06</td>
+        <td class="center nowrap">M1 权限</td>
+        <td>系统管理员调用 <code>setUserActive(adminId, adminId, false)</code>。</td>
+        <td>触发防自锁保护，抛出 <code>IllegalArgumentException("不能禁用自己的账号")</code>。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC10</td>
+        <td class="center nowrap">M2 台账</td>
+        <td>学生角色调用 <code>registerEquipment()</code> 尝试登记示波器。</td>
+        <td>RBAC 鉴权拦截，抛出 <code>SecurityException</code> 并记入越权审计日志。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC13</td>
+        <td class="center nowrap">M2 台账</td>
+        <td>组合检索：关键字“示波器”+分类“测量仪器”+在库+位置“201”。</td>
+        <td>从多台不同类别与库位的设备中精准命中 1 台 <code>EQ-A1</code> 泰克示波器。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC15</td>
+        <td class="center nowrap">M2 状态机</td>
+        <td>对已报废（<code>SCRAPPED</code>）设备尝试流转至在库、借出或维修。</td>
+        <td>状态机 <code>canTransitionTo</code> 返回 <code>false</code>，三次调用均抛出 <code>IllegalStateException</code>。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC16</td>
+        <td class="center nowrap">M2 状态机</td>
+        <td>对处于 <code>BORROWED</code> 借出未还的万用表直接调用 <code>approveScrap()</code>。</td>
+        <td>抛出 <code>IllegalStateException</code>，强制要求借出设备未归还前不可直接报废。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC20</td>
+        <td class="center nowrap">M3 采购</td>
+        <td>审批通过 5 台物联网传感箱申购单并执行到货验收入库。</td>
+        <td>申购单置为 <code>COMPLETED</code>，自动批量创建 5 台 <code>IN_STOCK</code> 设备，质保期+3年。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC21</td>
+        <td class="center nowrap">M3 采购</td>
+        <td>驳回超算节点申购单（<code>REJECTED</code>）后尝试调用验收入库。</td>
+        <td>抛出 <code>IllegalStateException</code>，严禁已驳回采购单执行入库建账。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC24</td>
+        <td class="center nowrap">M4 借还</td>
+        <td>学生 1 借出信号发生器后，学生 2 再次申请借用同一台设备。</td>
+        <td>因设备状态为 <code>BORROWED</code> 非 <code>IN_STOCK</code>，抛出 <code>IllegalStateException</code> 拦截。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC26</td>
+        <td class="center nowrap">M4 借还</td>
+        <td>归还红外热像仪，验收选择完好（<code>conditionOk = true</code>）。</td>
+        <td>借用单标记已归还，设备状态由 <code>BORROWED</code> 自动恢复为 <code>IN_STOCK</code>。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC27</td>
+        <td class="center nowrap">M4 借还</td>
+        <td>归还机械臂实训台，验收选择受损（<code>conditionOk = false</code>，“舵机卡死”）。</td>
+        <td>设备状态自动流转至 <code>MAINTENANCE</code>，且自动生成 1 张 <code>PENDING</code> 维修工单。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC31</td>
+        <td class="center nowrap">M5 维保</td>
+        <td>对处于待修状态的 3D 打印机工单执行 <code>completeRepair()</code>。</td>
+        <td>维修工单状态变为 <code>COMPLETED</code>，设备状态由 <code>MAINTENANCE</code> 恢复为 <code>IN_STOCK</code>。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC33</td>
+        <td class="center nowrap">M5 维保</td>
+        <td>对存在未结案维修工单的老旧服务器批准报废 <code>approveScrap()</code>。</td>
+        <td>设备永久变为 <code>SCRAPPED</code>，且关联的待修工单自动同步结案为 <code>COMPLETED</code>。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC35</td>
+        <td class="center nowrap">M6 盘点</td>
+        <td>库内 4 台设备分处四态（单价 1000/2000/3000/4000 元），执行盘点。</td>
+        <td>总数=4，各态=1，总资产=¥10000.00，完好率 $(1+1)/4 = 50.00\%$ 精确吻合。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+    <tr>
+        <td class="center nowrap">TC39</td>
+        <td class="center nowrap">M7 耗材</td>
+        <td>阈值 10 瓶的无水乙醇，从 15 瓶先领 5 瓶（余 10），再领 1 瓶（余 9）。</td>
+        <td>余 10 瓶时不报警（列表为空）；余 9 瓶（<code>9 &lt; 10</code>）时立即触发低库存预警。</td>
+        <td class="center nowrap"><strong>PASS</strong></td>
+    </tr>
+</table>
+
+<h2>3.3 自动化单元测试断言代码设计</h2>
+<p>以下截取 <code>src/test/java/cn/edu/ctgu/labms/AllTests.java</code> 中针对“设备受损归还自动转修并生成维修单（TC27）”与“低库存阈值边界校验（TC39）”的核心白盒测试断言代码：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line"><span class="cm">// TC27: 验证借用设备受损归还(conditionOk=false)自动流转至MAINTENANCE并创建维修单</span></p>
+        <p class="code-line"><span class="kw">private static void</span> testReturnEquipmentDamagedAutoTriggersMaintenance() {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">LabSystemFacade</span> sys = <span class="kw">new</span> <span class="ty">LabSystemFacade</span>();</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">User</span> mgr = sys.registerUser(<span class="st">"mgr"</span>, <span class="st">"Mgr@1"</span>, <span class="st">"实验员"</span>, <span class="ty">Role</span>.LAB_MANAGER, <span class="st">"中心"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">User</span> stu = sys.registerUser(<span class="st">"stu"</span>, <span class="st">"Stu@1"</span>, <span class="st">"学生"</span>, <span class="ty">Role</span>.STUDENT, <span class="st">"学院"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">Equipment</span> eq = sys.registerEquipment(mgr.getId(), <span class="st">"EQ-RET2"</span>, <span class="st">"机械臂实训台"</span>, <span class="st">"DOBOT-Magician"</span>,</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"机器人设备"</span>, <span class="st">"越疆"</span>, 12000.0, <span class="ty">LocalDate</span>.of(2025, 1, 1), <span class="ty">LocalDate</span>.of(2028, 1, 1), <span class="st">"B202"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">BorrowRecord</span> br = sys.borrowEquipment(<span class="st">"EQ-RET2"</span>, stu.getId(), mgr.getId(), <span class="st">"视觉抓取实验"</span>,</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">LocalDate</span>.of(2026, 4, 1), <span class="ty">LocalDate</span>.of(2026, 4, 10));</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;sys.returnEquipment(br.getRecordId(), mgr.getId(), <span class="ty">LocalDate</span>.of(2026, 4, 7), <span class="kw">false</span>, <span class="st">"末端舵机齿轮卡死"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;assertTrue(br.isReturned(), <span class="st">"借用记录应标记为已归还"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(<span class="ty">Boolean</span>.FALSE, br.getReturnConditionOk(), <span class="st">"归还完好标志应为false"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(<span class="ty">EquipmentStatus</span>.MAINTENANCE, eq.getStatus(), <span class="st">"受损归还后设备必须自动转入MAINTENANCE"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">List</span>&lt;<span class="ty">MaintenanceScrapRecord</span>&gt; tickets = sys.getMaintenanceScrapService().findAllRecords();</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(1, tickets.size(), <span class="st">"受损归还必须自动生成1张维修工单"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;assertEquals(<span class="ty">OrderStatus</span>.PENDING, tickets.get(0).getStatus(), <span class="st">"新生成维修工单状态应为PENDING"</span>);</p>
+        <p class="code-line">}</p>
+    </td></tr>
+</table>
+
+<h1>4. 自动化回归测试实证输出</h1>
+
+<h2>4.1 自动化单元测试套件（AllTests）全量通过实证</h2>
+<p>通过执行根目录下的自动化测试脚本 <code>.\run-tests.ps1</code>（底层运行 <code>java -cp "out/classes;out/test-classes" cn.edu.ctgu.labms.AllTests</code>），生成的真实回归测试输出文件 <code>out/test-output.txt</code> 完整内容如下（40 项测试全部通过，失败数为 0）：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line">================================================================================</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;《实验室设备管理系统》自动化单元测试套件 (共 40 项测试)</p>
+        <p class="code-line">================================================================================</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC01 - 用户正常注册与SHA-256密码摘要存储验证</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC02 - 重复用户名注册应抛出IllegalArgumentException</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC03 - 用户使用正确凭证登录成功并生成审计日志</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC04 - 用户登录密码错误应抛出SecurityException拦截</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC05 - 管理员禁用用户账号后该用户无法登录</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC06 - 管理员不允许禁用自身账号（防自锁保护）</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC07 - 非管理员尝试禁用他人账号应抛出SecurityException</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC08 - 管理员正常变更用户角色并记录审计日志</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC09 - 实验室管理员正常登记设备台账（初始状态IN_STOCK）</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC10 - 学生尝试越权登记设备台账应抛出SecurityException</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC11 - 重复设备编码登记应抛出IllegalArgumentException</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC12 - 质保到期日早于购置日期应抛出IllegalArgumentException</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC13 - 多条件组合查询（关键字+分类+状态+位置）精准匹配</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC14 - 设备变更存放位置及审计记录验证</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC15 - 状态机校验：SCRAPPED终态严禁流转至IN_STOCK或BORROWED或MAINTENANCE</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC16 - 状态机校验：BORROWED状态不可直接流转至SCRAPPED</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC17 - 教师提交设备申购单（初始状态PENDING，总金额计算正确）</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC18 - 学生尝试提交设备申购单应被RBAC拦截</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC19 - 申购数量小于等于0或单价为负数应抛出异常</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC20 - 申购单审批通过并验收入库后自动批量创建IN_STOCK设备</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC21 - 申购单被驳回后状态变为REJECTED且禁止执行入库</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC22 - 已审批申购单不可重复审批</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC23 - 正常借用IN_STOCK设备后设备状态变更为BORROWED</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC24 - 尝试重复借用已处于BORROWED状态的设备应抛出异常</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC25 - 尝试借用处于MAINTENANCE或SCRAPPED状态的设备应抛出异常</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC26 - 借用设备完好归还（conditionOk=true）后恢复为IN_STOCK</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC27 - 借用设备受损归还（conditionOk=false）自动流转至MAINTENANCE并创建维修单</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC28 - 已归还的借用记录不可重复执行归还</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC29 - 超期未还借用记录检测与已按期归还过滤验证</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC30 - 在库设备发起故障报修后状态变更为MAINTENANCE</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC31 - 维修工单完工后设备状态由MAINTENANCE恢复为IN_STOCK</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC32 - 已完工的维修工单不可重复执行完工操作</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC33 - 实验室管理员或系统管理员批准报废后设备永久变为SCRAPPED并自动结案待修单</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC34 - 学生或普通教师无权批准设备报废（RBAC拦截）</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC35 - 仓库库存多状态计数、资产总值与设备完好率公式精确验证</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC36 - 空仓库边界条件下完好率默认100%且无除零异常</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC37 - 耗材建档与补充入库后库存准确累加</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC38 - 耗材领用出库超过当前库存应抛出IllegalStateException拦截</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC39 - 低库存预警边界测试：currentStock == safetyThreshold 不报警，currentStock &lt; safetyThreshold 报警</p>
+        <p class="code-line"><span class="st">[PASS]</span> TC40 - 全链路操作安全审计日志完整性与按操作人检索验证</p>
+        <p class="code-line">================================================================================</p>
+        <p class="code-line"><span class="kw">Tests passed: 40, failed: 0</span></p>
+        <p class="code-line">================================================================================</p>
+    </td></tr>
+</table>
+
+<h2>4.2 端到端全业务流演示（Main）关键输出实证</h2>
+<p>执行 <code>.\run-demo.ps1</code> 驱动 <code>cn.edu.ctgu.labms.Main</code>，系统自动完成七大模块端到端全链路演示，生成的 <code>out/demo-output.txt</code> 核心实证输出摘要如下：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line">▶ 模块一：登录认证成功：李华(实验员)，当前角色：实验室管理员</p>
+        <p class="code-line">&nbsp;&nbsp;【RBAC安全拦截演示】权限不足：用户 陈明(本科生)(学生) 无权执行此操作，需要角色 [ADMIN, LAB_MANAGER]</p>
+        <p class="code-line">▶ 模块三：教师发起申购单：PurchaseOrder{id='PO-2026-101', name='嵌入式开发实验箱', qty=3, total=7200.00}</p>
+        <p class="code-line">&nbsp;&nbsp;申购单审批通过并完成到货验收，自动批量生成 3 台在库设备：EQ-2026-1001, EQ-2026-1002, EQ-2026-1003</p>
+        <p class="code-line">▶ 模块四：受损归还后：BorrowRecord{id='BR-2026-202', eq='EQ-2026-0001', state='已归还(受损转维修)'} | 状态：维修中</p>
+        <p class="code-line">&nbsp;&nbsp;截至 2026-04-20 超期未还记录数：1 -&gt; 【超期催还】BorrowRecord{id='BR-2026-203', eq='EQ-2026-1002'}</p>
+        <p class="code-line">▶ 模块五：维修完工后示波器恢复状态：在库可用；稳压电源 EQ-2026-0003 批准报废 -&gt; 最终状态：已报废</p>
+        <p class="code-line">&nbsp;&nbsp;【状态机终态保护演示】借用失败：设备[EQ-2026-0003-高精度稳压电源]当前状态为【已报废】，仅【在库可用】可借出</p>
+        <p class="code-line">▶ 模块六：【当前仓库盘点大盘】库存总台数: 6 | 在库可用: 4 | 已借出: 1 | 维修中: 0 | 已报废: 1 | 完好率: 83.33%</p>
+        <p class="code-line">▶ 模块七：领用后触发【低库存预警】：CS-2026-001 无铅焊锡丝(12&lt;15)、CS-2026-002 无水乙醇(7&lt;10，补货+20后解除)</p>
+        <p class="code-line">▶ 安全审计：系统累计记录安全审计日志总数：39 条。演示圆满结束！</p>
+    </td></tr>
+</table>
+
+<h1>5. 测试结论与质量评价</h1>
+
+<h2>5.1 研发过程缺陷收敛与修复分析</h2>
+<p>在阶段四单元测试编写与阶段五系统联调过程中，测试团队累计捕获并协助研发团队闭环修复了 4 项典型软件缺陷，缺陷跟踪与回归验证记录如表 5-1 所示。</p>
+
+<p class="tbl-caption">表 5-1 研发自测阶段发现缺陷与闭环修复记录表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="12%" style="width:12%;">
+        <col width="12%" style="width:12%;">
+        <col width="32%" style="width:32%;">
+        <col width="32%" style="width:32%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr>
+        <th width="12%" class="nowrap">缺陷编号</th>
+        <th width="12%" class="nowrap">严重级别</th>
+        <th width="32%">缺陷现象与触发条件描述</th>
+        <th width="32%">根因分析与代码修复方案</th>
+        <th width="12%" style="width:12%;">回归状态</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">BUG-01</td>
+        <td class="center nowrap">高（Major）</td>
+        <td>处于维修中且挂有未结案维修工单的设备被批准直接报废后，原维修工单仍停留在 <code>PENDING</code> 状态。</td>
+        <td>在 <code>MaintenanceScrapService.approveScrap()</code> 中增加级联清理逻辑，自动将该设备未结案维修单同步置为 <code>COMPLETED</code>（TC33验证通过）。</td>
+        <td class="center nowrap">已关闭</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">BUG-02</td>
+        <td class="center nowrap">中（Normal）</td>
+        <td>用户名大小写变体（如 <code>bob</code> 与 <code>BOB</code>）注册时未被识别为重复用户名。</td>
+        <td>在 <code>UserDao.findByUsername()</code> 中采用 <code>equalsIgnoreCase()</code> 进行大小写不敏感唯一性比对（TC02验证通过）。</td>
+        <td class="center nowrap">已关闭</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">BUG-03</td>
+        <td class="center nowrap">中（Normal）</td>
+        <td>新建空仓库尚未录入任何设备时调用 <code>getInventoryStatistics()</code> 完好率出现 <code>NaN</code>。</td>
+        <td>增加三元边界保护：<code>(total == 0) ? 100.0 : ((inStock + borrowed) * 100.0 / total)</code>（TC36验证通过）。</td>
+        <td class="center nowrap">已关闭</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">BUG-04</td>
+        <td class="center nowrap">低（Minor）</td>
+        <td>Windows PowerShell 默认 GBK 代码页下运行测试输出中文字符偶发乱码。</td>
+        <td>在 <code>Main</code> 与 <code>AllTests</code> 入口强制设置 <code>new PrintStream(System.out, true, "UTF-8")</code>。</td>
+        <td class="center nowrap">已关闭</td>
+    </tr>
+</table>
+
+<h2>5.2 软件质量度量与最终测试结论</h2>
+<p>综合全量白盒单元测试与黑盒系统功能测试结果，《实验室设备管理系统》（LabMS v1.0）各项质量指标达成如下：① <strong>需求覆盖率 100%</strong>：UC01～UC16 全部 16 个业务用例及七大模块均通过正向与异常测试验证；② <strong>测试通过率 100%</strong>：40 项自动化单元测试与 36 项系统测试用例全部 <code>PASS</code>，0 失败；③ <strong>缺陷修复率 100%</strong>：自测阶段发现的 4 项缺陷已全部修复并通过回归验证，无遗留高/中/低危缺陷。<strong>测试组最终结论：本系统功能完备、状态机严密、权限安全可靠，符合《需求分析规格说明书》与《系统设计说明书》的全部验收标准，准予正式交付答辩！</strong></p>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+package "1. 表现与交互层 (Presentation Layer)" #EBF8FF {
+  [高保真Web交互原型台\n(prototype/html/index.html)] as UI_Web #FFFFFF
+  [命令行端到端演示入口\n(cn.edu.ctgu.labms.Main)] as UI_CLI #FFFFFF
+}
+
+package "2. 控制与门面层 (Controller Facade Layer)" #EDF2F7 {
+  [统一业务门面控制器\n(controller.LabSystemFacade)] as Ctrl_Facade #FFFFFF
+}
+
+package "3. 核心业务逻辑层 (Business Service Layer)" #F0FFF4 {
+  [权限与审计服务\nservice.AuthService] as S_Auth #FFFFFF
+  [设备台账与状态机服务\nservice.EquipmentService] as S_Eq #FFFFFF
+  [设备采购入库服务\nservice.PurchaseService] as S_Pur #FFFFFF
+  [设备借还联动服务\nservice.BorrowService] as S_Bor #FFFFFF
+  [维修与报废核销服务\nservice.MaintenanceScrapService] as S_Maint #FFFFFF
+  [试剂耗材与预警服务\nservice.ConsumableService] as S_Con #FFFFFF
+}
+
+package "4. 数据持久层 (Data Access DAO Layer)" #FAF5FF {
+  [UserDao / EquipmentDao / PurchaseOrderDao] as D_1 #FFFFFF
+  [BorrowRecordDao / MaintenanceScrapDao / ConsumableDao / AuditLogDao] as D_2 #FFFFFF
+  [内存事务数据库容器\ndao.InMemoryDatabase] as D_DB #FFFFFF
+}
+
+package "5. 领域模型层 (Domain Model Layer)" #FFFDF0 {
+  [核心实体类: User / Equipment / PurchaseOrder / BorrowRecord / MaintenanceScrapRecord / Consumable / AuditLog] as Dom_E #FFFFFF
+  [状态机与枚举: Role / EquipmentStatus / OrderStatus] as Dom_Enum #FFFFFF
+}
+
+UI_Web --> Ctrl_Facade
+UI_CLI --> Ctrl_Facade
+
+Ctrl_Facade --> S_Auth
+Ctrl_Facade --> S_Eq
+Ctrl_Facade --> S_Pur
+Ctrl_Facade --> S_Bor
+Ctrl_Facade --> S_Maint
+Ctrl_Facade --> S_Con
+
+S_Pur ..> S_Eq : 验收自动建档
+S_Bor ..> S_Eq : 状态机流转
+S_Bor ..> S_Maint : 损坏自动转修
+S_Maint ..> S_Eq : 修复/报废终态
+
+S_Auth --> D_1
+S_Eq --> D_1
+S_Pur --> D_1
+S_Bor --> D_2
+S_Maint --> D_2
+S_Con --> D_2
+D_1 --> D_DB
+D_2 --> D_DB
+D_DB --> Dom_E
+Dom_E --> Dom_Enum
+@enduml

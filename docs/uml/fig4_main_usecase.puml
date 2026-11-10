@@ -1,0 +1,72 @@
+@startuml
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #EDF2F7
+  BorderColor #1F4E79
+  ArrowColor #2B6CB0
+}
+skinparam actor {
+  BackgroundColor #1F4E79
+  BorderColor #1F4E79
+}
+
+actor "学生 (Student)" as Student
+actor "教师 (Teacher)" as Teacher
+actor "实验室管理员 (LabManager)" as LabMgr
+actor "系统管理员 (Admin)" as Admin
+
+Student <|-- Teacher : 泛化继承权限
+
+rectangle "高校智慧实验室设备与耗材管理系统 (LabEquipMS)" {
+  package "公共与师生服务子系统" #F7FAFC {
+    usecase "UC01 用户注册与登录认证" as UC01
+    usecase "UC02 多维检索设备台账与状态" as UC02
+    usecase "UC03 提交设备借用申请" as UC03
+    usecase "UC04 归还设备与完好性登记" as UC04
+    usecase "UC05 提报设备故障报修" as UC05
+    usecase "UC06 提交新设备采购申请" as UC06
+    usecase "UC07 申领实验试剂与耗材" as UC07
+  }
+
+  package "实验室与后台管理子系统" #EBF8FF {
+    usecase "UC08 设备建档与生命周期维护" as UC08
+    usecase "UC09 审批借用申请与逾期监控" as UC09
+    usecase "UC10 处理维修工单与修复验收" as UC10
+    usecase "UC11 申报与审批设备报废核销" as UC11
+    usecase "UC12 仓库库位盘点与完好率统计" as UC12
+    usecase "UC13 耗材入库与低库存预警监控" as UC13
+    usecase "UC14 审批设备采购单并批量入库" as UC14
+    usecase "UC15 用户账号管理与RBAC授权" as UC15
+    usecase "UC16 查看系统安全审计日志" as UC16
+  }
+}
+
+Student --> UC01
+Student --> UC02
+Student --> UC03
+Student --> UC04
+Student --> UC05
+
+Teacher --> UC06
+Teacher --> UC07
+
+LabMgr --> UC01
+LabMgr --> UC08
+LabMgr --> UC09
+LabMgr --> UC10
+LabMgr --> UC11
+LabMgr --> UC12
+LabMgr --> UC13
+LabMgr --> UC14
+
+Admin --> UC01
+Admin --> UC11
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+@enduml

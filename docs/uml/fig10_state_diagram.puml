@@ -1,0 +1,44 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam state {
+  BackgroundColor #EDF2F7
+  BorderColor #1F4E79
+  ArrowColor #2B6CB0
+  StartColor #1F4E79
+  EndColor #C53030
+}
+
+[*] --> IN_STOCK : 采购验收入库 / 初始建档\n[PurchaseService.reviewAndReceive()]
+
+state "在库可用 (IN_STOCK)" as IN_STOCK {
+  IN_STOCK : 允许借用申请、常规巡检、直接报修或报废申报
+  IN_STOCK : 计入实验室可用设备库存与完好率分子
+}
+
+state "已借出 (BORROWED)" as BORROWED {
+  BORROWED : 绑定借用人(borrowerId)与应还日期(dueDate)
+  BORROWED : 严禁被其他用户重复借用，严禁直接报废
+}
+
+state "故障维修中 (MAINTENANCE)" as MAINTENANCE {
+  MAINTENANCE : 关联待处理维修工单(MaintenanceScrapRecord)
+  MAINTENANCE : 暂停对外借用，等待实验室管理员修复或转报废
+}
+
+state "已报废核销 (SCRAPPED)" as SCRAPPED #FED7D7 {
+  SCRAPPED : 永久终态 (Terminal State)
+  SCRAPPED : 写入报废台账，严禁逆向转回在库或借出
+}
+
+IN_STOCK --> BORROWED : 借用审批通过\n[borrowEquipment()]
+BORROWED --> IN_STOCK : 归还验收完好\n[returnEquipment(conditionOk=true)]
+BORROWED --> MAINTENANCE : 归还验收损坏 / 使用中故障\n[returnEquipment(conditionOk=false)]
+IN_STOCK --> MAINTENANCE : 巡检发现故障报修\n[reportFault()]
+MAINTENANCE --> IN_STOCK : 维修完工验收合格\n[completeMaintenance()]
+MAINTENANCE --> SCRAPPED : 无法修复批准报废\n[approveScrap()]
+IN_STOCK --> SCRAPPED : 达到折旧年限批准报废\n[approveScrap()]
+SCRAPPED --> [*]
+@enduml

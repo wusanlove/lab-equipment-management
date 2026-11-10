@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高校智慧实验室设备与耗材管理系统 - 高保真交互原型 (Axure RP 导出)</title>
+  <style>
+    :root {
+      --primary: #1f4e79;
+      --primary-light: #2b6cb0;
+      --primary-bg: #ebf4ff;
+      --accent: #0ea5e9;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --purple: #7c3aed;
+      --purple-bg: #ede9fe;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-500: #64748b;
+      --gray-700: #334155;
+      --gray-900: #0f172a;
+      --radius: 10px;
+      --shadow: 0 2px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif;
+      background: var(--gray-100);
+      color: var(--gray-900);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Axure RP Prototype Top Bar */
+    .axure-bar {
+      height: 36px;
+      background: #1e293b;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 12px;
+      border-bottom: 1px solid #0f172a;
+      flex-shrink: 0;
+    }
+    .axure-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .axure-tag {
+      background: #3b82f6;
+      color: #fff;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .axure-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .axure-btn {
+      background: #334155;
+      color: #f8fafc;
+      border: 1px solid #475569;
+      padding: 2px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+    }
+    .axure-btn:hover {
+      background: #475569;
+    }
+
+    /* App Layout */
+    .app-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 245px;
+      background: #0f2537;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.12);
+    }
+    .brand {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .brand-text h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .brand-text p {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 12px 10px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .nav-group-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #64748b;
+      padding: 8px 12px 4px;
+      letter-spacing: 0.5px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 4px;
+      cursor: pointer;
+      font-size: 13.5px;
+      color: #cbd5e1;
+      transition: all 0.18s;
+    }
+    .nav-item:hover {
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+    }
+    .nav-item.active {
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-badge {
+      background: #ef4444;
+      color: #fff;
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    .sidebar-footer {
+      padding: 12px 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 11.5px;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* Main Content Area */
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .top-header {
+      height: 60px;
+      background: #fff;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      flex-shrink: 0;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--gray-700);
+    }
+    .breadcrumb strong {
+      color: var(--gray-900);
+      font-size: 16px;
+    }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .role-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .role-switcher select {
+      border: none;
+      background: transparent;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      outline: none;
+      font-size: 13px;
+    }
+    .user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray-700);
+    }
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Workspace Content */
+    .workspace {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 26px;
+    }
+    .view-panel {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+    .view-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .kpi-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 18px 18px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--primary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .kpi-card.green { border-left-color: var(--success); }
+    .kpi-card.blue { border-left-color: var(--accent); }
+    .kpi-card.amber { border-left-color: var(--warning); }
+    .kpi-card.red { border-left-color: var(--danger); }
+    .kpi-card.purple { border-left-color: var(--purple); }
+    .kpi-label {
+      font-size: 12.5px;
+      color: var(--gray-500);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .kpi-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--gray-900);
+    }
+    .kpi-sub {
+      font-size: 11.5px;
+      color: var(--gray-500);
+      margin-top: 6px;
+    }
+
+    /* Cards & Grid Layout */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Toolbar & Filters */
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .input, .select {
+      padding: 8px 12px;
+      border: 1px solid var(--gray-300);
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+      background: #fff;
+      color: var(--gray-900);
+    }
+    .input:focus, .select:focus {
+      border-color: var(--primary-light);
+      box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.15);
+    }
+    .btn {
+      padding: 8px 15px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-light); }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-success:hover { opacity: 0.92; }
+    .btn-warning { background: var(--warning); color: #fff; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      border-color: var(--gray-300);
+      color: var(--gray-700);
+    }
+    .btn-outline:hover { background: var(--gray-50); }
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    th {
+      background: #f1f5f9;
+      color: var(--gray-700);
+      font-weight: 700;
+      text-align: left;
+      padding: 11px 12px;
+      border-bottom: 2px solid var(--gray-200);
+      white-space: nowrap;
+    }
+    td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--gray-100);
+      color: var(--gray-700);
+      vertical-align: middle;
+    }
+    tr:hover td {
+      background: #f8fafc;
+    }
+    tr.row-danger td {
+      background: #fff5f5;
+    }
+
+    /* Status Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 9px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-instock { background: var(--success-bg); color: var(--success); }
+    .badge-borrowed { background: var(--primary-bg); color: var(--primary-light); }
+    .badge-repair { background: var(--warning-bg); color: var(--warning); }
+    .badge-scrapped { background: var(--danger-bg); color: var(--danger); }
+    .badge-purple { background: var(--purple-bg); color: var(--purple); }
+
+    /* State Machine Diagram Bar */
+    .state-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(90deg, #f8fafc, #eff6ff);
+      border: 1px dashed #93c5fd;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 18px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .state-node {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #bfdbfe;
+      font-size: 12.5px;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .state-arrow {
+      color: #3b82f6;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* Alert List */
+    .alert-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      border-radius: 8px;
+      background: #fff5f5;
+      border: 1px solid #fecaca;
+      margin-bottom: 10px;
+    }
+    .alert-item-title {
+      font-weight: 700;
+      color: #991b1b;
+      font-size: 13.5px;
+    }
+    .alert-item-sub {
+      font-size: 12px;
+      color: #b91c1c;
+      margin-top: 2px;
+    }
+
+    /* Warehouse Cards */
+    .warehouse-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .wh-card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .wh-bar {
+      height: 8px;
+      background: var(--gray-100);
+      border-radius: 99px;
+      margin: 10px 0;
+      overflow: hidden;
+    }
+    .wh-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #0ea5e9);
+      border-radius: 99px;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+    .modal {
+      background: #fff;
+      width: 520px;
+      max-width: 94vw;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 16px 20px;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .form-row {
+      margin-bottom: 14px;
+    }
+    .form-row label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--gray-700);
+    }
+    .form-row .input, .form-row .select {
+      width: 100%;
+    }
+    .modal-footer {
+      padding: 12px 20px;
+      background: var(--gray-50);
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Toast */
+    .toast-container {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      border-left: 4px solid #38bdf8;
+      animation: fadeIn 0.2s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Axure RP Prototype Simulation Header -->
+  <div class="axure-bar">
+    <div class="axure-bar-left">
+      <span class="axure-tag">Axure RP 9 高保真交互原型</span>
+      <span>项目名称：<strong>实验室设备管理系统（高校智慧实验室设备与耗材管理系统）</strong></span>
+      <span>|</span>
+      <span>三峡大学 计算机与信息学院 · 第01组（组长：王胜运 202410120301）</span>
+    </div>
+    <div class="axure-bar-right">
+      <span>原型设计：林诗涵 (202410120312)</span>
+      <button class="axure-btn" onclick="resetDemoData()">重置演示数据</button>
+      <button class="axure-btn" onclick="showToast('已切换交互热区高亮显示')">显示交互批注</button>
+    </div>
+  </div>
+
+  <div class="app-container">
+    <!-- Left Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">实</div>
+        <div class="brand-text">
+          <h1>智慧实验室管理系统</h1>
+          <p>LabEquip &amp; Consumable v2.0</p>
+        </div>
+      </div>
+
+      <ul class="nav-list">
+        <div class="nav-group-label">综合监控中心</div>
+        <li class="nav-item active" data-view="dashboard" onclick="switchView('dashboard', this)">
+          <span class="nav-item-left">📊 1. 工作台总览</span>
+        </li>
+
+        <div class="nav-group-label">设备全生命周期闭环</div>
+        <li class="nav-item" data-view="equipment" onclick="switchView('equipment', this)">
+          <span class="nav-item-left">🖥️ 2. 设备信息台账</span>
+          <span class="nav-badge" id="nav-eq-count" style="background:#2563eb;">8</span>
+        </li>
+        <li class="nav-item" data-view="purchase" onclick="switchView('purchase', this)">
+          <span class="nav-item-left">🛒 3. 设备采购审批</span>
+          <span class="nav-badge" id="nav-pur-badge">2</span>
+        </li>
+        <li class="nav-item" data-view="borrow" onclick="switchView('borrow', this)">
+          <span class="nav-item-left">🔄 4. 设备借用与归还</span>
+        </li>
+        <li class="nav-item" data-view="repair" onclick="switchView('repair', this)">
+          <span class="nav-item-left">🛠️ 5. 维修与报废管理</span>
+          <span class="nav-badge" id="nav-rep-badge" style="background:#d97706;">1</span>
+        </li>
+
+        <div class="nav-group-label">库位与危化耗材管控</div>
+        <li class="nav-item" data-view="warehouse" onclick="switchView('warehouse', this)">
+          <span class="nav-item-left">🏢 6. 仓库库存监控</span>
+        </li>
+        <li class="nav-item" data-view="consumable" onclick="switchView('consumable', this)">
+          <span class="nav-item-left">🧪 7. 试剂与耗材管理</span>
+          <span class="nav-badge" id="nav-con-badge">2</span>
+        </li>
+
+        <div class="nav-group-label">系统安全与审计</div>
+        <li class="nav-item" data-view="rbac" onclick="switchView('rbac', this)">
+          <span class="nav-item-left">🔐 8. 用户与权限管理</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div><strong>第01组 团队成员：</strong></div>
+        <div>王胜运 · 陈宇航 · 林诗涵</div>
+        <div>张明哲 · 刘思源</div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-area">
+      <header class="top-header">
+        <div class="breadcrumb">
+          <span>高校智慧实验室管理系统</span>
+          <span>/</span>
+          <strong id="current-view-title">1. 工作台总览（全景监控与预警中心）</strong>
+        </div>
+
+        <div class="header-controls">
+          <div class="role-switcher">
+            <span>当前模拟角色：</span>
+            <select id="role-select" onchange="handleRoleChange(this.value)">
+              <option value="ADMIN">系统管理员 (ADMIN - 全部权限)</option>
+              <option value="LAB_STAFF">实验员 (LAB_STAFF - 库房与维保)</option>
+              <option value="TEACHER">指导教师 (TEACHER - 采购与借用)</option>
+              <option value="STUDENT">学生 (STUDENT - 仅查询与借用申请)</option>
+            </select>
+          </div>
+          <div class="user-pill">
+            <div class="avatar" id="user-avatar">王</div>
+            <div>
+              <div style="font-weight:700;" id="user-name-label">王胜运 (202410120301)</div>
+              <div style="font-size:11px;color:#64748b;" id="user-role-desc">第01组组长 · 系统管理员</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <!-- VIEW 1: 工作台总览 -->
+        <section id="view-dashboard" class="view-panel active">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label"><span>设备资产总数</span><span>📦</span></div>
+              <div class="kpi-value" id="kpi-total">8</div>
+              <div class="kpi-sub">覆盖 3 大专业实验室</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-label"><span>在库可用设备</span><span>✅</span></div>
+              <div class="kpi-value" id="kpi-instock">5</div>
+              <div class="kpi-sub">可随时办理借出登记</div>
+            </div>
+            <div class="kpi-card blue">
+              <div class="kpi-label"><span>当前借出数</span><span>📤</span></div>
+              <div class="kpi-value" id="kpi-borrowed">1</div>
+              <div class="kpi-sub">全部在有效借用期内</div>
+            </div>
+            <div class="kpi-card amber">
+              <div class="kpi-label"><span>维修处理中</span><span>🔧</span></div>
+              <div class="kpi-value" id="kpi-repair">1</div>
+              <div class="kpi-sub">含损坏归还自动转报修</div>
+            </div>
+            <div class="kpi-card red">
+              <div class="kpi-label"><span>已报废核销</span><span>🚫</span></div>
+              <div class="kpi-value" id="kpi-scrapped">1</div>
+              <div class="kpi-sub">已锁死禁止借出与报修</div>
+            </div>
+            <div class="kpi-card purple">
+              <div class="kpi-label"><span>设备完好率</span><span>📈</span></div>
+              <div class="kpi-value" id="kpi-health">75.0%</div>
+              <div class="kpi-sub">目标基准线 ≥ 85.0%</div>
+            </div>
+          </div>
+
+          <div class="state-flow">
+            <div style="font-weight:700;color:#1e3a8a;font-size:13px;">⚡ 核心设备状态机闭环（防错强约束）：</div>
+            <div class="state-node">🛒 采购审批通过</div>
+            <span class="state-arrow">──自动建档──▶</span>
+            <div class="state-node"><span class="badge badge-instock">在库 IN_STOCK</span></div>
+            <span class="state-arrow">──借出/正常归还──⇄</span>
+            <div class="state-node"><span class="badge badge-borrowed">借出 BORROWED</span></div>
+            <span class="state-arrow">──损坏归还自动转报修──▶</span>
+            <div class="state-node"><span class="badge badge-repair">维修中 UNDER_REPAIR</span></div>
+            <span class="state-arrow">──无法修复审批──▶</span>
+            <div class="state-node"><span class="badge badge-scrapped">已报废 SCRAPPED</span></div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">📋 最新设备状态动态与快捷操作</div>
+                <button class="btn btn-primary btn-sm" onclick="switchViewByName('equipment')">进入完整台账 →</button>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>资产编号</th>
+                      <th>设备名称</th>
+                      <th>所属实验室</th>
+                      <th>当前状态</th>
+                      <th>保管/借用人</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dash-eq-tbody"></tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title" style="color:#dc2626;">🚨 低库存耗材与危化品动态预警卡片</div>
+                <button class="btn btn-danger btn-sm" onclick="switchViewByName('consumable')">立即补库</button>
+              </div>
+              <div id="dash-alert-list"></div>
+              <div style="margin-top:14px;padding:12px;background:#f8fafc;border-radius:8px;font-size:12.5px;color:#475569;">
+                <strong>预警规则说明：</strong>当试剂或易耗品当前库存 <code>stock ≤ safety_threshold</code> 时，系统实时触发红色预警卡片并置顶提示实验员发起采购补货。
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: 设备信息台账 -->
+        <section id="view-equipment" class="view-panel">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🖥️ 实验室设备资产全生命周期台账</div>
+              <div style="font-size:12.5px;color:#64748b;">支持按编号/名称检索、状态筛选与新增入库</div>
+            </div>
+            <div class="toolbar">
+              <div class="toolbar-left">
+                <input type="text" id="eq-search" class="input" placeholder="🔍 搜索资产编号、设备名称、型号..." oninput="renderEquipment()" style="width:260px;" />
+                <select id="eq-status-filter" class="select" onchange="renderEquipment()">
+                  <option value="ALL">全部状态 (ALL)</option>
+                  <option value="IN_STOCK">在库可用 (IN_STOCK)</option>
+                  <option value="BORROWED">借出使用中 (BORROWED)</option>
+                  <option value="UNDER_REPAIR">故障维修中 (UNDER_REPAIR)</option>
+                  <option value="SCRAPPED">已报废核销 (SCRAPPED)</option>
+                </select>
+              </div>
+              <div class="toolbar-right">
+                <button class="btn btn-primary" onclick="openModal('modal-add-eq')">➕ 新增设备入库</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>资产编号</th>
+                    <th>设备名称</th>
+                    <th>型号规格</th>
+                    <th>单价 (元)</th>
+                    <th>存放库位</th>
+                    <th>生命周期状态</th>
+                    <th>当前责任人</th>
+                    <th>快捷操作</th>
+                  </tr>
+                </thead>
+                <tbody id="eq-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 3: 设备采购审批 -->
+        <section id="view-purchase" class="view-panel">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🛒 设备采购申请与审批流转（审批通过自动建档入库）</div>
+              <button class="btn btn-primary" onclick="openModal('modal-add-purchase')">➕ 发起采购申请</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>申请单号</th>
+                    <th>申购设备名称</th>
+                    <th>型号规格</th>
+                    <th>申购数量</th>
+                    <th>预算单价(元)</th>
+                    <th>申请人</th>
+                    <th>目标实验室</th>
+                    <th>审批状态</th>
+                    <th>审批操作</th>
+                  </tr>
+                </thead>
+                <tbody id="purchase-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 4: 设备借用与归还 -->
+        <section id="view-borrow" class="view-panel">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🔄 设备借用登记与归还验收（含“损坏归还自动转报修”联动）</div>
+              <button class="btn btn-primary" onclick="openBorrowModal()">📤 办理设备借出登记</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>借用单号</th>
+                    <th>设备编号</th>
+                    <th>设备名称</th>
+                    <th>借用人 (学号/工号)</th>
+                    <th>借出时间</th>
+                    <th>用途说明</th>
+                    <th>当前状态</th>
+                    <th>归还验收操作</th>
+                  </tr>
+                </thead>
+                <tbody id="borrow-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 5: 维修与报废管理 -->
+        <section id="view-repair" class="view-panel">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🛠️ 设备故障维修工单与报废核销台账</div>
+              <button class="btn btn-warning" onclick="openRepairModal()">🔧 登记故障报修</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>工单编号</th>
+                    <th>关联设备编号</th>
+                    <th>设备名称</th>
+                    <th>故障原因描述</th>
+                    <th>报修来源</th>
+                    <th>维修进度</th>
+                    <th>维保/报废审批操作</th>
+                  </tr>
+                </thead>
+                <tbody id="repair-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: 仓库库存监控 -->
+        <section id="view-warehouse" class="view-panel">
+          <div class="warehouse-grid" id="warehouse-cards"></div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🏢 各实验室库位设备分布与盘点明细</div>
+              <button class="btn btn-outline btn-sm" onclick="showToast('已完成全库位RFID自动盘点，账实相符率 100%！')">📡 一键库位盘点校准</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>库位编码</th>
+                    <th>实验室/库房名称</th>
+                    <th>安全责任人</th>
+                    <th>额定容量</th>
+                    <th>在库可用</th>
+                    <th>借出在外</th>
+                    <th>维修中</th>
+                    <th>库存健康度</th>
+                  </tr>
+                </thead>
+                <tbody id="warehouse-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 7: 试剂与耗材管理 -->
+        <section id="view-consumable" class="view-panel">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">🧪 实验室试剂与易耗品出入库管理（低于安全阈值红色预警）</div>
+              <button class="btn btn-primary" onclick="openModal('modal-add-consumable')">➕ 新增耗材品目</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>耗材编号</th>
+                    <th>耗材/试剂名称</th>
+                    <th>类别</th>
+                    <th>计量单位</th>
+                    <th>当前库存</th>
+                    <th>安全阈值</th>
+                    <th>存放库位</th>
+                    <th>预警状态</th>
+                    <th>出入库登记</th>
+                  </tr>
+                </thead>
+                <tbody id="consumable-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 8: 用户与权限管理 -->
+        <section id="view-rbac" class="view-panel">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">👥 第01组系统用户与 RBAC 角色权限矩阵</div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>学号/工号</th>
+                      <th>姓名</th>
+                      <th>系统角色</th>
+                      <th>团队分工与模块权限</th>
+                      <th>贡献率</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>202410120301</code></td>
+                      <td><strong>王胜运 (组长)</strong></td>
+                      <td><span class="badge badge-purple">系统管理员 ADMIN</span></td>
+                      <td>全部模块权限、核心状态机与预警引擎、系统集成</td>
+                      <td><strong>24%</strong></td>
+                    </tr>
+                    <tr>
+                      <td><code>202410120305</code></td>
+                      <td><strong>陈宇航</strong></td>
+                      <td><span class="badge badge-borrowed">实验员 LAB_STAFF</span></td>
+                      <td>借还管理、RBAC权限模块、UML建模与需求规格</td>
+                      <td><strong>22%</strong></td>
+                    </tr>
+                    <tr>
+                      <td><code>202410120312</code></td>
+                      <td><strong>林诗涵</strong></td>
+                      <td><span class="badge badge-instock">实验员 LAB_STAFF</span></td>
+                      <td>Axure系统原型与交互HTML设计、前端控制台、数据库设计</td>
+                      <td><strong>20%</strong></td>
+                    </tr>
+                    <tr>
+                      <td><code>202410120318</code></td>
+                      <td><strong>张明哲</strong></td>
+                      <td><span class="badge badge-repair">指导教师 TEACHER</span></td>
+                      <td>采购审批与维修报废模块、概要与详细设计文档</td>
+                      <td><strong>18%</strong></td>
+                    </tr>
+                    <tr>
+                      <td><code>202410120326</code></td>
+                      <td><strong>刘思源</strong></td>
+                      <td><span class="badge badge-instock">学生代表 STUDENT</span></td>
+                      <td>36项测试用例设计、自动化测试脚本、测试报告与答辩PPT</td>
+                      <td><strong>16%</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">📜 安全审计日志 (Audit Log)</div>
+                <span style="font-size:12px;color:#64748b;">实时记录关键状态流转与越权拦截</span>
+              </div>
+              <div id="audit-log-box" style="max-height:320px;overflow-y:auto;font-size:12.5px;"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL: 新增设备 -->
+  <div class="modal-backdrop" id="modal-add-eq">
+    <div class="modal">
+      <div class="modal-header">
+        <span>➕ 新增实验室设备入库</span>
+        <span style="cursor:pointer;" onclick="closeModal('modal-add-eq')">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>设备名称 *</label>
+          <input type="text" id="new-eq-name" class="input" placeholder="例如：高精度数字示波器" value="四通道数字存储示波器" />
+        </div>
+        <div class="form-row">
+          <label>型号规格 *</label>
+          <input type="text" id="new-eq-model" class="input" value="Rigol DS1104Z Plus" />
+        </div>
+        <div class="form-row">
+          <label>购置单价 (元) *</label>
+          <input type="number" id="new-eq-price" class="input" value="4600" />
+        </div>
+        <div class="form-row">
+          <label>存放实验室库位 *</label>
+          <select id="new-eq-loc" class="select">
+            <option value="嵌入式与物联网实验室 (B301)">嵌入式与物联网实验室 (B301)</option>
+            <option value="人工智能与算力实验室 (A402)">人工智能与算力实验室 (A402)</option>
+            <option value="分析化学与精密仪器室 (C205)">分析化学与精密仪器室 (C205)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('modal-add-eq')">取消</button>
+        <button class="btn btn-primary" onclick="submitNewEquipment()">确认建档入库</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 采购申请 -->
+  <div class="modal-backdrop" id="modal-add-purchase">
+    <div class="modal">
+      <div class="modal-header">
+        <span>🛒 发起实验室设备采购申请</span>
+        <span style="cursor:pointer;" onclick="closeModal('modal-add-purchase')">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>申购设备名称 *</label>
+          <input type="text" id="pur-name" class="input" value="激光雷达SLAM移动机器人平台" />
+        </div>
+        <div class="form-row">
+          <label>型号规格 *</label>
+          <input type="text" id="pur-model" class="input" value="TurtleBot4 Pro" />
+        </div>
+        <div class="form-row">
+          <label>申购数量 (台) *</label>
+          <input type="number" id="pur-qty" class="input" value="1" min="1" max="10" />
+        </div>
+        <div class="form-row">
+          <label>预算单价 (元) *</label>
+          <input type="number" id="pur-price" class="input" value="12800" />
+        </div>
+        <div class="form-row">
+          <label>目标存放实验室 *</label>
+          <select id="pur-loc" class="select">
+            <option value="人工智能与算力实验室 (A402)">人工智能与算力实验室 (A402)</option>
+            <option value="嵌入式与物联网实验室 (B301)">嵌入式与物联网实验室 (B301)</option>
+            <option value="分析化学与精密仪器室 (C205)">分析化学与精密仪器室 (C205)</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('modal-add-purchase')">取消</button>
+        <button class="btn btn-primary" onclick="submitPurchase()">提交采购申请</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 借用登记 -->
+  <div class="modal-backdrop" id="modal-borrow">
+    <div class="modal">
+      <div class="modal-header">
+        <span>📤 办理实验室设备借用登记</span>
+        <span style="cursor:pointer;" onclick="closeModal('modal-borrow')">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>选择在库可用设备 *</label>
+          <select id="borrow-eq-select" class="select"></select>
+        </div>
+        <div class="form-row">
+          <label>借用人姓名与学号 *</label>
+          <input type="text" id="borrow-user" class="input" value="刘思源 (202410120326)" />
+        </div>
+        <div class="form-row">
+          <label>借用实验用途 *</label>
+          <input type="text" id="borrow-reason" class="input" value="软件工程课程硬件联调测试" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('modal-borrow')">取消</button>
+        <button class="btn btn-primary" onclick="submitBorrow()">确认借出</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 故障报修 -->
+  <div class="modal-backdrop" id="modal-repair">
+    <div class="modal">
+      <div class="modal-header">
+        <span>🔧 登记设备故障报修工单</span>
+        <span style="cursor:pointer;" onclick="closeModal('modal-repair')">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>选择待报修设备 (仅限在库设备) *</label>
+          <select id="repair-eq-select" class="select"></select>
+        </div>
+        <div class="form-row">
+          <label>故障现象描述 *</label>
+          <input type="text" id="repair-desc" class="input" value="开机电源指示灯闪烁，采样通道CH2无波形输出" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('modal-repair')">取消</button>
+        <button class="btn btn-warning" onclick="submitManualRepair()">提交报修工单</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: 新增耗材 -->
+  <div class="modal-backdrop" id="modal-add-consumable">
+    <div class="modal">
+      <div class="modal-header">
+        <span>➕ 新增实验室试剂/耗材品目</span>
+        <span style="cursor:pointer;" onclick="closeModal('modal-add-consumable')">✕</span>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>耗材/试剂名称 *</label>
+          <input type="text" id="con-name" class="input" value="STM32F407ZGT6 核心开发板" />
+        </div>
+        <div class="form-row">
+          <label>分类 *</label>
+          <select id="con-cat" class="select">
+            <option value="电子元器件">电子元器件</option>
+            <option value="化学分析试剂">化学分析试剂</option>
+            <option value="光学与精密耗材">光学与精密耗材</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>计量单位 *</label>
+          <input type="text" id="con-unit" class="input" value="块" />
+        </div>
+        <div class="form-row">
+          <label>初始入库数量 *</label>
+          <input type="number" id="con-stock" class="input" value="8" />
+        </div>
+        <div class="form-row">
+          <label>安全预警阈值 *</label>
+          <input type="number" id="con-threshold" class="input" value="10" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal('modal-add-consumable')">取消</button>
+        <button class="btn btn-primary" onclick="submitNewConsumable()">保存并检测预警</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-box"></div>
+
+  <script>
+    // Initial Demo State
+    let currentRole = 'ADMIN';
+    let equipments = [];
+    let purchases = [];
+    let borrows = [];
+    let repairs = [];
+    let consumables = [];
+    let auditLogs = [];
+
+    function initDefaultData() {
+      equipments = [
+        { id: 'EQ-2026-001', name: '泰克数字荧光示波器', model: 'Tektronix MDO34', price: 18500, loc: '嵌入式与物联网实验室 (B301)', status: 'IN_STOCK', holder: '王胜运' },
+        { id: 'EQ-2026-002', name: 'NVIDIA边缘AI计算工作站', model: 'Jetson AGX Orin 64GB', price: 15900, loc: '人工智能与算力实验室 (A402)', status: 'IN_STOCK', holder: '王胜运' },
+        { id: 'EQ-2026-003', name: '紫外可见分光光度计', model: 'UV-2600i', price: 32000, loc: '分析化学与精密仪器室 (C205)', status: 'IN_STOCK', holder: '林诗涵' },
+        { id: 'EQ-2026-004', name: '六轴协作机械臂实训平台', model: ' Aubo-i5 Edu', price: 45000, loc: '人工智能与算力实验室 (A402)', status: 'BORROWED', holder: '陈宇航 (202410120305)' },
+        { id: 'EQ-2026-005', name: '高精度逻辑分析仪', model: 'Saleae Logic Pro 16', price: 6800, loc: '嵌入式与物联网实验室 (B301)', status: 'UNDER_REPAIR', holder: '张明哲 (维修中)' },
+        { id: 'EQ-2026-006', name: '工业级SLA光固化3D打印机', model: 'Formlabs Form 3+', price: 28000, loc: '嵌入式与物联网实验室 (B301)', status: 'IN_STOCK', holder: '王胜运' },
+        { id: 'EQ-2026-007', name: '精密电子分析天平', model: 'Mettler ME204E', price: 9200, loc: '分析化学与精密仪器室 (C205)', status: 'IN_STOCK', holder: '林诗涵' },
+        { id: 'EQ-2026-008', name: '旧款双踪模拟示波器', model: 'YB4320G (2015批次)', price: 2100, loc: '嵌入式与物联网实验室 (B301)', status: 'SCRAPPED', holder: '已核销封存' }
+      ];
+
+      purchases = [
+        { id: 'PO-202605-01', name: '无线射频频谱分析仪', model: 'Rigol DSA815-TG', qty: 1, price: 9800, applicant: '张明哲 (202410120318)', loc: '嵌入式与物联网实验室 (B301)', status: 'PENDING' },
+        { id: 'PO-202605-02', name: '深度学习多卡推理服务器', model: 'RTX 4090 * 2 塔式工作站', qty: 1, price: 36000, applicant: '陈宇航 (202410120305)', loc: '人工智能与算力实验室 (A402)', status: 'PENDING' },
+        { id: 'PO-202604-09', name: '泰克数字荧光示波器', model: 'Tektronix MDO34', qty: 1, price: 18500, applicant: '王胜运 (202410120301)', loc: '嵌入式与物联网实验室 (B301)', status: 'APPROVED' }
+      ];
+
+      borrows = [
+        { id: 'BR-202605-01', eqId: 'EQ-2026-004', eqName: '六轴协作机械臂实训平台', user: '陈宇航 (202410120305)', time: '2026-05-12 09:30', reason: '机器视觉抓取算法标定实验', status: 'BORROWED' },
+        { id: 'BR-202605-00', eqId: 'EQ-2026-005', eqName: '高精度逻辑分析仪', user: '刘思源 (202410120326)', time: '2026-05-10 14:15', reason: 'SPI总线时序采集实验', status: 'RETURNED_DAMAGED' }
+      ];
+
+      repairs = [
+        { id: 'RP-202605-01', eqId: 'EQ-2026-005', eqName: '高精度逻辑分析仪', desc: '归还验收发现探头排线断裂、通道3过压保护触发', source: '损坏归还自动转报修 (BR-202605-00)', status: 'OPEN' },
+        { id: 'RP-202603-08', eqId: 'EQ-2026-008', eqName: '旧款双踪模拟示波器', desc: '显像管老化高压包击穿，无维修价值', source: '例行巡检报修', status: 'SCRAPPED_DONE' }
+      ];
+
+      consumables = [
+        { id: 'CS-001', name: '无水乙醇 (AR分析纯 500mL)', cat: '化学分析试剂', unit: '瓶', stock: 3, threshold: 10, loc: '分析化学与精密仪器室 (C205)' },
+        { id: 'CS-002', name: '无铅焊锡丝 (0.8mm 500g)', cat: '电子元器件', unit: '卷', stock: 4, threshold: 8, loc: '嵌入式与物联网实验室 (B301)' },
+        { id: 'CS-003', name: 'ESP32-S3 WiFi蓝牙模组', cat: '电子元器件', unit: '片', stock: 35, threshold: 15, loc: '嵌入式与物联网实验室 (B301)' },
+        { id: 'CS-004', name: 'SLA光敏树脂耗材 (标准灰 1L)', cat: '光学与精密耗材', unit: '瓶', stock: 12, threshold: 5, loc: '人工智能与算力实验室 (A402)' },
+        { id: 'CS-005', name: '精密pH标准缓冲液组', cat: '化学分析试剂', unit: '盒', stock: 14, threshold: 6, loc: '分析化学与精密仪器室 (C205)' }
+      ];
+
+      auditLogs = [
+        { time: '10:15:32', actor: '王胜运 (ADMIN)', action: '系统初始化自检完成，加载 8 台设备资产与 5 类实验耗材，检测到 2 项低库存预警。' },
+        { time: '09:42:18', actor: '刘思源 (STUDENT)', action: '归还设备【EQ-2026-005 高精度逻辑分析仪】验收状态为【损坏】，系统自动生成维修单 RP-202605-01 并将设备状态切换为 UNDER_REPAIR。' },
+        { time: '09:30:05', actor: '陈宇航 (LAB_STAFF)', action: '办理设备借出【EQ-2026-004 六轴协作机械臂实训平台】，状态由 IN_STOCK 流转为 BORROWED。' }
+      ];
+
+      renderAll();
+    }
+
+    function addLog(actionText) {
+      const now = new Date();
+      const t = now.toTimeString().split(' ')[0];
+      auditLogs.unshift({ time: t, actor: `${currentRole}`, action: actionText });
+      renderAuditLogs();
+    }
+
+    function statusBadge(st) {
+      if (st === 'IN_STOCK') return '<span class="badge badge-instock">● 在库可用</span>';
+      if (st === 'BORROWED') return '<span class="badge badge-borrowed">● 借出使用中</span>';
+      if (st === 'UNDER_REPAIR') return '<span class="badge badge-repair">● 故障维修中</span>';
+      if (st === 'SCRAPPED') return '<span class="badge badge-scrapped">● 已报废核销</span>';
+      return st;
+    }
+
+    function renderAll() {
+      renderDashboard();
+      renderEquipment();
+      renderPurchase();
+      renderBorrow();
+      renderRepair();
+      renderWarehouse();
+      renderConsumable();
+      renderAuditLogs();
+    }
+
+    function renderDashboard() {
+      const total = equipments.length;
+      const inStock = equipments.filter(e => e.status === 'IN_STOCK').length;
+      const borrowed = equipments.filter(e => e.status === 'BORROWED').length;
+      const repair = equipments.filter(e => e.status === 'UNDER_REPAIR').length;
+      const scrapped = equipments.filter(e => e.status === 'SCRAPPED').length;
+      const activeCount = total - scrapped;
+      const health = activeCount > 0 ? (((inStock + borrowed) / total) * 100).toFixed(1) : '0.0';
+
+      document.getElementById('kpi-total').textContent = total;
+      document.getElementById('kpi-instock').textContent = inStock;
+      document.getElementById('kpi-borrowed').textContent = borrowed;
+      document.getElementById('kpi-repair').textContent = repair;
+      document.getElementById('kpi-scrapped').textContent = scrapped;
+      document.getElementById('kpi-health').textContent = health + '%';
+
+      document.getElementById('nav-eq-count').textContent = total;
+      document.getElementById('nav-pur-badge').textContent = purchases.filter(p => p.status === 'PENDING').length;
+      document.getElementById('nav-rep-badge').textContent = repairs.filter(r => r.status === 'OPEN').length;
+
+      // Equipment preview
+      const tbody = document.getElementById('dash-eq-tbody');
+      tbody.innerHTML = equipments.slice(0, 6).map(e => `
+        <tr>
+          <td><code>${e.id}</code></td>
+          <td><strong>${e.name}</strong></td>
+          <td>${e.loc}</td>
+          <td>${statusBadge(e.status)}</td>
+          <td>${e.holder}</td>
+        </tr>
+      `).join('');
+
+      // Low stock alerts
+      const lowItems = consumables.filter(c => c.stock <= c.threshold);
+      document.getElementById('nav-con-badge').textContent = lowItems.length;
+      const alertBox = document.getElementById('dash-alert-list');
+      if (lowItems.length === 0) {
+        alertBox.innerHTML = '<div style="padding:16px;background:#dcfce7;color:#166534;border-radius:8px;font-weight:600;">✅ 当前所有试剂与耗材库存充足，无低于安全阈值项！</div>';
+      } else {
+        alertBox.innerHTML = lowItems.map(c => `
+          <div class="alert-item">
+            <div>
+              <div class="alert-item-title">⚠️ ${c.name} (${c.id})</div>
+              <div class="alert-item-sub">当前库存：<strong>${c.stock} ${c.unit}</strong> ｜ 安全阈值：${c.threshold} ${c.unit} ｜ 库位：${c.loc}</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="quickRestock('${c.id}')">+10 补库</button>
+          </div>
+        `).join('');
+      }
+    }
+
+    function renderEquipment() {
+      const q = (document.getElementById('eq-search').value || '').trim().toLowerCase();
+      const sf = document.getElementById('eq-status-filter').value;
+      const list = equipments.filter(e => {
+        const matchQ = !q || e.id.toLowerCase().includes(q) || e.name.toLowerCase().includes(q) || e.model.toLowerCase().includes(q);
+        const matchS = sf === 'ALL' || e.status === sf;
+        return matchQ && matchS;
+      });
+
+      const tbody = document.getElementById('eq-tbody');
+      tbody.innerHTML = list.map(e => {
+        let actions = '';
+        if (e.status === 'IN_STOCK') {
+          actions = `<button class="btn btn-outline btn-sm" onclick="quickBorrowFromLedger('${e.id}')">借出</button>
+                     <button class="btn btn-outline btn-sm" onclick="quickRepairFromLedger('${e.id}')">报修</button>`;
+        } else if (e.status === 'BORROWED') {
+          actions = `<button class="btn btn-success btn-sm" onclick="switchViewByName('borrow')">去归还</button>`;
+        } else if (e.status === 'UNDER_REPAIR') {
+          actions = `<button class="btn btn-warning btn-sm" onclick="switchViewByName('repair')">去维保</button>`;
+        } else {
+          actions = `<span style="color:#94a3b8;font-size:12px;">已锁死归档</span>`;
+        }
+        return `
+          <tr>
+            <td><code>${e.id}</code></td>
+            <td><strong>${e.name}</strong></td>
+            <td>${e.model}</td>
+            <td>¥${e.price.toLocaleString()}</td>
+            <td>${e.loc}</td>
+            <td>${statusBadge(e.status)}</td>
+            <td>${e.holder}</td>
+            <td>${actions}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderPurchase() {
+      const tbody = document.getElementById('purchase-tbody');
+      tbody.innerHTML = purchases.map(p => {
+        const stBadge = p.status === 'PENDING'
+          ? '<span class="badge badge-repair">⏳ 待管理员审批</span>'
+          : (p.status === 'APPROVED'
+            ? '<span class="badge badge-instock">✅ 已批准并入库</span>'
+            : '<span class="badge badge-scrapped">✕ 已驳回</span>');
+        const ops = p.status === 'PENDING'
+          ? `<button class="btn btn-success btn-sm" onclick="approvePurchase('${p.id}')">批准并自动入库</button>
+             <button class="btn btn-danger btn-sm" onclick="rejectPurchase('${p.id}')">驳回</button>`
+          : `<span style="color:#64748b;font-size:12px;">已归档</span>`;
+        return `
+          <tr>
+            <td><code>${p.id}</code></td>
+            <td><strong>${p.name}</strong></td>
+            <td>${p.model}</td>
+            <td>${p.qty} 台</td>
+            <td>¥${p.price.toLocaleString()}</td>
+            <td>${p.applicant}</td>
+            <td>${p.loc}</td>
+            <td>${stBadge}</td>
+            <td>${ops}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderBorrow() {
+      const tbody = document.getElementById('borrow-tbody');
+      tbody.innerHTML = borrows.map(b => {
+        let badge = '';
+        let ops = '';
+        if (b.status === 'BORROWED') {
+          badge = '<span class="badge badge-borrowed">📤 借出使用中</span>';
+          ops = `
+            <button class="btn btn-success btn-sm" onclick="returnEquipment('${b.id}', false)">✅ 正常完好归还</button>
+            <button class="btn btn-danger btn-sm" onclick="returnEquipment('${b.id}', true)">⚠️ 损坏归还(自动转报修)</button>
+          `;
+        } else if (b.status === 'RETURNED_OK') {
+          badge = '<span class="badge badge-instock">✅ 已完好归还入库</span>';
+          ops = '<span style="color:#64748b;font-size:12px;">闭环完成</span>';
+        } else {
+          badge = '<span class="badge badge-repair">🛠️ 损坏归还→已转维修</span>';
+          ops = '<span style="color:#d97706;font-size:12px;">已联动生成维修工单</span>';
+        }
+        return `
+          <tr>
+            <td><code>${b.id}</code></td>
+            <td><code>${b.eqId}</code></td>
+            <td><strong>${b.eqName}</strong></td>
+            <td>${b.user}</td>
+            <td>${b.time}</td>
+            <td>${b.reason}</td>
+            <td>${badge}</td>
+            <td>${ops}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderRepair() {
+      const tbody = document.getElementById('repair-tbody');
+      tbody.innerHTML = repairs.map(r => {
+        let badge = '';
+        let ops = '';
+        if (r.status === 'OPEN') {
+          badge = '<span class="badge badge-repair">🔧 维修处理中</span>';
+          ops = `
+            <button class="btn btn-success btn-sm" onclick="finishRepair('${r.id}', true)">✅ 修复完成(恢复在库)</button>
+            <button class="btn btn-danger btn-sm" onclick="finishRepair('${r.id}', false)">🚫 无法修复(审批报废)</button>
+          `;
+        } else if (r.status === 'FIXED') {
+          badge = '<span class="badge badge-instock">✅ 已修复恢复在库</span>';
+          ops = '<span style="color:#16a34a;font-size:12px;">已验收归档</span>';
+        } else {
+          badge = '<span class="badge badge-scrapped">🚫 已走报废核销</span>';
+          ops = '<span style="color:#dc2626;font-size:12px;">资产已锁死</span>';
+        }
+        return `
+          <tr>
+            <td><code>${r.id}</code></td>
+            <td><code>${r.eqId}</code></td>
+            <td><strong>${r.eqName}</strong></td>
+            <td>${r.desc}</td>
+            <td>${r.source}</td>
+            <td>${badge}</td>
+            <td>${ops}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderWarehouse() {
+      const labs = [
+        { code: 'WH-B301', name: '嵌入式与物联网实验室 (B301)', manager: '王胜运 (202410120301)', cap: 20 },
+        { code: 'WH-A402', name: '人工智能与算力实验室 (A402)', manager: '陈宇航 (202410120305)', cap: 15 },
+        { code: 'WH-C205', name: '分析化学与精密仪器室 (C205)', manager: '林诗涵 (202410120312)', cap: 15 }
+      ];
+
+      const cardBox = document.getElementById('warehouse-cards');
+      const tbody = document.getElementById('warehouse-tbody');
+
+      cardBox.innerHTML = labs.map(l => {
+        const items = equipments.filter(e => e.loc === l.name);
+        const pct = Math.min(100, Math.round((items.length / l.cap) * 100));
+        return `
+          <div class="wh-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <strong>${l.name}</strong>
+              <span class="badge badge-borrowed">${l.code}</span>
+            </div>
+            <div style="font-size:12px;color:#64748b;margin-top:4px;">库房责任人：${l.manager}</div>
+            <div class="wh-bar"><div class="wh-bar-fill" style="width:${pct}%"></div></div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;">
+              <span>当前存放：<strong>${items.length}</strong> / ${l.cap} 台</span>
+              <span>库位利用率：<strong>${pct}%</strong></span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      tbody.innerHTML = labs.map(l => {
+        const items = equipments.filter(e => e.loc === l.name);
+        const ins = items.filter(e => e.status === 'IN_STOCK').length;
+        const bor = items.filter(e => e.status === 'BORROWED').length;
+        const rep = items.filter(e => e.status === 'UNDER_REPAIR').length;
+        return `
+          <tr>
+            <td><code>${l.code}</code></td>
+            <td><strong>${l.name}</strong></td>
+            <td>${l.manager}</td>
+            <td>${l.cap} 台</td>
+            <td><span class="badge badge-instock">${ins} 台</span></td>
+            <td><span class="badge badge-borrowed">${bor} 台</span></td>
+            <td><span class="badge badge-repair">${rep} 台</span></td>
+            <td><span class="badge badge-instock">账实相符 100%</span></td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderConsumable() {
+      const tbody = document.getElementById('consumable-tbody');
+      tbody.innerHTML = consumables.map(c => {
+        const isLow = c.stock <= c.threshold;
+        const badge = isLow
+          ? '<span class="badge badge-scrapped">🚨 低于阈值红色预警</span>'
+          : '<span class="badge badge-instock">✅ 库存充足正常</span>';
+        return `
+          <tr class="${isLow ? 'row-danger' : ''}">
+            <td><code>${c.id}</code></td>
+            <td><strong>${c.name}</strong></td>
+            <td>${c.cat}</td>
+            <td>${c.unit}</td>
+            <td><strong style="font-size:14px;color:${isLow ? '#dc2626' : '#0f172a'};">${c.stock}</strong></td>
+            <td>${c.threshold}</td>
+            <td>${c.loc}</td>
+            <td>${badge}</td>
+            <td>
+              <button class="btn btn-outline btn-sm" onclick="adjustConsumable('${c.id}', -2)">-2 领用出库</button>
+              <button class="btn btn-primary btn-sm" onclick="adjustConsumable('${c.id}', 10)">+10 采购入库</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderAuditLogs() {
+      const box = document.getElementById('audit-log-box');
+      box.innerHTML = auditLogs.map(l => `
+        <div style="padding:10px 12px;border-bottom:1px solid #f1f5f9;">
+          <div style="display:flex;justify-content:space-between;color:#64748b;font-size:11.5px;margin-bottom:3px;">
+            <span><strong>[${l.actor}]</strong></span>
+            <span>🕒 ${l.time}</span>
+          </div>
+          <div style="color:#1e293b;">${l.action}</div>
+        </div>
+      `).join('');
+    }
+
+    // Navigation & View Switching
+    const viewTitles = {
+      dashboard: '1. 工作台总览（全景监控与预警中心）',
+      equipment: '2. 设备信息台账（全生命周期状态追踪）',
+      purchase: '3. 设备采购审批（审批通过自动建档入库）',
+      borrow: '4. 设备借用与归还（含损坏归还自动转报修）',
+      repair: '5. 维修与报废管理（维保闭环与资产核销）',
+      warehouse: '6. 仓库库存监控（多实验室库位分布与盘点）',
+      consumable: '7. 试剂与耗材管理（出入库与安全阈值动态预警）',
+      rbac: '8. 用户与权限管理（RBAC角色切换与安全审计日志）'
+    };
+
+    function switchView(viewId, navEl) {
+      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('view-' + viewId).classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      if (navEl) navEl.classList.add('active');
+      document.getElementById('current-view-title').textContent = viewTitles[viewId] || '';
+      renderAll();
+    }
+
+    function switchViewByName(viewId) {
+      const navEl = document.querySelector(`.nav-item[data-view="${viewId}"]`);
+      switchView(viewId, navEl);
+    }
+
+    // Interactive Business Logic
+    function handleRoleChange(role) {
+      currentRole = role;
+      const roleMap = {
+        ADMIN: { name: '王胜运 (202410120301)', avatar: '王', desc: '第01组组长 · 系统管理员' },
+        LAB_STAFF: { name: '陈宇航 (202410120305)', avatar: '陈', desc: '第01组组员 · 实验室管理员' },
+        TEACHER: { name: '张明哲 (202410120318)', avatar: '张', desc: '第01组组员 · 实验指导教师' },
+        STUDENT: { name: '刘思源 (202410120326)', avatar: '刘', desc: '第01组组员 · 学生代表' }
+      };
+      const info = roleMap[role];
+      document.getElementById('user-name-label').textContent = info.name;
+      document.getElementById('user-avatar').textContent = info.avatar;
+      document.getElementById('user-role-desc').textContent = info.desc;
+      addLog(`切换当前登录角色为【${role} - ${info.name}】`);
+      showToast(`已切换为角色：${info.name}`);
+    }
+
+    function submitNewEquipment() {
+      if (currentRole === 'STUDENT') {
+        addLog('越权拦截：STUDENT 角色尝试直接新增设备入库被 RBAC 守卫拒绝。');
+        showToast('🚫 权限不足：学生角色无权直接建档入库！');
+        return;
+      }
+      const name = document.getElementById('new-eq-name').value.trim();
+      const model = document.getElementById('new-eq-model').value.trim();
+      const price = Number(document.getElementById('new-eq-price').value) || 0;
+      const loc = document.getElementById('new-eq-loc').value;
+      if (!name || price <= 0) {
+        showToast('⚠️ 请填写完整设备名称且单价须大于0！');
+        return;
+      }
+      const nextNum = String(equipments.length + 1).padStart(3, '0');
+      const newId = `EQ-2026-${nextNum}`;
+      equipments.unshift({ id: newId, name, model, price, loc, status: 'IN_STOCK', holder: '王胜运' });
+      closeModal('modal-add-eq');
+      addLog(`手工建档入库新设备【${newId} ${name}】，初始状态 IN_STOCK。`);
+      renderAll();
+      showToast(`✅ 设备 ${newId} 已成功入库！`);
+    }
+
+    function submitPurchase() {
+      const name = document.getElementById('pur-name').value.trim();
+      const model = document.getElementById('pur-model').value.trim();
+      const qty = Number(document.getElementById('pur-qty').value) || 1;
+      const price = Number(document.getElementById('pur-price').value) || 0;
+      const loc = document.getElementById('pur-loc').value;
+      const id = `PO-202605-0${purchases.length + 1}`;
+      purchases.unshift({ id, name, model, qty, price, applicant: document.getElementById('user-name-label').textContent, loc, status: 'PENDING' });
+      closeModal('modal-add-purchase');
+      addLog(`提交采购申请单【${id} ${name}】，等待管理员审批。`);
+      renderAll();
+      showToast(`✅ 采购申请单 ${id} 已提交！`);
+    }
+
+    function approvePurchase(poId) {
+      if (currentRole !== 'ADMIN') {
+        addLog(`越权拦截：${currentRole} 尝试审批采购单 ${poId} 被拒绝（仅限 ADMIN）。`);
+        showToast('🚫 权限拒绝：仅系统管理员(ADMIN)可执行采购终审！');
+        return;
+      }
+      const po = purchases.find(p => p.id === poId);
+      if (!po || po.status !== 'PENDING') return;
+      po.status = 'APPROVED';
+      const nextNum = String(equipments.length + 1).padStart(3, '0');
+      const newEqId = `EQ-2026-${nextNum}`;
+      equipments.unshift({
+        id: newEqId,
+        name: po.name,
+        model: po.model,
+        price: po.price,
+        loc: po.loc,
+        status: 'IN_STOCK',
+        holder: '王胜运'
+      });
+      addLog(`审批通过采购单【${poId}】，系统自动生成设备台账【${newEqId} ${po.name}】并置为 IN_STOCK。`);
+      renderAll();
+      showToast(`🎉 采购单 ${poId} 已批准，自动入库生成设备 ${newEqId}！`);
+    }
+
+    function rejectPurchase(poId) {
+      if (currentRole !== 'ADMIN') {
+        showToast('🚫 权限拒绝：仅系统管理员可驳回采购单！');
+        return;
+      }
+      const po = purchases.find(p => p.id === poId);
+      if (!po) return;
+      po.status = 'REJECTED';
+      addLog(`驳回采购申请单【${poId} ${po.name}】。`);
+      renderAll();
+      showToast(`已驳回采购单 ${poId}`);
+    }
+
+    function openBorrowModal() {
+      const inStockEqs = equipments.filter(e => e.status === 'IN_STOCK');
+      if (inStockEqs.length === 0) {
+        showToast('⚠️ 当前无在库可用设备可供借用！');
+        return;
+      }
+      const sel = document.getElementById('borrow-eq-select');
+      sel.innerHTML = inStockEqs.map(e => `<option value="${e.id}">${e.id} - ${e.name} (${e.loc})</option>`).join('');
+      openModal('modal-borrow');
+    }
+
+    function quickBorrowFromLedger(eqId) {
+      openBorrowModal();
+      document.getElementById('borrow-eq-select').value = eqId;
+    }
+
+    function submitBorrow() {
+      const eqId = document.getElementById('borrow-eq-select').value;
+      const user = document.getElementById('borrow-user').value.trim();
+      const reason = document.getElementById('borrow-reason').value.trim();
+      const eq = equipments.find(e => e.id === eqId);
+      if (!eq || eq.status !== 'IN_STOCK') {
+        showToast('🚫 状态机拦截：仅在库(IN_STOCK)设备可借出！');
+        return;
+      }
+      eq.status = 'BORROWED';
+      eq.holder = user;
+      const brId = `BR-202605-0${borrows.length + 1}`;
+      borrows.unshift({
+        id: brId,
+        eqId: eq.id,
+        eqName: eq.name,
+        user,
+        time: '2026-05-15 14:20',
+        reason,
+        status: 'BORROWED'
+      });
+      closeModal('modal-borrow');
+      addLog(`借出登记成功：设备【${eq.id} ${eq.name}】借予 ${user}，状态 IN_STOCK → BORROWED。`);
+      renderAll();
+      showToast(`📤 设备 ${eq.id} 已成功办理借出！`);
+    }
+
+    function returnEquipment(brId, isDamaged) {
+      const br = borrows.find(b => b.id === brId);
+      if (!br || br.status !== 'BORROWED') return;
+      const eq = equipments.find(e => e.id === br.eqId);
+      if (!isDamaged) {
+        br.status = 'RETURNED_OK';
+        if (eq) {
+          eq.status = 'IN_STOCK';
+          eq.holder = '王胜运';
+        }
+        addLog(`正常归还验收：借用单【${brId}】设备【${br.eqId}】完好归还，状态恢复为 IN_STOCK。`);
+        showToast(`✅ 设备 ${br.eqId} 完好归还，已恢复在库状态！`);
+      } else {
+        br.status = 'RETURNED_DAMAGED';
+        if (eq) {
+          eq.status = 'UNDER_REPAIR';
+          eq.holder = '张明哲 (维修中)';
+        }
+        const rpId = `RP-202605-0${repairs.length + 1}`;
+        repairs.unshift({
+          id: rpId,
+          eqId: br.eqId,
+          eqName: br.eqName,
+          desc: '归还验收异常：设备外观或核心功能受损，系统自动拦截并转入维修工单',
+          source: `损坏归还自动转报修 (${brId})`,
+          status: 'OPEN'
+        });
+        addLog(`⚠️ 损坏归还自动转报修：设备【${br.eqId}】状态自动流转为 UNDER_REPAIR，并创建维修工单【${rpId}】。`);
+        showToast(`⚠️ 检测到损坏归还！已自动置为“维修中”并生成工单 ${rpId}`);
+      }
+      renderAll();
+    }
+
+    function openRepairModal() {
+      const inStockEqs = equipments.filter(e => e.status === 'IN_STOCK');
+      if (inStockEqs.length === 0) {
+        showToast('⚠️ 当前无可报修的在库设备！');
+        return;
+      }
+      const sel = document.getElementById('repair-eq-select');
+      sel.innerHTML = inStockEqs.map(e => `<option value="${e.id}">${e.id} - ${e.name}</option>`).join('');
+      openModal('modal-repair');
+    }
+
+    function quickRepairFromLedger(eqId) {
+      openRepairModal();
+      document.getElementById('repair-eq-select').value = eqId;
+    }
+
+    function submitManualRepair() {
+      const eqId = document.getElementById('repair-eq-select').value;
+      const desc = document.getElementById('repair-desc').value.trim();
+      const eq = equipments.find(e => e.id === eqId);
+      if (!eq) return;
+      eq.status = 'UNDER_REPAIR';
+      eq.holder = '张明哲 (维修中)';
+      const rpId = `RP-202605-0${repairs.length + 1}`;
+      repairs.unshift({
+        id: rpId,
+        eqId: eq.id,
+        eqName: eq.name,
+        desc,
+        source: '实验室巡检手动报修',
+        status: 'OPEN'
+      });
+      closeModal('modal-repair');
+      addLog(`登记故障报修：设备【${eq.id}】生成工单【${rpId}】，状态置为 UNDER_REPAIR。`);
+      renderAll();
+      showToast(`🔧 已生成报修工单 ${rpId}`);
+    }
+
+    function finishRepair(rpId, isFixed) {
+      if (currentRole === 'STUDENT') {
+        showToast('🚫 权限不足：学生无权操作维修与报废审批！');
+        return;
+      }
+      const rp = repairs.find(r => r.id === rpId);
+      if (!rp || rp.status !== 'OPEN') return;
+      const eq = equipments.find(e => e.id === rp.eqId);
+      if (isFixed) {
+        rp.status = 'FIXED';
+        if (eq) {
+          eq.status = 'IN_STOCK';
+          eq.holder = '王胜运';
+        }
+        addLog(`维修完成验收：工单【${rpId}】已修复，设备【${rp.eqId}】恢复为 IN_STOCK。`);
+        showToast(`✅ 设备 ${rp.eqId} 维修完成，已恢复在库可用！`);
+      } else {
+        rp.status = 'SCRAPPED_DONE';
+        if (eq) {
+          eq.status = 'SCRAPPED';
+          eq.holder = '已核销封存';
+        }
+        addLog(`🚫 报废审批生效：工单【${rpId}】判定无法修复，设备【${rp.eqId}】永久变更为 SCRAPPED。`);
+        showToast(`🚫 设备 ${rp.eqId} 已完成报废核销并永久锁定！`);
+      }
+      renderAll();
+    }
+
+    function adjustConsumable(conId, delta) {
+      const c = consumables.find(item => item.id === conId);
+      if (!c) return;
+      if (c.stock + delta < 0) {
+        addLog(`库存防负拦截：尝试领用【${c.name}】超出当前剩余库存(${c.stock})，系统已拒绝。`);
+        showToast('🚫 出库失败：领用数量超过当前可用库存！');
+        return;
+      }
+      c.stock += delta;
+      const act = delta > 0 ? `采购补库 +${delta}` : `实验领用 ${delta}`;
+      const warnMsg = c.stock <= c.threshold ? '（⚠️ 触发低库存红色预警！）' : '';
+      addLog(`耗材库存变更：【${c.name}】${act}${c.unit}，当前库存=${c.stock}${c.unit}${warnMsg}`);
+      renderAll();
+      showToast(`${c.name} ${act}${c.unit}，当前库存：${c.stock}${c.unit}`);
+    }
+
+    function quickRestock(conId) {
+      adjustConsumable(conId, 10);
+    }
+
+    function submitNewConsumable() {
+      const name = document.getElementById('con-name').value.trim();
+      const cat = document.getElementById('con-cat').value;
+      const unit = document.getElementById('con-unit').value.trim() || '件';
+      const stock = Number(document.getElementById('con-stock').value) || 0;
+      const threshold = Number(document.getElementById('con-threshold').value) || 5;
+      const id = `CS-00${consumables.length + 1}`;
+      consumables.unshift({ id, name, cat, unit, stock, threshold, loc: '嵌入式与物联网实验室 (B301)' });
+      closeModal('modal-add-consumable');
+      addLog(`新增耗材品目【${id} ${name}】，初始库存 ${stock}${unit}，安全阈值 ${threshold}${unit}。`);
+      renderAll();
+      showToast(`✅ 已新增耗材 ${name}`);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toast-box');
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = msg;
+      box.appendChild(el);
+      setTimeout(() => el.remove(), 3200);
+    }
+
+    function resetDemoData() {
+      initDefaultData();
+      showToast('🔄 已重置所有演示数据至初始状态！');
+    }
+
+    window.addEventListener('DOMContentLoaded', initDefaultData);
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+@startwbs
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+<style>
+wbsDiagram {
+  LineColor #1F4E79
+  LineThickness 1.5
+  node {
+    BackgroundColor #EDF2F7
+    BorderColor #1F4E79
+    BorderThickness 1.2
+    RoundCorner 8
+    Padding 8
+  }
+  :depth(0) {
+    BackgroundColor #1F4E79
+    FontColor #FFFFFF
+    FontStyle bold
+    FontSize 15
+  }
+  :depth(1) {
+    BackgroundColor #2B6CB0
+    FontColor #FFFFFF
+    FontStyle bold
+  }
+}
+</style>
+* 高校智慧实验室设备与耗材管理系统 (LabEquipMS)
+** 1. 安全与权限管理 (M1)
+*** 用户注册与SHA-256认证
+*** 四角色RBAC权限矩阵
+*** 账号启停与防自锁控制
+*** 全链路操作安全审计日志
+** 2. 设备信息管理 (M2)
+*** 设备全生命周期档案建档
+*** 多维组合检索(状态/库位/类别)
+*** 四态状态机强约束流转
+*** 保修期与设备履历追踪
+** 3. 设备采购管理 (M3)
+*** 教师/实验员采购申请提报
+*** 管理员采购预算与合规审批
+*** 到货验收自动批量建档入库
+** 4. 设备使用管理 (M4)
+*** 在线借用申请与库存校验
+*** 借出审批与应还期限登记
+*** 归还验收(完好入库/损坏转修)
+*** 逾期未还自动检测预警
+** 5. 维修与报废管理 (M5)
+*** 故障报修工单登记与派工
+*** 维修完工验收恢复在库
+*** 报废原因申报与折旧核销
+*** 报废终态锁定与报废台账
+** 6. 仓库库存管理 (M6)
+*** 多实验室库位分布监控
+*** 在库率/借出率/完好率统计
+*** 实时库存盘点与动态看板
+** 7. 物资与耗材管理 (M7)
+*** 试剂与易耗品分类建档
+*** 耗材补充入库与领用出库
+*** 危化品标识与防超领拦截
+*** 安全阈值低水位自动预警
+@endwbs

@@ -1,0 +1,39 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam roundcorner 8
+skinparam componentStyle rectangle
+
+package "校园网客户端接入层 (Client Access Tier)" #EDF2F7 {
+  [系统管理员终端\n(Chrome / Edge)] as C_Admin #FFFFFF
+  [实验室管理员终端\n(设备盘点与审批台)] as C_Lab #FFFFFF
+  [教师与科研人员终端\n(申购与实验借用)] as C_Teacher #FFFFFF
+  [学生实验终端\n(设备查询与预约)] as C_Student #FFFFFF
+}
+
+node "校园网核心交换与安全网关\n(HTTPS / RBAC 认证防火墙)" as Gateway #BEE3F8
+
+package "应用服务层 (Application Server Tier - JDK 24)" #EBF8FF {
+  [表现与门面控制层\nLabSystemFacade / Web UI] as Layer_Ctrl #FFFFFF
+  [核心业务逻辑层\nAuth / Equipment / Purchase /\nBorrow / Maintenance / Consumable] as Layer_Svc #FFFFFF
+  [数据访问与持久化层\nDAO Repositories] as Layer_Dao #FFFFFF
+}
+
+package "数据存储与备份层 (Data Storage Tier)" #F0FFF4 {
+  database "主业务关系数据库\n(7张3NF核心业务表)" as DB_Main #FFFFFF
+  database "安全审计与归档库\n(操作日志与报废台账)" as DB_Audit #FFFFFF
+}
+
+C_Admin --> Gateway : HTTPS
+C_Lab --> Gateway : HTTPS
+C_Teacher --> Gateway : HTTPS
+C_Student --> Gateway : HTTPS
+
+Gateway --> Layer_Ctrl : 角色令牌与请求路由
+Layer_Ctrl --> Layer_Svc : 业务事务调用
+Layer_Svc --> Layer_Dao : 领域对象持久化
+Layer_Dao --> DB_Main : CRUD / 状态机事务
+Layer_Dao --> DB_Audit : 审计日志追加写入
+@enduml

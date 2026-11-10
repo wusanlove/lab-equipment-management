@@ -1,0 +1,40 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor #EDF2F7
+  BorderColor #1F4E79
+  ArrowColor #1F4E79
+  DiamondBackgroundColor #FEFCBF
+  DiamondBorderColor #B7791F
+}
+
+|需求提出方(师生/实验室)|
+start
+:提出需求变更申请单\n(说明变更模块、原因与期望效果);
+
+|项目组长与系统分析师|
+:接收变更请求并登记编号;
+:开展技术可行性与架构影响分析\n(评估涉及的领域类、数据库表与接口);
+:测算开发工时成本与进度风险;
+
+|项目评审委员会(全组核心成员)|
+:联合评审需求变更方案;
+if (变更评审决议?) then (拒绝变更)
+  :通知申请方并归档原因;
+  stop
+elseif (纳入下一迭代版本) then (延后实现)
+  :记入产品待办列表(Backlog);
+  stop
+else (批准立即变更)
+  |开发与测试团队|
+  :更新《需求分析规格说明书》与原型(.rp);
+  :更新《系统设计说明书》与UML模型;
+  :实施外科手术式代码修改与单元测试扩展;
+  :执行全量回归测试(AllTests 40项全绿);
+  :签入Git版本库并发布新基线版本;
+  stop
+endif
+@enduml

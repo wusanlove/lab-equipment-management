@@ -1,0 +1,141 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #F7FAFC
+  BorderColor #1F4E79
+  HeaderBackgroundColor #EDF2F7
+  ArrowColor #2B6CB0
+}
+
+package "cn.edu.ctgu.labms.domain" {
+  enum Role {
+    ADMIN
+    LAB_MANAGER
+    TEACHER
+    STUDENT
+  }
+
+  enum EquipmentStatus {
+    IN_STOCK
+    BORROWED
+    MAINTENANCE
+    SCRAPPED
+    + canTransitionTo(target: EquipmentStatus): boolean
+  }
+
+  class User {
+    - id: String
+    - username: String
+    - realName: String
+    - role: Role
+    - department: String
+    - active: boolean
+  }
+
+  class Equipment {
+    - code: String
+    - name: String
+    - modelSpec: String
+    - category: String
+    - manufacturer: String
+    - unitPrice: double
+    - location: String
+    - status: EquipmentStatus
+    + transitionTo(target: EquipmentStatus): void
+  }
+
+  class PurchaseOrder {
+    - orderId: String
+    - applicantId: String
+    - equipmentName: String
+    - quantity: int
+    - unitPrice: double
+    - status: OrderStatus
+    - reviewerId: String
+  }
+
+  class BorrowRecord {
+    - recordId: String
+    - equipmentCode: String
+    - borrowerId: String
+    - borrowDate: LocalDate
+    - dueDate: LocalDate
+    - returnDate: LocalDate
+    - returnConditionOk: Boolean
+  }
+
+  class MaintenanceScrapRecord {
+    - recordId: String
+    - equipmentCode: String
+    - reporterId: String
+    - type: RecordType
+    - reason: String
+    - status: OrderStatus
+  }
+
+  class Consumable {
+    - code: String
+    - name: String
+    - currentStock: int
+    - safetyThreshold: int
+    - hazardous: boolean
+    + isLowStock(): boolean
+  }
+}
+
+package "cn.edu.ctgu.labms.service" {
+  class LabSystemFacade {
+    - authService: AuthService
+    - equipmentService: EquipmentService
+    - purchaseService: PurchaseService
+    - borrowService: BorrowService
+    - maintenanceScrapService: MaintenanceScrapService
+    - consumableService: ConsumableService
+  }
+
+  class EquipmentService {
+    + registerEquipment(actor: User, eq: Equipment): Equipment
+    + transitionStatus(actor: User, code: String, target: EquipmentStatus): void
+    + getWarehouseSummary(): Map<String, Object>
+  }
+
+  class PurchaseService {
+    + submitOrder(applicant: User, ...): PurchaseOrder
+    + reviewAndReceive(reviewer: User, orderId: String, approve: boolean, location: String): List<Equipment>
+  }
+
+  class BorrowService {
+    + borrowEquipment(borrower: User, approver: User, code: String, days: int): BorrowRecord
+    + returnEquipment(actor: User, recordId: String, conditionOk: boolean, faultNote: String): void
+  }
+
+  class MaintenanceScrapService {
+    + reportFault(reporter: User, code: String, reason: String): MaintenanceScrapRecord
+    + completeMaintenance(mgr: User, recordId: String, resolution: String): void
+    + approveScrap(admin: User, code: String, reason: String): MaintenanceScrapRecord
+  }
+
+  class ConsumableService {
+    + inbound(actor: User, code: String, amount: int): Consumable
+    + outbound(actor: User, code: String, amount: int, purpose: String): Consumable
+    + getLowStockConsumables(): List<Consumable>
+  }
+}
+
+User --> Role
+Equipment --> EquipmentStatus
+BorrowRecord --> Equipment : 关联设备 >
+MaintenanceScrapRecord --> Equipment : 关联设备 >
+LabSystemFacade *-- EquipmentService
+LabSystemFacade *-- PurchaseService
+LabSystemFacade *-- BorrowService
+LabSystemFacade *-- MaintenanceScrapService
+LabSystemFacade *-- ConsumableService
+PurchaseService ..> EquipmentService : 验收批量入库
+BorrowService ..> EquipmentService : 驱动状态机
+BorrowService ..> MaintenanceScrapService : 损坏自动报修
+@enduml

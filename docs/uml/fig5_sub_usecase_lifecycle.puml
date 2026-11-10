@@ -1,0 +1,56 @@
+@startuml
+left to right direction
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 13
+skinparam shadowing false
+skinparam usecase {
+  BackgroundColor #EDF2F7
+  BorderColor #1F4E79
+  ArrowColor #2B6CB0
+}
+
+actor "借用人(教师/学生)" as User
+actor "实验室管理员" as Mgr
+actor "系统管理员" as Admin
+
+rectangle "设备全生命周期核心业务用例模型" {
+  usecase "申请借用设备" as B1
+  usecase "校验设备在库状态(IN_STOCK)" as B2
+  usecase "审批借出并变更状态(BORROWED)" as B3
+  usecase "归还设备验收" as B4
+  usecase "完好归还恢复在库" as B5
+  usecase "损坏归还自动转入维修(MAINTENANCE)" as B6
+
+  usecase "发起设备采购申请" as P1
+  usecase "审批采购预算与合规性" as P2
+  usecase "到货验收批量生成设备台账" as P3
+
+  usecase "登记故障维修工单" as M1
+  usecase "维修完工恢复在库" as M2
+  usecase "发起报废核销申请" as M3
+  usecase "审批报废并锁定终态(SCRAPPED)" as M4
+  usecase "记录安全审计日志" as Log
+}
+
+User --> B1
+User --> B4
+User --> P1
+B1 ..> B2 : <<include>>
+Mgr --> B3
+B3 ..> Log : <<include>>
+Mgr --> B4
+B5 .up.> B4 : <<extend>>\n[验收完好]
+B6 .up.> B4 : <<extend>>\n[验收损坏]
+B6 ..> M1 : <<include>>
+
+Mgr --> P2
+Admin --> P2
+P2 ..> P3 : <<include>>\n[审批通过到货]
+
+Mgr --> M1
+Mgr --> M2
+Mgr --> M3
+Admin --> M4
+M4 ..> Log : <<include>>
+@enduml

@@ -1,0 +1,105 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam linetype ortho
+skinparam entity {
+  BackgroundColor #F7FAFC
+  BorderColor #1F4E79
+  ArrowColor #2B6CB0
+}
+
+entity "sys_user (系统用户表)" as user {
+  * **user_id** : VARCHAR(32) <<PK>>
+  --
+  * username : VARCHAR(50) <<UK>>
+  * password_hash : VARCHAR(64)
+  * real_name : VARCHAR(50)
+  * role : VARCHAR(20)
+  * department : VARCHAR(64)
+  * is_active : TINYINT(1)
+}
+
+entity "lab_equipment (实验室设备台账表)" as eq {
+  * **eq_code** : VARCHAR(32) <<PK>>
+  --
+  * eq_name : VARCHAR(100)
+  * model_spec : VARCHAR(64)
+  * category : VARCHAR(32)
+  * manufacturer : VARCHAR(64)
+  * unit_price : DECIMAL(10,2)
+  * purchase_date : DATE
+  * warranty_until : DATE
+  * lab_location : VARCHAR(64)
+  * status : VARCHAR(20)
+}
+
+entity "purchase_order (设备采购申请单表)" as po {
+  * **order_id** : VARCHAR(32) <<PK>>
+  --
+  * applicant_id : VARCHAR(32) <<FK>>
+  * eq_name : VARCHAR(100)
+  * model_spec : VARCHAR(64)
+  * quantity : INT
+  * unit_price : DECIMAL(10,2)
+  * status : VARCHAR(20)
+  reviewer_id : VARCHAR(32) <<FK>>
+  created_at : DATETIME
+}
+
+entity "borrow_record (设备借还记录表)" as br {
+  * **record_id** : VARCHAR(32) <<PK>>
+  --
+  * eq_code : VARCHAR(32) <<FK>>
+  * borrower_id : VARCHAR(32) <<FK>>
+  * approver_id : VARCHAR(32) <<FK>>
+  * purpose : VARCHAR(200)
+  * borrow_date : DATE
+  * due_date : DATE
+  return_date : DATE
+  return_condition_ok : TINYINT(1)
+}
+
+entity "maintenance_scrap (维修与报废记录表)" as ms {
+  * **record_id** : VARCHAR(32) <<PK>>
+  --
+  * eq_code : VARCHAR(32) <<FK>>
+  * reporter_id : VARCHAR(32) <<FK>>
+  * record_type : VARCHAR(20)
+  * reason : VARCHAR(255)
+  * status : VARCHAR(20)
+  handler_id : VARCHAR(32) <<FK>>
+  resolution : VARCHAR(255)
+}
+
+entity "consumable_stock (实验试剂与耗材库存表)" as cs {
+  * **item_code** : VARCHAR(32) <<PK>>
+  --
+  * item_name : VARCHAR(100)
+  * spec : VARCHAR(64)
+  * unit : VARCHAR(16)
+  * current_stock : INT
+  * safety_threshold : INT
+  * is_hazardous : TINYINT(1)
+  * lab_location : VARCHAR(64)
+}
+
+entity "sys_audit_log (系统安全审计日志表)" as log {
+  * **log_id** : VARCHAR(32) <<PK>>
+  --
+  * operator_id : VARCHAR(32) <<FK>>
+  * action_type : VARCHAR(50)
+  * target_id : VARCHAR(64)
+  * detail_info : VARCHAR(500)
+  * created_at : DATETIME
+}
+
+user ||--o{ po : "提报/审批"
+user ||--o{ br : "借用/审批"
+user ||--o{ ms : "报修/核销"
+user ||--o{ log : "触发审计"
+po ||..o{ eq : "到货批量入账"
+eq ||--o{ br : "产生借还履历"
+eq ||--o{ ms : "产生维修/报废记录"
+@enduml

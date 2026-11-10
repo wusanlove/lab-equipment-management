@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>实验室设备管理系统系统设计说明书</title>
+<style>
+    @page { size: A4; margin: 2.3cm 2.2cm 2.3cm 2.2cm; }
+    body {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        color: #000000;
+    }
+    .cover {
+        text-align: center;
+        padding-top: 40pt;
+    }
+    .cover-course {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 18pt;
+        font-weight: bold;
+        letter-spacing: 2pt;
+        margin-bottom: 18pt;
+        text-indent: 0;
+    }
+    .cover-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 24pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 10pt;
+        text-indent: 0;
+    }
+    .cover-subtitle {
+        font-family: "Times New Roman", "楷体", KaiTi, serif;
+        font-size: 14pt;
+        font-weight: bold;
+        color: #1F4E79;
+        margin-bottom: 30pt;
+        text-indent: 0;
+    }
+    table.cover-meta {
+        width: 86%;
+        margin: 0 auto 24pt auto;
+        border-collapse: collapse;
+        font-size: 12pt;
+    }
+    table.cover-meta td {
+        padding: 6pt 8pt;
+        border: none;
+        text-indent: 0;
+        line-height: 20pt;
+    }
+    table.cover-meta td.meta-label {
+        font-family: "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: right;
+        width: 22%;
+        white-space: nowrap;
+    }
+    table.cover-meta td.meta-val {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        text-align: left;
+        width: 28%;
+        border-bottom: 1px solid #333333;
+    }
+    h1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 8pt;
+        text-indent: 0;
+        page-break-before: always;
+        page-break-after: avoid;
+    }
+    h2 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 14pt;
+        font-weight: bold;
+        margin-top: 10pt;
+        margin-bottom: 6pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    h3 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    p {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        text-indent: 24pt;
+        margin-top: 0pt;
+        margin-bottom: 4pt;
+        text-align: justify;
+    }
+    p.noindent { text-indent: 0; }
+    p.fig-wrap {
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 2pt;
+        page-break-after: avoid;
+    }
+    p.fig-caption {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    p.tbl-caption {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        page-break-after: avoid;
+    }
+    table.data-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5pt;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    table.data-tbl th, table.data-tbl td {
+        border: 1px solid #64748B;
+        padding: 4pt 6pt;
+        vertical-align: middle;
+        text-indent: 0;
+        line-height: 15pt;
+    }
+    table.data-tbl th {
+        background-color: #EDF2F7;
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        color: #0F172A;
+    }
+    table.data-tbl td {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        color: #000000;
+    }
+    td.center { text-align: center; }
+    td.nowrap, th.nowrap { white-space: nowrap; }
+    table.code-box {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 6pt;
+        margin-bottom: 10pt;
+        background-color: #F6F8FA;
+        border: 1px solid #D0D7DE;
+    }
+    table.code-box td.code-cell {
+        background-color: #F6F8FA;
+        border: 1px solid #D0D7DE;
+        padding: 6pt 8pt;
+        text-indent: 0;
+    }
+    p.code-line {
+        font-family: Consolas, "Microsoft YaHei", monospace;
+        font-size: 9pt;
+        line-height: 12pt;
+        mso-line-height-rule: exactly;
+        text-indent: 0;
+        margin: 0;
+        padding: 0;
+        color: #24292F;
+        text-align: left;
+    }
+    .kw { color: #0033B3; font-weight: bold; }
+    .ty { color: #6F42C1; }
+    .st { color: #067D17; }
+    .cm { color: #6E7781; font-style: italic; }
+    .toc-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 12pt;
+        margin-bottom: 12pt;
+        page-break-before: always;
+    }
+    table.toc-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5pt;
+    }
+    table.toc-tbl td {
+        border: none;
+        padding: 2.5pt 2pt;
+        line-height: 19pt;
+        text-indent: 0;
+    }
+    table.toc-tbl td.toc-l1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+    }
+    table.toc-tbl td.toc-l2 {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        padding-left: 18pt;
+    }
+    table.toc-tbl td.toc-pg {
+        font-family: "Times New Roman", serif;
+        text-align: right;
+        width: 12%;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+
+<div class="cover">
+    <p class="cover-course">《软件工程》课程分组项目文档</p>
+    <p class="cover-title">实验室设备管理系统<br>系统设计说明书</p>
+    <p class="cover-subtitle">System Architecture &amp; Detailed Design Specification for LabMS v1.0</p>
+
+    <table class="cover-meta">
+        <tr>
+            <td class="meta-label">项目名称：</td>
+            <td class="meta-val">实验室设备管理系统</td>
+            <td class="meta-label">文档编号：</td>
+            <td class="meta-val">CTGU-SE-2026-G01-SDD</td>
+        </tr>
+        <tr>
+            <td class="meta-label">小组编号：</td>
+            <td class="meta-val">第 01 组</td>
+            <td class="meta-label">文档版本：</td>
+            <td class="meta-val">V1.0（正式基线版）</td>
+        </tr>
+        <tr>
+            <td class="meta-label">系统架构师：</td>
+            <td class="meta-val">王胜运（202410120301）</td>
+            <td class="meta-label">协同设计：</td>
+            <td class="meta-val">林诗涵、张明哲、陈宇航</td>
+        </tr>
+        <tr>
+            <td class="meta-label">所属学院：</td>
+            <td class="meta-val">计算机与信息学院</td>
+            <td class="meta-label">专　　业：</td>
+            <td class="meta-val">计算机科学与技术</td>
+        </tr>
+        <tr>
+            <td class="meta-label">指导教师：</td>
+            <td class="meta-val">覃兵文</td>
+            <td class="meta-label">设计日期：</td>
+            <td class="meta-val">2026 年 11 月 16 日</td>
+        </tr>
+        <tr>
+            <td class="meta-label">代码包路径：</td>
+            <td class="meta-val" colspan="3"><code>cn.edu.ctgu.labms.{controller, service, dao, domain}</code></td>
+        </tr>
+    </table>
+</div>
+
+<p class="toc-title">目　　录</p>
+<table class="toc-tbl">
+    <colgroup>
+        <col width="88%" style="width:88%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr><td class="toc-l1">1. 导言</td><td class="toc-pg" data-toc-target="1. 导言">1</td></tr>
+    <tr><td class="toc-l2">1.1 编写目的</td><td class="toc-pg" data-toc-target="1.1 编写目的">1</td></tr>
+    <tr><td class="toc-l2">1.2 项目范围</td><td class="toc-pg" data-toc-target="1.2 项目范围">1</td></tr>
+    <tr><td class="toc-l2">1.3 引用标准与参考资料</td><td class="toc-pg" data-toc-target="1.3 引用标准与参考资料">1</td></tr>
+    <tr><td class="toc-l2">1.4 版本更新信息</td><td class="toc-pg" data-toc-target="1.4 版本更新信息">1</td></tr>
+    <tr><td class="toc-l1">2. 项目设计原则简介</td><td class="toc-pg" data-toc-target="2. 项目设计原则简介">2</td></tr>
+    <tr><td class="toc-l2">2.1 实用性与高内聚低耦合原则</td><td class="toc-pg" data-toc-target="2.1 实用性与高内聚低耦合原则">2</td></tr>
+    <tr><td class="toc-l2">2.2 单一职责原则（SRP）与门面模式（Facade）</td><td class="toc-pg" data-toc-target="2.2 单一职责原则（SRP）与门面模式（Facade）">2</td></tr>
+    <tr><td class="toc-l2">2.3 开闭原则（OCP）与依赖倒置原则（DIP）</td><td class="toc-pg" data-toc-target="2.3 开闭原则（OCP）与依赖倒置原则（DIP）">2</td></tr>
+    <tr><td class="toc-l2">2.4 有限状态机（FSM）防错设计原则</td><td class="toc-pg" data-toc-target="2.4 有限状态机（FSM）防错设计原则">2</td></tr>
+    <tr><td class="toc-l1">3. 体系结构设计</td><td class="toc-pg" data-toc-target="3. 体系结构设计">3</td></tr>
+    <tr><td class="toc-l2">3.1 五层体系架构总述</td><td class="toc-pg" data-toc-target="3.1 五层体系架构总述">3</td></tr>
+    <tr><td class="toc-l2">3.2 表现层与控制层设计</td><td class="toc-pg" data-toc-target="3.2 表现层与控制层设计">4</td></tr>
+    <tr><td class="toc-l2">3.3 业务逻辑层与数据持久层设计</td><td class="toc-pg" data-toc-target="3.3 业务逻辑层与数据持久层设计">4</td></tr>
+    <tr><td class="toc-l2">3.4 核心接口与关键代码设计</td><td class="toc-pg" data-toc-target="3.4 核心接口与关键代码设计">6</td></tr>
+    <tr><td class="toc-l1">4. 功能模块详细设计</td><td class="toc-pg" data-toc-target="4. 功能模块详细设计">8</td></tr>
+    <tr><td class="toc-l2">4.1 功能模块设计总述</td><td class="toc-pg" data-toc-target="4.1 功能模块设计总述">8</td></tr>
+    <tr><td class="toc-l2">4.2 核心业务模块交互时序设计</td><td class="toc-pg" data-toc-target="4.2 核心业务模块交互时序设计">9</td></tr>
+    <tr><td class="toc-l2">4.3 设备全生命周期状态机设计</td><td class="toc-pg" data-toc-target="4.3 设备全生命周期状态机设计">10</td></tr>
+    <tr><td class="toc-l1">5. 数据库设计</td><td class="toc-pg" data-toc-target="5. 数据库设计">12</td></tr>
+    <tr><td class="toc-l2">5.1 数据库选型与逻辑结构设计</td><td class="toc-pg" data-toc-target="5.1 数据库选型与逻辑结构设计">12</td></tr>
+    <tr><td class="toc-l2">5.2 物理表结构详细设计</td><td class="toc-pg" data-toc-target="5.2 物理表结构详细设计">13</td></tr>
+    <tr><td class="toc-l1">6. 界面设计</td><td class="toc-pg" data-toc-target="6. 界面设计">16</td></tr>
+    <tr><td class="toc-l2">6.1 界面总体布局与视觉规范</td><td class="toc-pg" data-toc-target="6.1 界面总体布局与视觉规范">16</td></tr>
+    <tr><td class="toc-l2">6.2 核心业务界面与后端接口映射</td><td class="toc-pg" data-toc-target="6.2 核心业务界面与后端接口映射">16</td></tr>
+</table>
+
+<h1>1. 导言</h1>
+
+<h2>1.1 编写目的</h2>
+<p>本《系统设计说明书》（System Design Document，简称 SDD）是在《实验室设备管理系统项目需求分析规格说明书》（V1.0）基线之上编写的概要设计与详细设计技术文档。本文档旨在将需求规格转化为严谨的五层软件体系结构、面向对象 UML 类图模型、跨层调用时序图、设备四态有限状态机模型及符合第三范式（3NF）的数据库物理表结构，直接指导第 01 组开发团队完成 <code>cn.edu.ctgu.labms</code> 核心工程编码与单元测试。</p>
+
+<h2>1.2 项目范围</h2>
+<p>本设计涵盖《实验室设备管理系统》（LabMS v1.0）全部七大业务模块的软件架构与实现细节：安全与权限管理模块（M1）、设备信息与状态机模块（M2）、设备采购与批量自动入库模块（M3）、设备借用与受损归还自动转修模块（M4）、设备维修闭环与报废终态核销模块（M5）、仓库库存盘点与完好率统计模块（M6）、实验耗材出入库与安全阈值预警模块（M7）。</p>
+
+<h2>1.3 引用标准与参考资料</h2>
+<p>（1）GB/T 8567-2006《计算机软件文档编制规范》（软件概要设计与详细设计说明书规范）。</p>
+<p>（2）OMG Unified Modeling Language (OMG UML) Specification Version 2.5.1。</p>
+<p>（3）Erich Gamma 等著，《设计模式：可复用面向对象软件的基础》（Facade 门面模式、State 状态模式）。</p>
+<p>（4）第 01 组《实验室设备管理系统项目需求分析规格说明书》（CTGU-SE-2026-G01-SRS）。</p>
+<p>（5）星语课程网《软件工程系统设计说明书模板》（<code>design_tpl.pdf</code>）。</p>
+
+<h2>1.4 版本更新信息</h2>
+<p>本系统设计说明书的版本演进与修订记录如表 1-1 所示。</p>
+
+<p class="tbl-caption">表 1-1 系统设计说明书版本更新记录表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="12%" style="width:12%;">
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="40%" style="width:40%;">
+        <col width="14%" style="width:14%;">
+    </colgroup>
+    <tr>
+        <th width="12%" class="nowrap">版本号</th>
+        <th width="16%" class="nowrap">修订日期</th>
+        <th width="18%" class="nowrap">设计人</th>
+        <th width="40%">主要设计与修订内容说明</th>
+        <th width="14%" class="nowrap">状态</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">V0.1</td>
+        <td class="center nowrap">2026-11-09</td>
+        <td class="center nowrap">王胜运</td>
+        <td>确立五层体系结构与包划分方案，完成领域实体类与状态枚举设计。</td>
+        <td class="center nowrap">架构初审</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">V0.5</td>
+        <td class="center nowrap">2026-11-13</td>
+        <td class="center nowrap">王胜运、张明哲</td>
+        <td>完成核心服务类图、借还转修时序图、四态状态机图及 7 张 3NF 数据库表结构设计。</td>
+        <td class="center nowrap">详细联审</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">V1.0</td>
+        <td class="center nowrap">2026-11-16</td>
+        <td class="center nowrap">王胜运、林诗涵</td>
+        <td>对齐全部 23 个 Java 源码类的方法签名与异常规约，通过评审并冻结设计基线。</td>
+        <td class="center nowrap"><strong>正式基线</strong></td>
+    </tr>
+</table>
+
+<h1>2. 项目设计原则简介</h1>
+
+<h2>2.1 实用性与高内聚低耦合原则</h2>
+<p>系统设计摒弃过度复杂的冗余框架堆砌，坚持“高内聚、低耦合”的工程实用性原则。每个业务模块仅关注自身核心职责：权限与密码哈希内聚于 <code>AuthService</code>，设备状态迁移内聚于 <code>EquipmentService</code>，借还联动内聚于 <code>BorrowService</code>。层与层之间通过明确的方法签名交互，杜绝跨层直接篡改底层集合数据。</p>
+
+<h2>2.2 单一职责原则（SRP）与门面模式（Facade）</h2>
+<p>严格遵循单一职责原则（Single Responsibility Principle）：领域实体类（<code>domain</code> 包）仅封装业务属性、不变式校验（如单价非负、应还日期不早于借出日期）及状态转换规则；数据访问类（<code>dao</code> 包）仅负责主键生成、集合存储与多条件过滤查询；业务服务类（<code>service</code> 包）负责 RBAC 鉴权、状态流转与审计记录。同时，在控制层引入 GoF <strong>门面模式（Facade Pattern）</strong>，构建 <code>LabSystemFacade</code> 统一对外暴露业务入口，屏蔽底层 6 个 Service 与 7 个 DAO 之间的复杂装配关系。</p>
+
+<h2>2.3 开闭原则（OCP）与依赖倒置原则（DIP）</h2>
+<p>遵循开闭原则（Open-Closed Principle）与依赖倒置原则（Dependency Inversion Principle）：各业务 Service 通过构造函数依赖注入（Constructor Injection）接收所需的 DAO 与协作 Service 实例（并通过 <code>Objects.requireNonNull</code> 强校验），使得单元测试可独立创建全新的 <code>InMemoryDatabase</code> 实例实现 100% 隔离测试；未来扩展新的设备类别、审批状态或切换底层关系型数据库时，对扩展开放、对核心业务代码修改关闭。</p>
+
+<h2>2.4 有限状态机（FSM）防错设计原则</h2>
+<p>针对实验设备全生命周期流转这一核心难点，采用<strong>表驱动/枚举内聚有限状态机（Finite State Machine）</strong>设计原则。将合法状态迁移路径内聚在 <code>EquipmentStatus.canTransitionTo(target)</code> 方法中，强制规定 <code>SCRAPPED</code>（已报废）为不可逆吸收终态，规定 <code>BORROWED</code>（已借出）状态严禁越过归还验收直接报废，从架构根源上消除了状态错乱隐患。</p>
+
+<h1>3. 体系结构设计</h1>
+
+<h2>3.1 五层体系架构总述</h2>
+<p>《实验室设备管理系统》采用经典且职责分明的五层体系结构，自顶向下依次为：<strong>表现与交互层（Presentation Layer）</strong>、<strong>控制与门面层（Controller Facade Layer）</strong>、<strong>核心业务逻辑层（Business Service Layer）</strong>、<strong>数据持久层（Data Access DAO Layer）</strong>以及<strong>领域模型层（Domain Model Layer）</strong>。系统五层体系结构与包依赖关系如图 3-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig7_layered_arch.png" style="width: 14.2cm;"></p>
+<p class="fig-caption">图 3-1 系统五层体系结构与包依赖图</p>
+
+<h2>3.2 表现层与控制层设计</h2>
+<p>表现层提供两套交互载体：一套是基于 HTML5/CSS3/JS 构建的高保真 Web 交互原型工作台（<code>prototype/html/index.html</code>），另一套是端到端全业务流命令行演示入口（<code>cn.edu.ctgu.labms.Main</code>）。控制层由统一门面控制器 <code>LabSystemFacade</code> 构成，负责初始化内存数据库容器、装配六大业务服务并对外提供统一的事务调用接口。表现层与控制层组件结构如表 3-1 所示。</p>
+
+<p class="tbl-caption">表 3-1 表现层与门面控制层组件结构表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="28%" style="width:28%;">
+        <col width="56%" style="width:56%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">所属层次</th>
+        <th width="28%" class="nowrap">组件 / 类全限定名</th>
+        <th width="56%">核心架构职责与对外暴露接口说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">表现与交互层</td>
+        <td class="nowrap"><code>prototype/html/index.html</code></td>
+        <td>提供工作台总览、设备台账检索、采购审批、借还验收弹窗、维修报废、耗材预警及审计日志可视化交互界面。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">表现与交互层</td>
+        <td class="nowrap"><code>cn.edu.ctgu.labms.Main</code></td>
+        <td>端到端业务流演示驱动程序，依次调用七大模块接口完成注册登录、越权拦截、采购批量入库、借还转修、报废核销及盘点预警全流程实证输出。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">控制与门面层</td>
+        <td class="nowrap"><code>controller.LabSystemFacade</code></td>
+        <td>应用门面模式（Facade），内部聚合 <code>InMemoryDatabase</code> 与 6 个核心 Service，对外提供 <code>registerEquipment</code>、<code>approveAndInboundPurchaseOrder</code>、<code>borrowEquipment</code>、<code>returnEquipment</code> 等 22 个统一业务方法。</td>
+    </tr>
+</table>
+
+<h2>3.3 业务逻辑层与数据持久层设计</h2>
+<p>业务逻辑层（<code>cn.edu.ctgu.labms.service</code>）包含 6 个核心服务类及 1 个盘点统计值对象 <code>InventoryStatistics</code>；数据持久层（<code>cn.edu.ctgu.labms.dao</code>）包含 7 个领域仓储 DAO 类与统一内存数据库容器 <code>InMemoryDatabase</code>。业务逻辑层与数据持久层组件结构如表 3-2 所示，核心领域模型与业务服务层 UML 类图如图 3-2 所示。</p>
+
+<p class="tbl-caption">表 3-2 业务逻辑层与DAO数据持久层组件结构表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="14%" style="width:14%;">
+        <col width="28%" style="width:28%;">
+        <col width="58%" style="width:58%;">
+    </colgroup>
+    <tr>
+        <th width="14%" class="nowrap">所属包</th>
+        <th width="28%" class="nowrap">类名（Class Name）</th>
+        <th width="58%">核心方法与业务逻辑职责说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>AuthService</code></td>
+        <td>提供 <code>hashPassword()</code>（SHA-256摘要）、<code>registerUser()</code>、<code>login()</code>、<code>requireRole()</code>（RBAC强制鉴权）、<code>setUserActiveStatus()</code>（含防自锁）及 <code>changeUserRole()</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>EquipmentService</code></td>
+        <td>提供 <code>registerEquipment()</code>（含质保期校验）、<code>transitionStatus()</code>（状态机转移核心）、<code>updateLocation()</code>、<code>queryEquipment()</code> 及 <code>getInventoryStatistics()</code>（完好率统计）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>PurchaseService</code></td>
+        <td>提供 <code>submitOrder()</code>、<code>reviewOrder()</code>、<code>receiveOrderAndInbound()</code> 及 <code>approveAndInboundOrder()</code>（审批通过后按采购数量循环调用设备服务自动批量建账入库）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>BorrowService</code></td>
+        <td>提供 <code>borrowEquipment()</code>、<code>returnEquipment()</code>（完好归还恢复在库，受损归还自动调用维修服务转入 <code>MAINTENANCE</code> 并生成维修单）及 <code>findOverdueRecords()</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>MaintenanceScrapService</code></td>
+        <td>提供 <code>reportFault()</code>（发起维修单并切换至维修态）、<code>completeRepair()</code>（完工恢复在库）及 <code>approveScrap()</code>（同步结案未完维修单并永久锁定为 <code>SCRAPPED</code> 终态）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>service</code></td>
+        <td class="nowrap"><code>ConsumableService</code></td>
+        <td>提供 <code>registerConsumable()</code>、<code>inboundStock()</code>、<code>outboundStock()</code>（防超领拦截与低水位预警触发）及 <code>getLowStockWarnings()</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>dao</code></td>
+        <td class="nowrap"><code>InMemoryDatabase</code> 及 7 个 DAO</td>
+        <td>聚合 <code>UserDao</code>、<code>EquipmentDao</code>、<code>PurchaseOrderDao</code>、<code>BorrowRecordDao</code>、<code>MaintenanceScrapDao</code>、<code>ConsumableDao</code>、<code>AuditLogDao</code>，基于 <code>LinkedHashMap</code> 与原子序列提供事务级存取。</td>
+    </tr>
+</table>
+
+<p class="fig-wrap"><img src="fig8_class_diagram.png" style="width: 15.0cm;"></p>
+<p class="fig-caption">图 3-2 核心领域模型与服务层 UML 类图</p>
+
+<h2>3.4 核心接口与关键代码设计</h2>
+<p>为直观展示系统核心业务规则的代码落地实现，以下精选三段最具代表性的核心源码片段（均严格截取自 <code>src/main/java/cn/edu/ctgu/labms/</code>）。</p>
+<p>（1）<strong>设备四态有限状态机守卫实现（<code>EquipmentStatus.canTransitionTo</code>）</strong>：通过枚举内聚状态转移矩阵，确保任何状态变更请求必须经过合法性判定，特别是保证 <code>SCRAPPED</code> 终态绝不向任何其他状态逆向流转，且 <code>BORROWED</code> 状态不可绕过归还直接报废。关键代码如下：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line"><span class="kw">package</span> cn.edu.ctgu.labms.domain;</p>
+        <p class="code-line"><span class="cm">// 实验设备全生命周期四态有限状态机枚举（节选自 EquipmentStatus.java）</span></p>
+        <p class="code-line"><span class="kw">public enum</span> <span class="ty">EquipmentStatus</span> {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">IN_STOCK</span>(<span class="st">"在库可用"</span>), <span class="ty">BORROWED</span>(<span class="st">"已借出"</span>), <span class="ty">MAINTENANCE</span>(<span class="st">"维修中"</span>), <span class="ty">SCRAPPED</span>(<span class="st">"已报废"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">private final</span> <span class="ty">String</span> displayName;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">EquipmentStatus</span>(<span class="ty">String</span> displayName) { <span class="kw">this</span>.displayName = displayName; }</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public</span> <span class="ty">String</span> getDisplayName() { <span class="kw">return</span> displayName; }</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">/** 校验从当前状态转移到目标状态是否合法 */</span></p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">public boolean</span> canTransitionTo(<span class="ty">EquipmentStatus</span> target) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (target == <span class="kw">null</span> || <span class="kw">this</span> == target) { <span class="kw">return false</span>; }</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">switch</span> (<span class="kw">this</span>) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">case</span> <span class="ty">IN_STOCK</span>:&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> target == <span class="ty">BORROWED</span> || target == <span class="ty">MAINTENANCE</span> || target == <span class="ty">SCRAPPED</span>;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">case</span> <span class="ty">BORROWED</span>:&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> target == <span class="ty">IN_STOCK</span> || target == <span class="ty">MAINTENANCE</span>;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">case</span> <span class="ty">MAINTENANCE</span>: <span class="kw">return</span> target == <span class="ty">IN_STOCK</span> || target == <span class="ty">SCRAPPED</span>;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">case</span> <span class="ty">SCRAPPED</span>:&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return false</span>; <span class="cm">// 已报废为永久终态，严禁逆向流转</span></p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">default</span>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return false</span>;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">}</p>
+    </td></tr>
+</table>
+
+<p>（2）<strong>设备归还验收与损坏自动转修跨服务联动实现（<code>BorrowService.returnEquipment</code>）</strong>：当归还验收标志 <code>conditionOk == true</code> 时，驱动设备恢复为 <code>IN_STOCK</code>；当 <code>conditionOk == false</code> 时，自动委托 <code>maintenanceScrapService.reportFault()</code> 将设备流转至 <code>MAINTENANCE</code> 并生成维修工单。关键代码如下：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line"><span class="cm">// 归还设备验收：完好恢复在库，受损自动转入维修并生成工单（节选自 BorrowService.java）</span></p>
+        <p class="code-line"><span class="kw">public</span> <span class="ty">BorrowRecord</span> returnEquipment(<span class="ty">String</span> recordId, <span class="ty">String</span> operatorId,</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">LocalDate</span> returnDate, <span class="kw">boolean</span> conditionOk, <span class="ty">String</span> damageReason) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;authService.requireRole(operatorId, <span class="ty">Role</span>.LAB_MANAGER, <span class="ty">Role</span>.ADMIN, <span class="ty">Role</span>.TEACHER);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">BorrowRecord</span> record = getRecordOrThrow(recordId);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (record.isReturned()) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">throw new</span> <span class="ty">IllegalStateException</span>(<span class="st">"归还失败：借用记录["</span> + recordId + <span class="st">"]已归还，不可重复操作"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (returnDate.isBefore(record.getBorrowDate())) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">throw new</span> <span class="ty">IllegalArgumentException</span>(<span class="st">"归还日期不能早于借出日期"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;record.setReturnDate(returnDate);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;record.setReturnConditionOk(conditionOk);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;borrowRecordDao.save(record);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">String</span> eqCode = record.getEquipmentCode();</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (conditionOk) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;equipmentService.transitionStatus(eqCode, <span class="ty">EquipmentStatus</span>.IN_STOCK, operatorId, <span class="st">"借用归还验收完好"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auditLogDao.append(operatorId, <span class="st">"EQUIPMENT_RETURN_OK"</span>, recordId, <span class="st">"设备归还验收完好，已恢复在库"</span>);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="kw">else</span> {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">String</span> faultDesc = (damageReason == <span class="kw">null</span> || damageReason.trim().isEmpty())</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? <span class="st">"借用归还验收发现设备受损，自动转入维修"</span> : <span class="st">"归还验收受损："</span> + damageReason.trim();</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">MaintenanceScrapRecord</span> ticket = maintenanceScrapService.reportFault(eqCode, operatorId, faultDesc);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;auditLogDao.append(operatorId, <span class="st">"EQUIPMENT_RETURN_DAMAGED"</span>, recordId, <span class="st">"受损自动生成工单:"</span> + ticket.getRecordId());</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> record;</p>
+        <p class="code-line">}</p>
+    </td></tr>
+</table>
+
+<p>（3）<strong>实验耗材防超领校验与安全阈值低水位预警实现（<code>ConsumableService.outboundStock</code>）</strong>：在领用出库时强制校验库存充足性（防超领），并在扣减库存后调用 <code>consumable.isLowStock()</code>（判定 <code>currentStock &lt; safetyThreshold</code>）自动触发低水位预警标记。关键代码如下：</p>
+
+<table class="code-box">
+    <tr><td class="code-cell">
+        <p class="code-line"><span class="cm">// 耗材领用出库：防超领拦截与低库存阈值自动预警（节选自 ConsumableService.java）</span></p>
+        <p class="code-line"><span class="kw">public</span> <span class="ty">Consumable</span> outboundStock(<span class="ty">String</span> operatorId, <span class="ty">String</span> code, <span class="kw">int</span> quantity, <span class="ty">String</span> purpose) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;authService.getActiveUserOrThrow(operatorId);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (quantity &lt;= 0) { <span class="kw">throw new</span> <span class="ty">IllegalArgumentException</span>(<span class="st">"领用出库数量必须大于0"</span>); }</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">Consumable</span> consumable = getByCodeOrThrow(code);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">int</span> currentStock = consumable.getCurrentStock();</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (currentStock &lt; quantity) {</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">throw new</span> <span class="ty">IllegalStateException</span>(<span class="ty">String</span>.format(</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="st">"耗材库存不足：[%s-%s]当前库存为 %d%s，申请领用 %d%s"</span>,</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consumable.getCode(), consumable.getName(), currentStock, consumable.getUnit(), quantity, consumable.getUnit()));</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">int</span> newStock = currentStock - quantity;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;consumable.setCurrentStock(newStock);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;consumableDao.save(consumable);</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">String</span> alertMsg = consumable.isLowStock() <span class="cm">// currentStock &lt; safetyThreshold 时返回 true</span></p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;? <span class="ty">String</span>.format(<span class="st">"【触发低库存预警：当前%d &lt; 阈值%d】"</span>, newStock, consumable.getSafetyThreshold()) : <span class="st">""</span>;</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;auditLogDao.append(operatorId, <span class="st">"CONSUMABLE_OUTBOUND"</span>, code,</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="ty">String</span>.format(<span class="st">"耗材[%s]领用 -%d%s，余量=%d%s %s"</span>, consumable.getName(), quantity, consumable.getUnit(), newStock, consumable.getUnit(), alertMsg));</p>
+        <p class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> consumable;</p>
+        <p class="code-line">}</p>
+    </td></tr>
+</table>
+
+<h1>4. 功能模块详细设计</h1>
+
+<h2>4.1 功能模块设计总述</h2>
+<p>系统按照高内聚业务域划分为七大功能模块（CM1～CM7），由门面控制器 <code>LabSystemFacade</code> 统一协调。系统的功能模块层次结构如图 4-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig1_system_boundary.png" style="width: 14.5cm;"></p>
+<p class="fig-caption">图 4-1 系统功能模块层次图</p>
+
+<h2>4.2 核心业务模块交互时序设计</h2>
+<p>各核心功能模块（CM1～CM7）的详细算法逻辑与跨层交互设计如下：</p>
+<p>（1）<strong>CM1 安全认证与 RBAC 权限模块</strong>：接收注册或登录请求，通过 <code>MessageDigest</code> 计算 256 位哈希值；在所有受保护业务入口处执行 <code>requireRole(userId, allowedRoles...)</code>，若当前用户的角色不在许可列表内，立即记录 <code>PERMISSION_DENIED</code> 审计日志并抛出 <code>SecurityException</code>。</p>
+<p>（2）<strong>CM2 设备台账与多维检索模块</strong>：在 <code>EquipmentDao.search()</code> 中采用流式谓词过滤（Stream Predicate），支持关键字（忽略大小写匹配编码、名称、规格）、分类、状态与存放实验室位置的任意组合检索；当参数为空或 <code>null</code> 时自动视为通配该维度。</p>
+<p>（3）<strong>CM3 采购审批与到货批量自动入库模块</strong>：在 <code>PurchaseService.receiveOrderAndInbound()</code> 中，首先验证申购单状态必须为 <code>OrderStatus.APPROVED</code>（严禁未批或已驳回单据入库），随后按申购单中的数量 <code>order.getQuantity()</code> 执行循环，每次调用 <code>equipmentService.registerEquipment()</code> 自动分配新设备编号（如 <code>EQ-2026-1001</code>～<code>1003</code>），最后将申购单置为 <code>COMPLETED</code>。</p>
+<p>（4）<strong>CM4 设备借用与受损归还自动转修模块</strong>：借出与归还验收涉及跨多个服务层对象的协同交互。设备借用申请、状态校验及归还验收发现故障自动转入维修工单的跨层 UML 时序图如图 4-2 所示。</p>
+
+<p class="fig-wrap"><img src="fig9_sequence_borrow_purchase.png" style="width: 15.0cm;"></p>
+<p class="fig-caption">图 4-2 设备借还与损坏自动转修跨层 UML 时序图</p>
+
+<p>（5）<strong>CM5 维修闭环与报废核销模块</strong>：<code>completeRepair()</code> 校验维修单处于 <code>PENDING</code> 状态后，驱动设备状态从 <code>MAINTENANCE</code> 恢复为 <code>IN_STOCK</code>；<code>approveScrap()</code> 则在批准报废前自动遍历该设备名下所有未结案的维修单将其同步结案，再将设备状态永久推入 <code>SCRAPPED</code>。</p>
+<p>（6）<strong>CM6 仓库盘点与完好率统计模块</strong>与 <strong>CM7 实验耗材与低水位预警模块</strong>：<code>getInventoryStatistics()</code> 一次遍历汇总总台数、四态分布计数与固定资产总值，并按公式 $\text{IntactRate} = (\text{inStock} + \text{borrowed}) \times 100.0 / \text{total}$ 计算完好率（当 $\text{total}=0$ 时返回 $100.0\%$）。</p>
+
+<h2>4.3 设备全生命周期状态机设计</h2>
+<p>实验设备在全生命周期中包含四个核心状态：<strong>在库可用（<code>IN_STOCK</code>）</strong>、<strong>已借出（<code>BORROWED</code>）</strong>、<strong>故障维修中（<code>MAINTENANCE</code>）</strong>和<strong>已报废核销（<code>SCRAPPED</code>）</strong>。设备全生命周期四态 UML 状态机图如图 4-3 所示，对应的设备状态合法迁移矩阵如表 4-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig10_state_diagram.png" style="width: 14.2cm;"></p>
+<p class="fig-caption">图 4-3 设备全生命周期四态 UML 状态机图</p>
+
+<p class="tbl-caption">表 4-1 设备全生命周期状态合法迁移矩阵表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="14%" style="width:14%;">
+        <col width="14%" style="width:14%;">
+        <col width="22%" style="width:22%;">
+        <col width="10%" style="width:10%;">
+        <col width="40%" style="width:40%;">
+    </colgroup>
+    <tr>
+        <th width="14%" class="nowrap">当前状态</th>
+        <th width="14%" class="nowrap">目标状态</th>
+        <th width="22%" class="nowrap">触发业务方法 / 事件</th>
+        <th width="10%" class="nowrap">合法性</th>
+        <th width="40%">守卫条件、后置动作或非法拦截异常说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>[初始]</code></td>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="nowrap"><code>registerEquipment()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>直接登记入账或采购单到货批量验收，初始状态设为在库可用。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="center nowrap"><code>BORROWED</code></td>
+        <td class="nowrap"><code>borrowEquipment()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>借用人有效、应还日 $\ge$ 借出日，生成借用记录并变更为已借出。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="center nowrap"><code>MAINTENANCE</code></td>
+        <td class="nowrap"><code>reportFault()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>日常巡检发现故障发起报修，生成 <code>PENDING</code> 维修工单。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="center nowrap"><code>SCRAPPED</code></td>
+        <td class="nowrap"><code>approveScrap()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>达到折旧年限经管理员核准直接报废，进入永久终态。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>BORROWED</code></td>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="nowrap"><code>returnEquipment(true)</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>归还验收完好（<code>conditionOk=true</code>），恢复在库可用状态。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>BORROWED</code></td>
+        <td class="center nowrap"><code>MAINTENANCE</code></td>
+        <td class="nowrap"><code>returnEquipment(false)</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>归还验收受损（<code>conditionOk=false</code>），自动联动生成维修工单。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>BORROWED</code></td>
+        <td class="center nowrap"><code>SCRAPPED</code></td>
+        <td class="nowrap"><code>approveScrap()</code></td>
+        <td class="center nowrap">禁止</td>
+        <td><strong>拦截</strong>：抛出 <code>IllegalStateException</code>，未归还设备严禁直接报废（TC16）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>MAINTENANCE</code></td>
+        <td class="center nowrap"><code>IN_STOCK</code></td>
+        <td class="nowrap"><code>completeRepair()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>维修工单完工验收合格，工单置为 <code>COMPLETED</code>，设备恢复在库。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>MAINTENANCE</code></td>
+        <td class="center nowrap"><code>SCRAPPED</code></td>
+        <td class="nowrap"><code>approveScrap()</code></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td>确认无维修价值批准报废，自动同步结案待修单并锁定终态（TC33）。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><code>SCRAPPED</code></td>
+        <td class="center nowrap">任意其他状态</td>
+        <td class="nowrap"><code>transitionStatus()</code></td>
+        <td class="center nowrap">禁止</td>
+        <td><strong>终态保护拦截</strong>：<code>canTransitionTo()</code> 返回 <code>false</code>，严禁复活或借出（TC15）。</td>
+    </tr>
+</table>
+
+<h1>5. 数据库设计</h1>
+
+<h2>5.1 数据库选型与逻辑结构设计</h2>
+<p>系统关系数据库模型遵循第三范式（3NF）设计，消除传递依赖与数据冗余，支持 MySQL 8.0 生产部署及 <code>InMemoryDatabase</code> 内存事务容器运行。数据库共规划 7 张核心物理表：系统用户表（<code>sys_user</code>）、实验室设备台账表（<code>lab_equipment</code>）、设备采购申请单表（<code>purchase_order</code>）、设备借还记录表（<code>borrow_record</code>）、维修与报废记录表（<code>maintenance_scrap</code>）、实验试剂与耗材库存表（<code>consumable_stock</code>）以及系统安全审计日志表（<code>sys_audit_log</code>）。系统核心实体关系（E-R）与物理数据模型如图 5-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig11_er_diagram.png" style="width: 14.8cm;"></p>
+<p class="fig-caption">图 5-1 系统核心实体关系与物理数据模型图</p>
+
+<h2>5.2 物理表结构详细设计</h2>
+<p>数据库全部 7 张核心物理表的字段名称、字段代码、数据类型、主外键约束、非空约束及业务说明分别如表 5-1 至表 5-7 所示。</p>
+
+<p class="tbl-caption">表 5-1 系统用户表（sys_user）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">用户唯一ID</td>
+        <td class="nowrap"><code>user_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>主键，格式如 <code>USR-1001</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">登录用户名</td>
+        <td class="nowrap"><code>username</code></td>
+        <td class="nowrap"><code>VARCHAR(50)</code></td>
+        <td class="center nowrap">UK</td>
+        <td class="center nowrap">否</td>
+        <td>唯一索引，忽略大小写唯一校验。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">密码摘要值</td>
+        <td class="nowrap"><code>password_hash</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>SHA-256 64位十六进制不可逆密码摘要。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">真实姓名</td>
+        <td class="nowrap"><code>real_name</code></td>
+        <td class="nowrap"><code>VARCHAR(50)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>师生或管理员真实姓名。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">RBAC角色</td>
+        <td class="nowrap"><code>role</code></td>
+        <td class="nowrap"><code>VARCHAR(20)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>枚举：<code>ADMIN</code> / <code>LAB_MANAGER</code> / <code>TEACHER</code> / <code>STUDENT</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">所属院系部门</td>
+        <td class="nowrap"><code>department</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>所属学院、实验室或班级名称。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">账号启用状态</td>
+        <td class="nowrap"><code>is_active</code></td>
+        <td class="nowrap"><code>TINYINT(1)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td><code>1</code>=启用（默认），<code>0</code>=已禁用拦截登录。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-2 实验室设备台账表（lab_equipment）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">设备资产编码</td>
+        <td class="nowrap"><code>eq_code</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>主键，唯一资产编号如 <code>EQ-2026-0001</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">设备名称</td>
+        <td class="nowrap"><code>eq_name</code></td>
+        <td class="nowrap"><code>VARCHAR(100)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如“数字存储示波器”、“嵌入式开发实验箱”。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">型号与规格</td>
+        <td class="nowrap"><code>model_spec</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如 <code>TBS2102B (100MHz)</code>、<code>STM32H743-Pro</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">设备分类</td>
+        <td class="nowrap"><code>category</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如“电子测量仪器”、“计算服务器”等。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">生产厂商</td>
+        <td class="nowrap"><code>manufacturer</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>设备制造品牌或供应商名称。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">购置单价</td>
+        <td class="nowrap"><code>unit_price</code></td>
+        <td class="nowrap"><code>DECIMAL(10,2)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>单位：元，约束 <code>unit_price &gt;= 0.00</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">购置入库日期</td>
+        <td class="nowrap"><code>purchase_date</code></td>
+        <td class="nowrap"><code>DATE</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>设备验收入库日期。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">质保到期日期</td>
+        <td class="nowrap"><code>warranty_until</code></td>
+        <td class="nowrap"><code>DATE</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>约束：<code>warranty_until &gt;= purchase_date</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">存放实验室位置</td>
+        <td class="nowrap"><code>lab_location</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如“电工电子实验室A201”。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">生命周期状态</td>
+        <td class="nowrap"><code>status</code></td>
+        <td class="nowrap"><code>VARCHAR(20)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>四态枚举：<code>IN_STOCK</code> / <code>BORROWED</code> / <code>MAINTENANCE</code> / <code>SCRAPPED</code>。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-3 设备采购申请单表（purchase_order）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">采购申购单号</td>
+        <td class="nowrap"><code>order_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>主键，格式如 <code>PO-2026-101</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">申请人用户ID</td>
+        <td class="nowrap"><code>applicant_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>关联 <code>sys_user.user_id</code>（教师或管理员）。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">申购设备名称</td>
+        <td class="nowrap"><code>eq_name</code></td>
+        <td class="nowrap"><code>VARCHAR(100)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>拟采购设备标准名称。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">型号规格与类别</td>
+        <td class="nowrap"><code>model_spec</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>设备技术规格、分类及厂商信息。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">申购台数</td>
+        <td class="nowrap"><code>quantity</code></td>
+        <td class="nowrap"><code>INT</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>约束 <code>quantity &gt; 0</code>，决定自动建账台数。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">预计单价</td>
+        <td class="nowrap"><code>unit_price</code></td>
+        <td class="nowrap"><code>DECIMAL(10,2)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>约束 <code>unit_price &gt;= 0</code>，总价自动核算。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">申购理由</td>
+        <td class="nowrap"><code>reason</code></td>
+        <td class="nowrap"><code>VARCHAR(255)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>实验教学或科研课题申购说明。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">单据审批状态</td>
+        <td class="nowrap"><code>status</code></td>
+        <td class="nowrap"><code>VARCHAR(20)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td><code>PENDING</code> / <code>APPROVED</code> / <code>REJECTED</code> / <code>COMPLETED</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">审批人及意见</td>
+        <td class="nowrap"><code>reviewer_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">是</td>
+        <td>审批管理员 ID、审批意见 <code>review_comment</code> 及创建时间。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-4 设备借还记录表（borrow_record）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">借还记录单号</td>
+        <td class="nowrap"><code>record_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>主键，格式如 <code>BR-2026-201</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">借用设备编码</td>
+        <td class="nowrap"><code>eq_code</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>外键关联 <code>lab_equipment.eq_code</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">借用人用户ID</td>
+        <td class="nowrap"><code>borrower_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>外键关联 <code>sys_user.user_id</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">审批人用户ID</td>
+        <td class="nowrap"><code>approver_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>批准借出的实验员或指导教师 ID。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">借用实验用途</td>
+        <td class="nowrap"><code>purpose</code></td>
+        <td class="nowrap"><code>VARCHAR(200)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>课程实验、竞赛备赛或课题研究用途。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">借出日期</td>
+        <td class="nowrap"><code>borrow_date</code></td>
+        <td class="nowrap"><code>DATE</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>实际借出起始日期。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">应还截止日期</td>
+        <td class="nowrap"><code>due_date</code></td>
+        <td class="nowrap"><code>DATE</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>约束 <code>due_date &gt;= borrow_date</code>，用于超期判定。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">实际归还日期</td>
+        <td class="nowrap"><code>return_date</code></td>
+        <td class="nowrap"><code>DATE</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">是</td>
+        <td>未归还时为 <code>NULL</code>；归还时须 $\ge$ <code>borrow_date</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">归还完好标志</td>
+        <td class="nowrap"><code>return_condition_ok</code></td>
+        <td class="nowrap"><code>TINYINT(1)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">是</td>
+        <td><code>1</code>=完好恢复在库；<code>0</code>=受损自动转修。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-5 设备维修与报废记录表（maintenance_scrap）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">工单记录编号</td>
+        <td class="nowrap"><code>record_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>维修单前缀 <code>MT-</code>，报废单前缀 <code>SC-</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">关联设备编码</td>
+        <td class="nowrap"><code>eq_code</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>外键关联 <code>lab_equipment.eq_code</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">提报人用户ID</td>
+        <td class="nowrap"><code>reporter_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>发起故障报修或报废申请的用户 ID。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">工单业务类型</td>
+        <td class="nowrap"><code>record_type</code></td>
+        <td class="nowrap"><code>VARCHAR(20)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>枚举：<code>MAINTENANCE</code>（维修） / <code>SCRAP</code>（报废）。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">故障/报废原因</td>
+        <td class="nowrap"><code>reason</code></td>
+        <td class="nowrap"><code>VARCHAR(255)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>详细故障现象或达到折旧无法修复说明。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">工单处理状态</td>
+        <td class="nowrap"><code>status</code></td>
+        <td class="nowrap"><code>VARCHAR(20)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td><code>PENDING</code>（待修） / <code>COMPLETED</code>（已完工/已核销）。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">处理人及结果</td>
+        <td class="nowrap"><code>handler_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">是</td>
+        <td>处理管理员 ID 及维修/报废核销结论 <code>resolution</code>。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-6 实验试剂与耗材库存表（consumable_stock）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">耗材物资编码</td>
+        <td class="nowrap"><code>item_code</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>主键，格式如 <code>CS-2026-001</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">耗材名称</td>
+        <td class="nowrap"><code>item_name</code></td>
+        <td class="nowrap"><code>VARCHAR(100)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如“无铅焊锡丝”、“无水乙醇(分析纯)”。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">包装规格与单位</td>
+        <td class="nowrap"><code>spec</code> / <code>unit</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如 <code>0.8mm/500g</code>（卷）、<code>500mL/瓶</code>（瓶）。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">当前实际库存</td>
+        <td class="nowrap"><code>current_stock</code></td>
+        <td class="nowrap"><code>INT</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>约束 <code>current_stock &gt;= 0</code>，严禁负库存。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">安全预警阈值</td>
+        <td class="nowrap"><code>safety_threshold</code></td>
+        <td class="nowrap"><code>INT</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>当 <code>current_stock &lt; safety_threshold</code> 时触发预警。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">危化品标志</td>
+        <td class="nowrap"><code>is_hazardous</code></td>
+        <td class="nowrap"><code>TINYINT(1)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td><code>1</code>=危化品（专柜双人管控），<code>0</code>=普通耗材。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">存放库位架号</td>
+        <td class="nowrap"><code>lab_location</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如“危化品防爆柜-02号”、“耗材库房A区-01架”。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 5-7 系统安全审计日志表（sys_audit_log）结构设计</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="16%" style="width:16%;">
+        <col width="10%" style="width:10%;">
+        <col width="10%" style="width:10%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">字段中文名</th>
+        <th width="18%" class="nowrap">字段代码</th>
+        <th width="16%" class="nowrap">数据类型</th>
+        <th width="10%" class="nowrap">主/外键</th>
+        <th width="10%" class="nowrap">可否为空</th>
+        <th width="30%">字段说明与取值约束</th>
+    </tr>
+    <tr>
+        <td class="nowrap">审计日志编号</td>
+        <td class="nowrap"><code>log_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">PK</td>
+        <td class="center nowrap">否</td>
+        <td>自增主键，格式如 <code>LOG-5001</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">操作人用户ID</td>
+        <td class="nowrap"><code>operator_id</code></td>
+        <td class="nowrap"><code>VARCHAR(32)</code></td>
+        <td class="center nowrap">FK</td>
+        <td class="center nowrap">否</td>
+        <td>执行该业务动作或触发拦截的用户 ID。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">动作事件类型</td>
+        <td class="nowrap"><code>action_type</code></td>
+        <td class="nowrap"><code>VARCHAR(50)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>如 <code>EQUIPMENT_RETURN_DAMAGED</code>、<code>PERMISSION_DENIED</code>。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">操作目标编码</td>
+        <td class="nowrap"><code>target_id</code></td>
+        <td class="nowrap"><code>VARCHAR(64)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>被操作的设备编码、工单号、采购单号或耗材编码。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">审计详情快照</td>
+        <td class="nowrap"><code>detail_info</code></td>
+        <td class="nowrap"><code>VARCHAR(500)</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>状态流转前后对比、库存变动或越权拦截完整原因。</td>
+    </tr>
+    <tr>
+        <td class="nowrap">记录时间戳</td>
+        <td class="nowrap"><code>created_at</code></td>
+        <td class="nowrap"><code>DATETIME</code></td>
+        <td class="center nowrap">—</td>
+        <td class="center nowrap">否</td>
+        <td>精确到秒的不可篡改服务器操作时间。</td>
+    </tr>
+</table>
+
+<h1>6. 界面设计</h1>
+
+<h2>6.1 界面总体布局与视觉规范</h2>
+<p>系统高保真原型（位于 <code>02-需求分析与系统原型/prototype/html/index.html</code>）采用左导航 + 顶栏角色矩阵切换 + 主工作区卡片式布局。顶部提供四角色一键实时切换器（系统管理员、实验室管理员、指导教师、学生），切换角色时界面按钮与操作权限根据 RBAC 矩阵动态显隐或触发越权拦截弹窗提示。</p>
+
+<h2>6.2 核心业务界面与后端接口映射</h2>
+<p>系统七大核心交互视图与底层门面控制器 <code>LabSystemFacade</code> 的接口映射关系如表 6-1 所示。</p>
+
+<p class="tbl-caption">表 6-1 系统高保真原型核心界面与控制器接口映射表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="14%" style="width:14%;">
+        <col width="24%" style="width:24%;">
+        <col width="32%" style="width:32%;">
+        <col width="30%" style="width:30%;">
+    </colgroup>
+    <tr>
+        <th width="14%" class="nowrap">视图编号</th>
+        <th width="24%" class="nowrap">界面视图名称</th>
+        <th width="32%" class="nowrap">绑定的门面控制器核心接口</th>
+        <th width="30%">核心交互组件与视觉反馈设计</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-01</td>
+        <td class="nowrap">仓库盘点与完好率大盘</td>
+        <td class="nowrap"><code>getInventoryStatistics()</code></td>
+        <td>顶部4张KPI卡片展示库存总台数、完好率（83.33%）、固定资产总值（¥61,000）及低库存耗材报警数。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-02</td>
+        <td class="nowrap">实验设备台账检索中心</td>
+        <td class="nowrap"><code>queryEquipment(kw, cat, st, loc)</code></td>
+        <td>提供关键字搜索框、分类/四态下拉筛选器、库位调拨弹窗及四色状态语义徽章。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-03</td>
+        <td class="nowrap">设备采购与自动入库台</td>
+        <td class="nowrap"><code>approveAndInboundPurchaseOrder()</code></td>
+        <td>教师提报申购单表单；管理员一键“批准并批量验收入库”自动生成多台在库设备提示。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-04</td>
+        <td class="nowrap">设备借还与验收工作台</td>
+        <td class="nowrap"><code>borrowEquipment()</code> / <code>returnEquipment()</code></td>
+        <td>提供归还验收模态框：勾选“完好”恢复在库，勾选“故障受损”自动高亮转修并跳转维修单。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-05</td>
+        <td class="nowrap">维修闭环与报废核销台</td>
+        <td class="nowrap"><code>completeRepair()</code> / <code>approveScrap()</code></td>
+        <td>展示待处理维修单与报废申请，完工后恢复绿色在库徽章，报废后永久打上红色终态锁。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-06</td>
+        <td class="nowrap">试剂耗材与低水位预警</td>
+        <td class="nowrap"><code>outboundConsumable()</code> / <code>listLowStock()</code></td>
+        <td>危化品标注红色防爆警示标签；库存低于安全阈值时自动显示脉冲式“【预警】”高亮条。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">VIEW-07</td>
+        <td class="nowrap">RBAC权限与安全审计台</td>
+        <td class="nowrap"><code>setUserActive()</code> / <code>listAuditLogs()</code></td>
+        <td>展示四角色用户列表、防自锁启停开关，以及按时间倒序排列的 39+ 条全链路安全审计流水。</td>
+    </tr>
+</table>
+
+</body>
+</html>

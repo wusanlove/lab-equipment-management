@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>实验室设备管理系统项目需求分析规格说明书</title>
+<style>
+    @page { size: A4; margin: 2.3cm 2.2cm 2.3cm 2.2cm; }
+    body {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        color: #000000;
+    }
+    .cover {
+        text-align: center;
+        padding-top: 40pt;
+    }
+    .cover-course {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 18pt;
+        font-weight: bold;
+        letter-spacing: 2pt;
+        margin-bottom: 18pt;
+        text-indent: 0;
+    }
+    .cover-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 24pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 10pt;
+        text-indent: 0;
+    }
+    .cover-subtitle {
+        font-family: "Times New Roman", "楷体", KaiTi, serif;
+        font-size: 14pt;
+        font-weight: bold;
+        color: #1F4E79;
+        margin-bottom: 30pt;
+        text-indent: 0;
+    }
+    table.cover-meta {
+        width: 86%;
+        margin: 0 auto 24pt auto;
+        border-collapse: collapse;
+        font-size: 12pt;
+    }
+    table.cover-meta td {
+        padding: 6pt 8pt;
+        border: none;
+        text-indent: 0;
+        line-height: 20pt;
+    }
+    table.cover-meta td.meta-label {
+        font-family: "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: right;
+        width: 22%;
+        white-space: nowrap;
+    }
+    table.cover-meta td.meta-val {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        text-align: left;
+        width: 28%;
+        border-bottom: 1px solid #333333;
+    }
+    h1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        margin-top: 14pt;
+        margin-bottom: 8pt;
+        text-indent: 0;
+        page-break-before: always;
+        page-break-after: avoid;
+    }
+    h2 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 14pt;
+        font-weight: bold;
+        margin-top: 10pt;
+        margin-bottom: 6pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    h3 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 12pt;
+        font-weight: bold;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        text-indent: 0;
+        page-break-after: avoid;
+    }
+    p {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 12pt;
+        line-height: 20pt;
+        mso-line-height-rule: exactly;
+        text-indent: 24pt;
+        margin-top: 0pt;
+        margin-bottom: 4pt;
+        text-align: justify;
+    }
+    p.noindent { text-indent: 0; }
+    p.fig-wrap {
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 2pt;
+        page-break-after: avoid;
+    }
+    p.fig-caption {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    p.tbl-caption {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 8pt;
+        margin-bottom: 4pt;
+        page-break-after: avoid;
+    }
+    table.data-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10.5pt;
+        margin-top: 2pt;
+        margin-bottom: 10pt;
+    }
+    table.data-tbl th, table.data-tbl td {
+        border: 1px solid #64748B;
+        padding: 4pt 6pt;
+        vertical-align: middle;
+        text-indent: 0;
+        line-height: 15pt;
+    }
+    table.data-tbl th {
+        background-color: #EDF2F7;
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+        text-align: center;
+        color: #0F172A;
+    }
+    table.data-tbl td {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        color: #000000;
+    }
+    td.center { text-align: center; }
+    td.nowrap, th.nowrap { white-space: nowrap; }
+    .toc-title {
+        font-family: "黑体", SimHei, sans-serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-align: center;
+        text-indent: 0;
+        margin-top: 12pt;
+        margin-bottom: 12pt;
+        page-break-before: always;
+    }
+    table.toc-tbl {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 11.5pt;
+    }
+    table.toc-tbl td {
+        border: none;
+        padding: 2pt 2pt;
+        line-height: 19pt;
+        text-indent: 0;
+    }
+    table.toc-tbl td.toc-l1 {
+        font-family: "Times New Roman", "黑体", SimHei, sans-serif;
+        font-weight: bold;
+    }
+    table.toc-tbl td.toc-l2 {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        padding-left: 18pt;
+    }
+    table.toc-tbl td.toc-l3 {
+        font-family: "Times New Roman", "宋体", SimSun, serif;
+        padding-left: 36pt;
+        font-size: 10.5pt;
+    }
+    table.toc-tbl td.toc-pg {
+        font-family: "Times New Roman", serif;
+        text-align: right;
+        width: 12%;
+        white-space: nowrap;
+    }
+</style>
+</head>
+<body>
+
+<div class="cover">
+    <p class="cover-course">《软件工程》课程分组项目文档</p>
+    <p class="cover-title">实验室设备管理系统<br>项目需求分析规格说明书</p>
+    <p class="cover-subtitle">Software Requirements Specification (SRS) for LabMS v1.0</p>
+
+    <table class="cover-meta">
+        <tr>
+            <td class="meta-label">项目名称：</td>
+            <td class="meta-val">实验室设备管理系统</td>
+            <td class="meta-label">文档编号：</td>
+            <td class="meta-val">CTGU-SE-2026-G01-SRS</td>
+        </tr>
+        <tr>
+            <td class="meta-label">小组编号：</td>
+            <td class="meta-val">第 01 组</td>
+            <td class="meta-label">当前版本：</td>
+            <td class="meta-val">V1.0（正式基线版）</td>
+        </tr>
+        <tr>
+            <td class="meta-label">项目组长：</td>
+            <td class="meta-val">王胜运（202410120301）</td>
+            <td class="meta-label">需求主笔：</td>
+            <td class="meta-val">陈宇航、王胜运</td>
+        </tr>
+        <tr>
+            <td class="meta-label">所属学院：</td>
+            <td class="meta-val">计算机与信息学院</td>
+            <td class="meta-label">专　　业：</td>
+            <td class="meta-val">计算机科学与技术</td>
+        </tr>
+        <tr>
+            <td class="meta-label">指导教师：</td>
+            <td class="meta-val">覃兵文</td>
+            <td class="meta-label">完成日期：</td>
+            <td class="meta-val">2026 年 11 月 6 日</td>
+        </tr>
+        <tr>
+            <td class="meta-label">配套原型：</td>
+            <td class="meta-val" colspan="3"><code>prototype/实验室设备管理系统原型.rp</code> 及 <code>prototype/html/index.html</code></td>
+        </tr>
+    </table>
+</div>
+
+<p class="toc-title">目　　录</p>
+<table class="toc-tbl">
+    <colgroup>
+        <col width="88%" style="width:88%;">
+        <col width="12%" style="width:12%;">
+    </colgroup>
+    <tr><td class="toc-l1">1. 导言</td><td class="toc-pg" data-toc-target="1. 导言">1</td></tr>
+    <tr><td class="toc-l2">1.1 编写目的</td><td class="toc-pg" data-toc-target="1.1 编写目的">1</td></tr>
+    <tr><td class="toc-l2">1.2 项目范围</td><td class="toc-pg" data-toc-target="1.2 项目范围">1</td></tr>
+    <tr><td class="toc-l2">1.3 参考资料</td><td class="toc-pg" data-toc-target="1.3 参考资料">1</td></tr>
+    <tr><td class="toc-l2">1.4 版本更新信息</td><td class="toc-pg" data-toc-target="1.4 版本更新信息">1</td></tr>
+    <tr><td class="toc-l1">2. 项目介绍</td><td class="toc-pg" data-toc-target="2. 项目介绍">2</td></tr>
+    <tr><td class="toc-l2">2.1 项目背景</td><td class="toc-pg" data-toc-target="2.1 项目背景">2</td></tr>
+    <tr><td class="toc-l2">2.2 项目目标</td><td class="toc-pg" data-toc-target="2.2 项目目标">2</td></tr>
+    <tr><td class="toc-l1">3. 应用环境</td><td class="toc-pg" data-toc-target="3. 应用环境">3</td></tr>
+    <tr><td class="toc-l2">3.1 系统运行网络环境</td><td class="toc-pg" data-toc-target="3.1 系统运行网络环境">3</td></tr>
+    <tr><td class="toc-l2">3.2 系统软硬件环境</td><td class="toc-pg" data-toc-target="3.2 系统软硬件环境">3</td></tr>
+    <tr><td class="toc-l1">4. 功能规格</td><td class="toc-pg" data-toc-target="4. 功能规格">5</td></tr>
+    <tr><td class="toc-l2">4.1 系统角色（Actor）分析</td><td class="toc-pg" data-toc-target="4.1 系统角色（Actor）分析">5</td></tr>
+    <tr><td class="toc-l2">4.2 系统主用例图（Use Case）</td><td class="toc-pg" data-toc-target="4.2 系统主用例图（Use Case）">5</td></tr>
+    <tr><td class="toc-l2">4.3 师生服务子系统功能需求</td><td class="toc-pg" data-toc-target="4.3 师生服务子系统功能需求">7</td></tr>
+    <tr><td class="toc-l2">4.4 实验室与后台管理子系统功能需求</td><td class="toc-pg" data-toc-target="4.4 实验室与后台管理子系统功能需求">8</td></tr>
+    <tr><td class="toc-l2">4.5 非功能性需求</td><td class="toc-pg" data-toc-target="4.5 非功能性需求">10</td></tr>
+    <tr><td class="toc-l3">4.5.1 界面需求</td><td class="toc-pg" data-toc-target="4.5.1 界面需求">10</td></tr>
+    <tr><td class="toc-l3">4.5.2 响应时间需求</td><td class="toc-pg" data-toc-target="4.5.2 响应时间需求">10</td></tr>
+    <tr><td class="toc-l3">4.5.3 可靠性需求</td><td class="toc-pg" data-toc-target="4.5.3 可靠性需求">10</td></tr>
+    <tr><td class="toc-l3">4.5.4 可扩展性需求</td><td class="toc-pg" data-toc-target="4.5.4 可扩展性需求">11</td></tr>
+    <tr><td class="toc-l3">4.5.5 系统安全性需求</td><td class="toc-pg" data-toc-target="4.5.5 系统安全性需求">11</td></tr>
+    <tr><td class="toc-l1">5. 需求变更</td><td class="toc-pg" data-toc-target="5. 需求变更">12</td></tr>
+    <tr><td class="toc-l1">6. 产品提交</td><td class="toc-pg" data-toc-target="6. 产品提交">13</td></tr>
+    <tr><td class="toc-l1">7. 实现约束</td><td class="toc-pg" data-toc-target="7. 实现约束">14</td></tr>
+    <tr><td class="toc-l1">8. 签字</td><td class="toc-pg" data-toc-target="8. 签字">15</td></tr>
+</table>
+
+<h1>1. 导言</h1>
+
+<h2>1.1 编写目的</h2>
+<p>本《项目需求分析规格说明书》（Software Requirements Specification，简称 SRS）旨在全面、准确、无歧义地定义三峡大学《实验室设备管理系统》（LabMS v1.0）的功能性需求、非功能性需求、运行环境、角色用例模型及外部实现约束。本文档经需求提出方与第 01 组全体研发成员共同评审确认，是后续开展系统体系结构设计、数据库建模、核心业务代码实现、高保真交互原型验收以及黑盒/白盒测试的唯一需求基线依据。</p>
+
+<h2>1.2 项目范围</h2>
+<p>本项目围绕高校教学与科研实验室的固定资产设备及低值易耗品全生命周期管理展开。系统命名为《实验室设备管理系统》（LabMS），划分为“公共与师生服务子系统”和“实验室与后台管理子系统”两大业务域，覆盖用户认证与 RBAC 权限管理（M1）、设备信息与状态机管理（M2）、设备采购与自动批量入库（M3）、设备借用与受损归还自动转修（M4）、设备维修闭环与报废核销（M5）、仓库库存盘点与完好率统计（M6）、实验耗材出入库与低水位预警（M7）七大核心模块。</p>
+
+<h2>1.3 参考资料</h2>
+<p>（1）GB/T 8567-2006《计算机软件文档编制规范》，中华人民共和国国家质量监督检验检疫总局。</p>
+<p>（2）IEEE Std 830-1998，《IEEE Recommended Practice for Software Requirements Specifications》。</p>
+<p>（3）教育部《高等学校仪器设备管理办法》及三峡大学《实验室固定资产与危化耗材安全管理规程》。</p>
+<p>（4）第 01 组《实验室设备管理系统项目立项说明书》（文档编号：CTGU-SE-2026-G01-P01）。</p>
+<p>（5）星语课程网《软件工程课程团队项目文档模板与评审规范》（<code>srs_tpl.pdf</code>、<code>946.html</code>）。</p>
+
+<h2>1.4 版本更新信息</h2>
+<p>本文档自初始草案编制至正式基线冻结的历次版本演进与修订记录如表 1-1 所示。</p>
+
+<p class="tbl-caption">表 1-1 版本更新记录表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="12%" style="width:12%;">
+        <col width="16%" style="width:16%;">
+        <col width="16%" style="width:16%;">
+        <col width="42%" style="width:42%;">
+        <col width="14%" style="width:14%;">
+    </colgroup>
+    <tr>
+        <th width="12%" class="nowrap">版本号</th>
+        <th width="16%" class="nowrap">更新日期</th>
+        <th width="16%" class="nowrap">修订作者</th>
+        <th width="42%">主要修订与增补内容说明</th>
+        <th width="14%" class="nowrap">评审状态</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">V0.1</td>
+        <td class="center nowrap">2026-10-28</td>
+        <td class="center nowrap">陈宇航</td>
+        <td>创建需求规格书初稿，完成四类系统角色识别与总体主用例图（UC01～UC16）草案。</td>
+        <td class="center nowrap">内部初审</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">V0.5</td>
+        <td class="center nowrap">2026-11-02</td>
+        <td class="center nowrap">陈宇航、王胜运</td>
+        <td>补充设备全生命周期子用例图，细化“申购审批自动入库”与“受损归还自动转修”用例规约表。</td>
+        <td class="center nowrap">原型联审</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">V1.0</td>
+        <td class="center nowrap">2026-11-06</td>
+        <td class="center nowrap">王胜运、全组</td>
+        <td>增补耗材安全阈值边界规则、非功能性指标及需求变更流程图，通过全组评审并冻结基线。</td>
+        <td class="center nowrap"><strong>正式基线</strong></td>
+    </tr>
+</table>
+
+<h1>2. 项目介绍</h1>
+
+<h2>2.1 项目背景</h2>
+<p>在高校实验教学中心日常运转中，电工电子实验室、人工智能实验室、嵌入式系统实验室等场馆存放着大量不同档次与用途的教学科研设备。长期以来，实验室管理面临“重采购、轻流转、弱盘点”的信息化短板：一方面，学生在课程设计与学科竞赛期间频繁借用开发箱、示波器等设备，手工台账无法实时反映某台设备是否已在库、是否处于故障待修状态，常导致借用冲突；另一方面，设备在归还验收时若发现硬件损坏，纸质登记往往未能及时转化为维修工单，致使带病设备再次流向实验课堂；此外，危化试剂（如无水乙醇）与常规耗材（如无铅焊锡丝）缺乏库存红线自动监控，存在断供或超领隐患。因此，亟需构建一套覆盖“申购—入库—借还—维修—报废—盘点—耗材预警”的现代化实验室设备管理系统。</p>
+
+<h2>2.2 项目目标</h2>
+<p>（1）<strong>业务全链路闭环目标</strong>：消除人工二次录入断层，实现采购申请审批通过并验收入库后 100% 自动批量生成在库（<code>IN_STOCK</code>）设备台账；实现借用设备受损归还（<code>conditionOk = false</code>）时 100% 自动流转至维修态（<code>MAINTENANCE</code>）并自动派发待处理维修工单。</p>
+<p>（2）<strong>状态强约束防错目标</strong>：通过有限状态机严格管控设备四态转换，彻底杜绝“重复借出已借设备”、“借出维修中/已报废设备”、“未归还直接报废”以及“已报废终态设备逆向复活”等违规操作。</p>
+<p>（3）<strong>实时盘点与预警目标</strong>：支持一键生成全院实验室库存统计大盘（总台数、各状态计数、固定资产总值、设备完好率），并对低于安全阈值的实验耗材实现 100% 实时识别与高亮预警。</p>
+
+<h1>3. 应用环境</h1>
+
+<h2>3.1 系统运行网络环境</h2>
+<p>本系统采用标准的多层客户端/服务器与 Web 浏览交互架构，部署于高校校园网内网环境。客户端涵盖系统管理员终端、实验室管理员终端、指导教师科研终端与学生实验终端，通过校园网交换机与 HTTPS/RBAC 安全认证网关接入应用服务层，并持久化至主业务数据库与安全审计归档库。系统运行网络拓扑结构如图 3-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig3_network_topology.png" style="width: 14.5cm;"></p>
+<p class="fig-caption">图 3-1 系统运行网络拓扑结构图</p>
+
+<h2>3.2 系统软硬件环境</h2>
+<p>为保障《实验室设备管理系统》在高并发检索、批量建账入库及全链路审计日志记录场景下的稳定运行，系统对服务器端与客户端硬件环境的配置要求如表 3-1 所示，对开发、测试与生产运行软件环境的要求如表 3-2 所示。</p>
+
+<p class="tbl-caption">表 3-1 服务器与终端硬件配置要求表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="22%" style="width:22%;">
+        <col width="28%" style="width:28%;">
+        <col width="34%" style="width:34%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">节点类型</th>
+        <th width="22%" class="nowrap">硬件指标项</th>
+        <th width="28%" class="nowrap">最低配置要求</th>
+        <th width="34%">推荐生产配置要求</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">应用服务器</td>
+        <td class="nowrap">处理器（CPU）</td>
+        <td class="nowrap">4 核 x86_64（2.4 GHz）</td>
+        <td>8 核及以上 Intel Xeon 或 AMD EPYC（3.0 GHz+）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">应用服务器</td>
+        <td class="nowrap">内存与存储</td>
+        <td class="nowrap">8 GB RAM / 128 GB SSD</td>
+        <td>16 GB DDR4 ECC 内存 / 512 GB NVMe RAID1 固态阵列</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">数据库服务器</td>
+        <td class="nowrap">内存与磁盘 IOPS</td>
+        <td class="nowrap">8 GB RAM / 256 GB SSD</td>
+        <td>32 GB RAM / 1 TB 企业级 SSD（定时快照备份）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">师生/管理终端</td>
+        <td class="nowrap">终端与显示器</td>
+        <td class="nowrap">双核 CPU / 4 GB RAM / 1366×768</td>
+        <td>四核 CPU / 8 GB+ RAM / 1920×1080 全高清显示屏</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 3-2 系统运行软件环境表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="26%" style="width:26%;">
+        <col width="24%" style="width:24%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">软件环境类别</th>
+        <th width="26%" class="nowrap">软件名称</th>
+        <th width="24%" class="nowrap">版本规范要求</th>
+        <th width="32%">在系统中的主要用途说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">操作系统</td>
+        <td class="nowrap">Windows 10/11 或 Linux</td>
+        <td class="nowrap">64-bit (10.0.26200+)</td>
+        <td>提供核心服务运行、自动化脚本执行与终端访问环境。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">Java 运行环境</td>
+        <td class="nowrap">Oracle JDK / OpenJDK</td>
+        <td class="nowrap">JDK 24.0.2（兼容 JDK 8+）</td>
+        <td>编译与运行 <code>cn.edu.ctgu.labms</code> 核心业务与自测套件。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">原型与前端环境</td>
+        <td class="nowrap">Axure RP / 现代浏览器</td>
+        <td class="nowrap">Axure RP 9/10、Chrome 120+</td>
+        <td>承载 <code>.rp</code> 原型源文件设计及 HTML5 高保真交互工作台运行。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">数据库系统</td>
+        <td class="nowrap">InMemoryDatabase / MySQL</td>
+        <td class="nowrap">内置事务容器 / MySQL 8.0</td>
+        <td>提供零依赖内存事务持久化及 7 张 3NF 关系表映射存储。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">建模与版本工具</td>
+        <td class="nowrap">PlantUML / Git</td>
+        <td class="nowrap">PlantUML 1.2025.4 / Git 2.55</td>
+        <td>绘制 11 张标准 UML 图件，管理团队源代码与文档版本基线。</td>
+    </tr>
+</table>
+
+<h1>4. 功能规格</h1>
+
+<h2>4.1 系统角色（Actor）分析</h2>
+<p>本系统依据最小权限原则（Principle of Least Privilege）构建四级 RBAC 角色体系，定义在枚举类 <code>cn.edu.ctgu.labms.domain.Role</code> 中。四类系统角色（Actor）及其业务权限边界分析如下，系统角色与功能权限矩阵如表 4-1 所示。</p>
+<p>（1）<strong>学生（<code>STUDENT</code>）</strong>：系统的基础服务使用者。可注册登录、多维检索实验设备台账、申请借用在库设备、归还所借设备、对发现故障的设备提报维修申请，以及按课程实验需求领用常规实验耗材；严禁执行设备建档、提交新设备采购单、审批工单或批准报废。</p>
+<p>（2）<strong>指导教师（<code>TEACHER</code>）</strong>：继承学生的查询、借用、报修与耗材领用能力，同时具备<strong>发起新设备采购申请单（<code>submitPurchaseOrder</code>）</strong>及作为课程指导教师协助审核借用流程的业务权限；但无权直接批准国有固定资产报废或管理系统账号。</p>
+<p>（3）<strong>实验室管理员（<code>LAB_MANAGER</code>）</strong>：实验室日常运维的核心执行者。负责登记新设备台账与库位调拨、审批采购单并执行到货批量入库、审批借出申请与归还完好性验收、处理维修工单并确认完工恢复在库、提报或审批设备报废、执行耗材建档与补货入库、查看仓库完好率盘点大盘。</p>
+<p>（4）<strong>系统管理员（<code>ADMIN</code>）</strong>：系统最高安全与资产监管角色。除拥有实验室业务审批与报废核准权限外，独家拥有<strong>用户账号启用/禁用控制（<code>setUserActiveStatus</code>，含防自锁保护）</strong>、<strong>用户角色变更授权（<code>changeUserRole</code>）</strong>以及<strong>全院安全审计日志检索审查（<code>getAuditLogs</code>）</strong>权限。</p>
+
+<p class="tbl-caption">表 4-1 系统角色与功能权限矩阵表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="14%" style="width:14%;">
+        <col width="26%" style="width:26%;">
+        <col width="12%" style="width:12%;">
+        <col width="12%" style="width:12%;">
+        <col width="14%" style="width:14%;">
+        <col width="14%" style="width:14%;">
+        <col width="8%" style="width:8%;">
+    </colgroup>
+    <tr>
+        <th width="14%" class="nowrap">所属模块</th>
+        <th width="26%" class="nowrap">功能操作项</th>
+        <th width="12%" class="nowrap">学生</th>
+        <th width="12%" class="nowrap">指导教师</th>
+        <th width="14%" class="nowrap">实验室管理员</th>
+        <th width="14%" class="nowrap">系统管理员</th>
+        <th width="8%" class="nowrap">审计</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">M1 权限安全</td>
+        <td>注册登录 / SHA-256认证</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M1 权限安全</td>
+        <td>账号启停与角色变更授权</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M2 设备台账</td>
+        <td>多维条件组合检索设备</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">允许</td>
+        <td class="center nowrap">否</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M2 设备台账</td>
+        <td>设备建档入账与库位调拨</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M3 设备采购</td>
+        <td>提交新设备采购申请单</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M3 设备采购</td>
+        <td>采购单审批与到货批量入库</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap">禁止</td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap"><strong>允许</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M4 借还管理</td>
+        <td>设备借用申请与归还验收</td>
+        <td class="center nowrap">申请借用</td>
+        <td class="center nowrap">申请/审核</td>
+        <td class="center nowrap"><strong>审批/验收</strong></td>
+        <td class="center nowrap"><strong>审批/验收</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M5 维修报废</td>
+        <td>故障报修 / 维修完工 / 批报废</td>
+        <td class="center nowrap">仅报修</td>
+        <td class="center nowrap">仅报修</td>
+        <td class="center nowrap"><strong>全权限</strong></td>
+        <td class="center nowrap"><strong>全权限</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">M6 &amp; M7</td>
+        <td>盘点统计 / 耗材建档补货与领用</td>
+        <td class="center nowrap">仅领用</td>
+        <td class="center nowrap">仅领用</td>
+        <td class="center nowrap"><strong>建档/补货</strong></td>
+        <td class="center nowrap"><strong>建档/补货</strong></td>
+        <td class="center nowrap">是</td>
+    </tr>
+</table>
+
+<h2>4.2 系统主用例图（Use Case）</h2>
+<p>基于对四类角色与两大业务子系统的深入剖析，建立《实验室设备管理系统》总体主用例模型（涵盖 UC01～UC16 共 16 个核心用例），如图 4-1 所示。进一步针对设备全生命周期中的“借还验收、采购入库、维修报废”三大联动闭环，提取包含（<code>&lt;&lt;include&gt;&gt;</code>）与扩展（<code>&lt;&lt;extend&gt;&gt;</code>）关系的设备全生命周期核心业务用例图，如图 4-2 所示。</p>
+
+<p class="fig-wrap"><img src="fig4_main_usecase.png" style="width: 14.8cm;"></p>
+<p class="fig-caption">图 4-1 系统总体主用例图</p>
+
+<p class="fig-wrap"><img src="fig5_sub_usecase_lifecycle.png" style="width: 14.8cm;"></p>
+<p class="fig-caption">图 4-2 设备全生命周期核心业务用例图</p>
+
+<h2>4.3 师生服务子系统功能需求</h2>
+<p>公共与师生服务子系统面向全体学生与指导教师提供 7 项核心业务用例（UC01～UC07）：</p>
+<p>（1）<strong>用户注册与登录认证（UC01）</strong>：支持输入用户名、明文密码、真实姓名、角色与所属院系完成注册，系统强制采用 SHA-256 哈希算法存储 64 位十六进制密码摘要；登录时校验账号存在性、启用状态（<code>active == true</code>）与密码摘要匹配性，并写入审计日志。其详细用例规约如表 4-2 所示。</p>
+<p>（2）<strong>多维检索设备台账与状态（UC02）</strong>：支持按关键字（匹配设备编码、名称或型号规格）、设备分类（如电子测量仪器、计算服务器、嵌入式教学设备）、实时状态（<code>IN_STOCK</code> 等四态）及存放位置进行任意组合模糊或精确查询。</p>
+<p>（3）<strong>提交设备借用申请（UC03）</strong>：借用人选择目标设备并填写借用用途、借出日期与应还日期，系统强制校验应还日期不早于借出日期，且设备当前状态必须为“在库可用（<code>IN_STOCK</code>）”。其详细用例规约如表 4-3 所示。</p>
+<p>（4）<strong>归还设备与完好性登记（UC04）</strong>、<strong>提报设备故障报修（UC05）</strong>、<strong>提交新设备采购申请（UC06，仅教师与管理员）</strong>以及<strong>申领实验试剂与耗材（UC07）</strong>。其中实验耗材领用出库的详细用例规约如表 4-4 所示。</p>
+
+<p class="tbl-caption">表 4-2 用户登录认证与RBAC鉴权用例规约表（UC01）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC01（对应服务：<code>AuthService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">用户注册、登录认证与RBAC鉴权</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">学生、教师、实验室管理员、系统管理员</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">高（P0 基础安全底座）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">系统服务已启动；若执行登录，用户账号须已完成注册。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 用户输入用户名与登录密码提交认证请求；<br>2. 系统根据用户名（忽略大小写及首尾空格）检索 <code>UserDao</code>；<br>3. 系统验证用户属性 <code>isActive() == true</code>；<br>4. 系统调用 <code>AuthService.hashPassword(rawPassword)</code> 计算 SHA-256 摘要并与存储的 <code>passwordHash</code> 比对一致；<br>5. 系统追加 <code>USER_LOGIN_SUCCESS</code> 审计日志并返回当前用户会话身份与 RBAC 角色。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 用户名不存在：抛出 <code>SecurityException("登录失败：用户名不存在")</code>；<br>E2. 账号已被禁用（<code>active == false</code>）：记录 <code>USER_LOGIN_DENIED</code> 日志并抛出 <code>SecurityException</code>；<br>E3. 密码摘要不匹配：记录 <code>USER_LOGIN_FAILED</code> 日志并抛出 <code>SecurityException("登录失败：密码错误")</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">用户通过身份认证，后续每次业务操作均通过 <code>requireRole()</code> 校验角色许可。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 4-3 设备借用申请与库存状态校验用例规约表（UC03）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC03（对应服务：<code>BorrowService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">提交设备借用申请与借出审批</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">借用人（学生/教师）、审批人（实验员）</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">高（P0 核心流转业务）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">借用人账号处于启用状态；审批人具备 <code>LAB_MANAGER</code>、<code>ADMIN</code> 或 <code>TEACHER</code> 角色；目标设备已建档。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 借用人提交目标设备编码 <code>equipmentCode</code>、借用用途 <code>purpose</code>、借出日期 <code>borrowDate</code> 与应还日期 <code>dueDate</code>；<br>2. 系统校验 <code>!dueDate.isBefore(borrowDate)</code>；<br>3. 系统查询设备当前状态，确认 <code>status == EquipmentStatus.IN_STOCK</code>；<br>4. 系统调用状态机将设备状态由 <code>IN_STOCK</code> 变更为 <code>BORROWED</code>；<br>5. 生成唯一借用单号（如 <code>BR-2026-201</code>）持久化至 <code>BorrowRecordDao</code>，并记录 <code>EQUIPMENT_BORROW</code> 审计日志。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 应还日期早于借用日期：抛出 <code>IllegalArgumentException("应还日期不能早于借用日期")</code>；<br>E2. 设备处于 <code>BORROWED</code>、<code>MAINTENANCE</code> 或 <code>SCRAPPED</code> 状态：抛出 <code>IllegalStateException</code> 拒绝重复借出或带病借出。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">设备状态变更为“已借出（<code>BORROWED</code>）”，进入借用期及超期监控队列。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 4-4 实验试剂与耗材领用出库用例规约表（UC07）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC07（对应服务：<code>ConsumableService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">申领实验试剂与耗材出库</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">指导教师、学生、实验室管理员</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">中（P1 物资管控业务）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">目标实验耗材（如 <code>CS-2026-002</code> 无水乙醇）已完成建档且当前库存大于 0。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 申领人输入耗材编码 <code>code</code>、领用数量 <code>quantity</code>（必须 &gt; 0）及实验用途 <code>purpose</code>；<br>2. 系统校验当前库存满足 <code>currentStock &gt;= quantity</code>；<br>3. 系统扣减库存：<code>newStock = currentStock - quantity</code> 并保存；<br>4. 系统自动检测扣减后是否满足低水位条件 <code>newStock &lt; safetyThreshold</code>，若触发则在审计日志中附加 <code>【触发低库存预警】</code> 标记并纳入预警清单。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 领用数量 $\le 0$：抛出 <code>IllegalArgumentException("领用出库数量必须大于0")</code>；<br>E2. 申请领用数量超过当前实际库存（<code>currentStock &lt; quantity</code>）：抛出 <code>IllegalStateException("耗材库存不足")</code> 拦截超领。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">耗材库存准确扣减；若跌破安全阈值，该耗材自动出现在 <code>getLowStockWarnings()</code> 预警看板中。</td>
+    </tr>
+</table>
+
+<h2>4.4 实验室与后台管理子系统功能需求</h2>
+<p>实验室与后台管理子系统面向实验室管理员与系统管理员提供 9 项核心管控用例（UC08～UC16）：</p>
+<p>（1）<strong>设备建档与生命周期维护（UC08）</strong>：支持实验员录入设备编码、名称、规格、分类、厂商、单价、购置日、质保到期日及存放位置，强制校验编码唯一性、单价非负性及质保期不早于购置日，初始状态设为 <code>IN_STOCK</code>。</p>
+<p>（2）<strong>设备采购审批与到货自动批量建账（UC14）</strong>：管理员对处于 <code>PENDING</code> 状态的申购单进行合规审批；批准通过并执行到货验收时，系统按申购数量 <code>quantity</code> 循环自动调用设备建档服务，批量生成连续编号的 <code>IN_STOCK</code> 设备台账，并将申购单状态置为 <code>COMPLETED</code>。其详细用例规约如表 4-5 所示。</p>
+<p>（3）<strong>设备归还验收与受损自动转修联动（UC04/UC09/UC10）</strong>：管理员验收归还设备时，若选择“完好（<code>conditionOk = true</code>）”，设备状态恢复为 <code>IN_STOCK</code>；若选择“受损（<code>conditionOk = false</code>）”并填写故障现象，系统自动调用 <code>MaintenanceScrapService.reportFault()</code>，将设备状态切换为 <code>MAINTENANCE</code> 并自动生成待处理维修工单。其详细用例规约如表 4-6 所示。</p>
+<p>（4）<strong>设备报废核销与永久终态锁定（UC11）</strong>：针对无法修复或超期服役的在库/维修中设备，经管理员批准报废后，系统自动将该设备关联的所有未结案维修工单同步结案，并将设备状态永久锁定为终态 <code>SCRAPPED</code>。其详细用例规约如表 4-7 所示。</p>
+
+<p class="tbl-caption">表 4-5 设备采购审批与到货自动批量建账用例规约表（UC14）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC14（对应服务：<code>PurchaseService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">审批设备采购单并到货批量入库</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">实验室管理员、系统管理员</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">高（P0 跨模块自动联动）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">教师已提交设备申购单，且申购单当前状态为 <code>OrderStatus.PENDING</code>；审批人具备 <code>LAB_MANAGER</code> 或 <code>ADMIN</code> 角色。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 审批人审阅申购单预算总价（<code>quantity * unitPrice</code>）与申购理由，录入审批意见并批准通过，单据状态变为 <code>APPROVED</code>；<br>2. 设备到货后，管理员指定存放实验室位置 <code>location</code>、购置日期 <code>purchaseDate</code> 与质保年限 <code>warrantyYears</code>；<br>3. 系统自动计算质保到期日 <code>warrantyUntil = purchaseDate.plusYears(warrantyYears)</code>；<br>4. 系统按申购数量 <code>quantity</code> 自动循环调用 <code>equipmentService.registerEquipment()</code>，批量创建 <code>quantity</code> 台状态为 <code>IN_STOCK</code> 的设备台账；<br>5. 申购单状态更新为 <code>COMPLETED</code>，记录 <code>PURCHASE_INBOUND_COMPLETE</code> 审计日志。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 审批驳回：单据状态变更为 <code>REJECTED</code>，若后续尝试对该单执行验收入库，系统抛出 <code>IllegalStateException</code> 严禁入库；<br>E2. 重复审批：对非 <code>PENDING</code> 状态的申购单再次审批，抛出 <code>IllegalStateException("不可重复审批")</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">申购单结案，新增的 <code>N</code> 台实验设备自动进入设备台账并可立即被检索与借用。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 4-6 设备归还验收与受损自动转修联动用例规约表（UC04/UC10）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC04 / UC10（<code>BorrowService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">设备归还完好性验收与受损自动转修</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">实验室管理员、指导教师、系统管理员</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">高（P0 状态机联动核心）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">存在未归还的借用记录（<code>record.isReturned() == false</code>），关联设备当前处于 <code>BORROWED</code> 状态。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 验收人输入借用单号 <code>recordId</code>、归还日期 <code>returnDate</code>、完好标志 <code>conditionOk</code> 及损坏说明 <code>damageReason</code>；<br>2. 系统校验未重复归还且 <code>!returnDate.isBefore(borrowDate)</code>，记录归还日期与完好标志；<br>3. <strong>分支 A（验收完好 <code>conditionOk == true</code>）</strong>：系统驱动状态机将设备由 <code>BORROWED</code> 恢复为 <code>IN_STOCK</code>，记录 <code>EQUIPMENT_RETURN_OK</code> 日志；<br>4. <strong>分支 B（验收受损 <code>conditionOk == false</code>）</strong>：系统自动调用 <code>maintenanceScrapService.reportFault()</code>，将设备状态由 <code>BORROWED</code> 切换为 <code>MAINTENANCE</code>，并自动生成一张 <code>PENDING</code> 状态的维修工单（如 <code>MT-2026-301</code>），记录 <code>EQUIPMENT_RETURN_DAMAGED</code> 日志。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 对已归还记录再次调用归还：抛出 <code>IllegalStateException("已归还，不可重复操作")</code>；<br>E2. 归还日期早于借出日期：抛出 <code>IllegalArgumentException("归还日期不能早于借出日期")</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">完好设备立即回归可用库存；受损设备被自动锁定在维修队列中，杜绝带病再次借出。</td>
+    </tr>
+</table>
+
+<p class="tbl-caption">表 4-7 设备报废核销与永久终态锁定用例规约表（UC11）</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+        <col width="18%" style="width:18%;">
+        <col width="32%" style="width:32%;">
+    </colgroup>
+    <tr>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+        <th width="18%" class="nowrap">规约属性</th>
+        <th width="32%">内容说明</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>用例编号</strong></td>
+        <td class="nowrap">UC11（<code>MaintenanceScrapService</code>）</td>
+        <td class="center nowrap"><strong>用例名称</strong></td>
+        <td class="nowrap">设备报废审批与终态核销锁定</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>主要参与者</strong></td>
+        <td class="nowrap">实验室管理员、系统管理员</td>
+        <td class="center nowrap"><strong>优先级</strong></td>
+        <td class="nowrap">高（P0 国有资产核销风控）</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>前置条件</strong></td>
+        <td colspan="3">审批人具备 <code>LAB_MANAGER</code> 或 <code>ADMIN</code> 角色；目标设备处于 <code>IN_STOCK</code> 或 <code>MAINTENANCE</code> 状态。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>基本事件流</strong></td>
+        <td colspan="3">1. 申请人与审批人提交目标设备编码 <code>equipmentCode</code>、报废原因 <code>reason</code> 及核销决议 <code>resolution</code>；<br>2. 系统校验操作人角色权限与设备当前状态（严禁处于 <code>BORROWED</code> 借出未还状态的设备直接报废）；<br>3. 系统扫描该设备关联的所有历史工单，若存在未结案（<code>PENDING</code>）的维修工单，自动将其同步结案并标注“无法修复，已转报废流程处理”；<br>4. 系统驱动状态机将设备变更为永久终态 <code>SCRAPPED</code>，生成报废单（如 <code>SC-2026-303</code>）并记录审计日志。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>异常/扩展流</strong></td>
+        <td colspan="3">E1. 学生或普通指导教师尝试批准报废：被 RBAC 拦截并抛出 <code>SecurityException</code>；<br>E2. 尝试将已处于 <code>SCRAPPED</code> 终态的设备再次借出、维修或恢复在库：状态机返回 <code>false</code> 并抛出 <code>IllegalStateException</code>。</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>后置条件</strong></td>
+        <td colspan="3">设备永久锁定为 <code>SCRAPPED</code> 终态，在盘点统计中自动从完好率分子中剔除。</td>
+    </tr>
+</table>
+
+<h2>4.5 非功能性需求</h2>
+
+<h3>4.5.1 界面需求</h3>
+<p>系统前端与高保真交互原型（<code>prototype/html/index.html</code>）采用清爽现代的高校智慧实验室视觉规范（主色调深海蓝 <code>#1F4E79</code> 搭配活力蓝 <code>#2B6CB0</code>）。设备四态采用高辨识度语义色彩徽章区分：在库可用采用翠绿色（<code>#16A34A</code>）、已借出采用琥珀色（<code>#D97706</code>）、维修中采用紫色（<code>#7C3AED</code>）、已报废采用警示红色（<code>#DC2626</code>）。工作台采用左侧固定导航栏 + 顶部角色切换与安全状态栏 + 右侧数据卡片与交互弹窗的经典 B/S 管理后台布局。</p>
+
+<h3>4.5.2 响应时间需求</h3>
+<p>在校园网常规负载下，系统各核心业务的响应时间须满足以下性能指标：① 用户登录认证与 SHA-256 哈希校验响应时间 $\le 50\text{ ms}$；② 多维组合条件检索设备台账（支持按关键字、分类、状态、库位过滤）响应时间 $\le 100\text{ ms}$；③ 采购单审批并批量生成 10 台以内设备台账事务响应时间 $\le 150\text{ ms}$；④ 仓库库存盘点与完好率统计汇总计算响应时间 $\le 100\text{ ms}$。</p>
+
+<h3>4.5.3 可靠性需求</h3>
+<p>系统必须具备严格的防御式编程与边界容错能力：① <strong>状态机 100% 防错</strong>：任何违反四态迁移图的操作均在内存状态变更前被拦截，不产生脏数据；② <strong>空仓库零除保护</strong>：当新建实验室设备总数为 0 时，完好率计算公式自动返回默认 <code>100.00%</code>，严禁触发 <code>ArithmeticException</code> 或 <code>NaN</code>；③ <strong>防重复提交</strong>：已审批的采购单、已归还的借用记录、已完工的维修单均具备幂等锁保护，防止重复点击造成库存错乱。</p>
+
+<h3>4.5.4 可扩展性需求</h3>
+<p>系统遵循开闭原则（OCP）与依赖倒置原则（DIP），采用五层解耦架构设计。业务逻辑层（<code>service</code>）与数据访问层（<code>dao</code>）职责分离，当前内置的 <code>InMemoryDatabase</code> 内存事务容器可无缝替换为基于 JDBC / MyBatis 的 MySQL 8.0 持久化实现，而无需修改上层业务规则与状态机代码。</p>
+
+<h3>4.5.5 系统安全性需求</h3>
+<p>（1）<strong>凭证不可逆加密</strong>：严禁明文存储用户密码，全部密码均通过 <code>MessageDigest.getInstance("SHA-256")</code> 转换为 64 位十六进制哈希串存储。</p>
+<p>（2）<strong>细粒度 RBAC 鉴权与防自锁</strong>：所有写操作均强制调用 <code>authService.requireRole()</code>；管理员禁用账号接口内置自检逻辑（<code>adminId.equals(targetUserId)</code> 时抛出异常），防止系统管理员误禁用自身导致系统锁死。</p>
+<p>（3）<strong>全链路安全审计可追溯</strong>：所有登录、越权拦截、建档、采购审批、借出、归还、报修、报废、耗材出入库操作均自动生成带精确时间戳与操作人 ID 的 <code>AuditLog</code> 记录，支持按操作人追踪审计。</p>
+
+<h1>5. 需求变更</h1>
+<p>在软件生命周期中，为应对实验室管理制度调整或新增教学实验场景引起的需求变动，同时防止无序变更破坏系统架构稳定性与项目排期，项目组建立了规范化的需求变更控制流程（Change Control Process）。需求变更控制流程如图 5-1 所示。</p>
+
+<p class="fig-wrap"><img src="fig6_change_control.png" style="width: 12.8cm;"></p>
+<p class="fig-caption">图 5-1 需求变更控制流程图</p>
+
+<p>如图 5-1 所示，任何需求变更均须依次经历以下五个受控环节：① <strong>变更申请提报</strong>：由师生或实验室提出书面变更申请单，明确变更所属模块、原因及期望效果；② <strong>技术影响域与成本评估</strong>：由项目组长与系统分析师评估该变更对现有领域模型类、数据库表结构、状态机规则及开发工时的影响；③ <strong>变更控制委员会（CCB）联合评审</strong>：全组核心成员评审决议，分为“拒绝变更”、“延后纳入下一迭代 Backlog”与“批准立即变更”三类分支；④ <strong>基线同步与外科手术式实现</strong>：若批准立即变更，须先行更新《需求分析规格说明书》、Axure 原型（<code>.rp</code>）与《系统设计说明书》，随后实施代码修改；⑤ <strong>全量回归测试与基线发布</strong>：执行 <code>AllTests</code> 全部 40 项自动化单元测试，确保零回归缺陷后签入 Git 仓库发布新基线。</p>
+
+<h1>6. 产品提交</h1>
+<p>本项目在生命周期各阶段向课程指导教师与评审方正式提交的软件产品、原型、源代码及工程文档交付清单如表 6-1 所示。</p>
+
+<p class="tbl-caption">表 6-1 项目阶段交付产品与归档清单表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="10%" style="width:10%;">
+        <col width="22%" style="width:22%;">
+        <col width="40%" style="width:40%;">
+        <col width="14%" style="width:14%;">
+        <col width="14%" style="width:14%;">
+    </colgroup>
+    <tr>
+        <th width="10%" class="nowrap">序号</th>
+        <th width="22%" class="nowrap">交付物类别</th>
+        <th width="40%">交付文件标准命名与路径</th>
+        <th width="14%" class="nowrap">文件格式</th>
+        <th width="14%" class="nowrap">交付状态</th>
+    </tr>
+    <tr>
+        <td class="center nowrap">01</td>
+        <td class="nowrap">项目立项说明书</td>
+        <td><code>01-项目立项说明书/第01组-202410120301-王胜运-实验室设备管理系统项目立项说明书</code></td>
+        <td class="center nowrap"><code>.docx / .doc</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">02</td>
+        <td class="nowrap">需求分析规格说明书</td>
+        <td><code>02-需求分析与系统原型/第01组-202410120301-王胜运-实验室设备管理系统项目需求分析规格说明书</code></td>
+        <td class="center nowrap"><code>.docx / .doc</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">03</td>
+        <td class="nowrap">系统高保真交互原型</td>
+        <td><code>02-需求分析与系统原型/prototype/实验室设备管理系统原型.rp</code> 及 <code>html/index.html</code></td>
+        <td class="center nowrap"><code>.rp / .html</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">04</td>
+        <td class="nowrap">系统设计说明书</td>
+        <td><code>03-系统设计说明书/第01组-202410120301-王胜运-实验室设备管理系统系统设计说明书</code></td>
+        <td class="center nowrap"><code>.docx / .doc</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">05</td>
+        <td class="nowrap">测试用例与测试报告</td>
+        <td><code>04-测试用例与测试报告/第01组-202410120301-王胜运-实验室设备管理系统测试报告</code> 及 <code>.xlsx</code></td>
+        <td class="center nowrap"><code>.docx / .xlsx</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">06</td>
+        <td class="nowrap">核心源码与自测套件</td>
+        <td><code>src/main/java/cn/edu/ctgu/labms/...</code>（23个类）与 <code>src/test/.../AllTests.java</code>（40项单测）</td>
+        <td class="center nowrap"><code>.java / .ps1</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+    <tr>
+        <td class="center nowrap">07</td>
+        <td class="nowrap">项目答辩材料</td>
+        <td><code>05-项目答辩材料/第01组-202410120301-王胜运-实验室设备管理系统答辩PPT.pptx</code> 及答辩记录单</td>
+        <td class="center nowrap"><code>.pptx / .xlsx</code></td>
+        <td class="center nowrap">已交付</td>
+    </tr>
+</table>
+
+<h1>7. 实现约束</h1>
+<p>（1）<strong>开发语言与编译器约束</strong>：系统后端核心业务统一采用 Java 语言编写，包命名空间严格遵循 <code>cn.edu.ctgu.labms</code>（含 <code>domain</code>、<code>dao</code>、<code>service</code>、<code>controller</code> 四大子包），源码文件字符编码统一采用 <code>UTF-8</code>。</p>
+<p>（2）<strong>零外部脆弱依赖约束</strong>：为保证在任何教学机房与评审机器上均可开箱即用一键编译运行，系统核心业务逻辑与 40 项自动化单元测试均基于 Java 标准库实现，不依赖外部特定版本的商业中间件。</p>
+<p>（3）<strong>文档与归档命名约束</strong>：所有交付文档严格按照课程规定的“<code>第01组-202410120301-王胜运-实验室设备管理系统&lt;文档类型&gt;</code>”格式命名，需求分析归档包同时包含需求规格说明书与系统原型文件夹。</p>
+
+<h1>8. 签字</h1>
+<p>本《实验室设备管理系统项目需求分析规格说明书》（V1.0）已经需求方代表（课程指导教师与实验室业务代表）与开发方（第 01 组全体成员）共同审阅核实，双方一致同意将本文档作为项目后续设计、开发与测试验收的正式基准。双方签署确认信息如表 8-1 所示。</p>
+
+<p class="tbl-caption">表 8-1 需求规格双方签署确认表</p>
+<table class="data-tbl">
+    <colgroup>
+        <col width="16%" style="width:16%;">
+        <col width="18%" style="width:18%;">
+        <col width="22%" style="width:22%;">
+        <col width="28%" style="width:28%;">
+        <col width="16%" style="width:16%;">
+    </colgroup>
+    <tr>
+        <th width="16%" class="nowrap">签署方别</th>
+        <th width="18%" class="nowrap">签署人姓名</th>
+        <th width="22%" class="nowrap">所属单位 / 项目角色</th>
+        <th width="28%">确认意见</th>
+        <th width="16%" class="nowrap">签署日期</th>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>需求与评审方</strong></td>
+        <td class="center nowrap">覃兵文</td>
+        <td class="center nowrap">计算机与信息学院 / 指导教师</td>
+        <td>需求规格完整覆盖七大模块，原型交互与状态机约束合理，同意冻结需求基线。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>开发方组长</strong></td>
+        <td class="center nowrap">王胜运</td>
+        <td class="center nowrap">第01组 / 项目组长（24%）</td>
+        <td>确认全部功能与非功能需求，承诺按期推进架构设计与核心编码实现。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>开发方成员</strong></td>
+        <td class="center nowrap">陈宇航</td>
+        <td class="center nowrap">第01组 / 需求与原型师（22%）</td>
+        <td>确认16个用例模型与高保真原型页面同需求规格书完全一致。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>开发方成员</strong></td>
+        <td class="center nowrap">林诗涵</td>
+        <td class="center nowrap">第01组 / 核心后端开发（20%）</td>
+        <td>确认M1权限认证、M3采购自动入库与安全审计接口需求明确可执行。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>开发方成员</strong></td>
+        <td class="center nowrap">张明哲</td>
+        <td class="center nowrap">第01组 / 数据库与后端（18%）</td>
+        <td>确认M5维修报废、M6盘点统计、M7耗材预警与数据库建模需求明确。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+    <tr>
+        <td class="center nowrap"><strong>开发方成员</strong></td>
+        <td class="center nowrap">刘思源</td>
+        <td class="center nowrap">第01组 / QA测试工程师（16%）</td>
+        <td>确认全部用例验收准则具备可测试性，依此编制测试用例矩阵。</td>
+        <td class="center nowrap">2026-11-06</td>
+    </tr>
+</table>
+
+</body>
+</html>

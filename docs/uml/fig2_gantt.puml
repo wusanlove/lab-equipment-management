@@ -1,0 +1,48 @@
+@startgantt
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "Microsoft YaHei"
+skinparam defaultFontSize 12
+Project starts 2026-10-20
+language zh
+printscale daily zoom 2
+
+<style>
+ganttDiagram {
+  task {
+    BackGroundColor #2B6CB0
+    LineColor #1F4E79
+    FontName "Microsoft YaHei"
+  }
+  milestone {
+    BackGroundColor #C53030
+    LineColor #9B2C2C
+  }
+}
+</style>
+
+-- 阶段一：项目立项与团队组建 --
+[T1 选题调研与团队分工] starts 2026-10-20 and lasts 3 days
+[T2 编写项目立项说明书与甘特图] starts 2026-10-23 and lasts 4 days
+[M1 立项评审通过] happens at 2026-10-26
+
+-- 阶段二：需求分析与原型设计 --
+[T3 业务流程梳理与UML用例建模] starts 2026-10-27 and lasts 5 days
+[T4 Axure高保真系统原型设计] starts 2026-10-30 and lasts 6 days
+[T5 撰写需求分析规格说明书(SRS)] starts 2026-11-02 and lasts 5 days
+[M2 需求与原型基线冻结] happens at 2026-11-06
+
+-- 阶段三：系统概要与详细设计 --
+[T6 五层体系结构与包接口设计] starts 2026-11-07 and lasts 4 days
+[T7 核心类图/时序图/状态机与ER设计] starts 2026-11-10 and lasts 5 days
+[T8 撰写系统设计说明书] starts 2026-11-13 and lasts 4 days
+
+-- 阶段四：编码实现与单元测试 --
+[T9 领域模型与内存持久化层编码] starts 2026-11-17 and lasts 4 days
+[T10 七大业务服务层与门面控制器实现] starts 2026-11-21 and lasts 6 days
+[T11 编写40项自动化单元测试与联调] starts 2026-11-27 and lasts 4 days
+
+-- 阶段五：系统测试与项目答辩 --
+[T12 黑盒测试用例执行与测试报告] starts 2026-12-01 and lasts 4 days
+[T13 答辩PPT制作与全套材料归档] starts 2026-12-05 and lasts 3 days
+[M3 项目正式答辩交付] happens at 2026-12-07
+@endgantt
